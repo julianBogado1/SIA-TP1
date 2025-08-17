@@ -6,6 +6,8 @@ public class Cell {
         this.state = state;
     }
 
+
+
     public State getState() {
         return state;
     }
