@@ -14,18 +14,18 @@ public class Main {
         //inicializar arbol
         //crear Fr set
 
-        Node<Board> root = new Node<>(, null, null );
-        Set<Node<Board>> frontier = new TreeSet<>(new AStar<>());
+        int width = 5;
+        int height = 5;
+        Node<Board> root = new Node<>(new Board(width, height), null, null );
+        Set<Node<Board>> frontier = new TreeSet<>(new BFS<>());
 
-        //{ 1, 2, 3, 6 } -> 1 -> 2
-        //
 
 
     }
 }
 
 //algoritmos
-class AStar<T> implements Comparator<T> {
+class BFS<T> implements Comparator<T> {
     @Override
     public int compare(T o1, T o2) {
         // Implement the comparison logic for A* algorithm
