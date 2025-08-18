@@ -10,7 +10,7 @@ public class Board {
 
     private Cell[][] cells;
 
-    // cells = { {c00, c01, c02},
+    // cells = {  {c00, c01, c02},
     //            {c10, c11, c12}
     //            {c20, c21, c22} }
 
@@ -39,7 +39,7 @@ public class Board {
         }
     }
 
-    private static fromBoard(Board old){
+    private static Board fromBoard(Board old){
         Board board = new Board(old.width, old.height);
         Cell[][] cells = Arrays.copyOf(old.cells, board.width*board.height);
 
@@ -49,19 +49,52 @@ public class Board {
                 board.setCell(i, j, cells[i][j]);
             }
         }
+        return board;
     }
 
-    Board nextMove = board.moveLeft();
-
-    public Board moveLeft(){
-        if(cells[playerY][playerX-1].getState() == State.WALL){
-            //no se mueve
+    public Board move(Direction direction){
+        Board nextBoard = fromBoard(this);
+        int newX = playerX + direction.dx();
+        int newY = playerY + direction.dy();
+        if(cells[newY][newX].getState() != State.WALL){
+            if(cells[newY][newX].getState() == State.BOX || cells[newY][newX].getState() == State.BOX_ON_TARGET){
+                if (!nextBoard.moveBox(direction, newX, newY)) return nextBoard;
+            }
+            nextBoard.setPlayer(newX, newY);
         }
-        else if(){
+        return nextBoard;
+    }
 
+    private boolean moveBox(Direction direction, int x, int y){
+        State previous;
+        if(cells[y][x].getState() == State.BOX) previous = State.EMPTY;
+        else previous = State.TARGET;
+        int newX = x + direction.dx();
+        int newY = y + direction.dy();
+        switch (cells[newY][newX].getState()) {
+            case EMPTY -> {
+                setCell(newX, newY, new Cell(State.BOX));
+                setCell(x, y, new Cell(previous));
+                return true;
+            }
+            case TARGET -> {
+                setCell(newX, newY, new Cell(State.BOX_ON_TARGET));
+                setCell(x, y, new Cell(previous));
+                return true;
+            }
+            default -> {
+                return false;
+            }
         }
+    }
 
-        return ;
+    public void setPlayer(int x, int y){
+        if(cells[playerY][playerX].getState() == State.PLAYER_ON_TARGET) setCell(playerX, playerY, new Cell(State.TARGET));
+        else setCell(playerX, playerY, new Cell(State.EMPTY));
+        playerX = x;
+        playerY = y;
+        if(cells[playerY][playerX].getState() == State.TARGET || cells[playerY][playerX].getState() == State.BOX_ON_TARGET) setCell(playerX, playerY, new Cell(State.PLAYER_ON_TARGET));
+        else setCell(playerX, playerY, new Cell(State.PLAYER));
     }
 
     public Cell getCell(int x, int y) {
