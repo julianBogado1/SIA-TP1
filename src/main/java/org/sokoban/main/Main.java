@@ -14,7 +14,7 @@ public class Main {
         //inicializar arbol
         //crear Fr set
 
-        Node<Board> root = new Node<>(, null, null );
+        Node<Board> root = new Node<>(new Board(), null, null );
         Set<Node<Board>> frontier = new TreeSet<>(new AStar<>());
 
         //{ 1, 2, 3, 6 } -> 1 -> 2
