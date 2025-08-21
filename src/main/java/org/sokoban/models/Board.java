@@ -1,6 +1,8 @@
 package org.sokoban.models;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Board {
     private int width = 7;
@@ -28,8 +30,8 @@ public class Board {
     // default map
     private Cell[][] cells = {
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.TARGET), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
@@ -61,19 +63,25 @@ public class Board {
             }
         }
     }
+    private Board(Board other) {
+        this.width   = other.width;
+        this.height  = other.height;
+        this.playerX = other.playerX;
+        this.playerY = other.playerY;
 
-    private static Board fromBoard(Board old){
-        Board board = new Board();
-        Cell[][] cells = Arrays.copyOf(old.cells, board.width*board.height);
-
-        //Copy cells
-        for(int i=0; i<board.width; i++){
-            for(int j=0; j<board.height; j++){
-                board.setCell(i, j, cells[i][j]);
+        this.cells = new Cell[height][width];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                this.cells[y][x] = new Cell(other.cells[y][x].getState());
             }
         }
-        return board;
+        this.preAnalysis = other.preAnalysis;
     }
+
+    private static Board fromBoard(Board old){
+        return new Board(old);
+    }
+
 
     public Board move(Direction direction){
         Board nextBoard = fromBoard(this);
@@ -111,6 +119,34 @@ public class Board {
         }
     }
 
+    public boolean isSolution() {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                State s = cell.getState();
+                if (s == State.TARGET || s == State.PLAYER_ON_TARGET) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    public List<Board> getPossibleBoards(){
+        List<Board> possibleBoards = new ArrayList<>();
+        for (Direction dir : Direction.values()) {
+            Board nextBoard = move(dir);
+            if (!this.equals(nextBoard)) {
+                possibleBoards.add(nextBoard);
+            }
+        }
+        return possibleBoards;
+    }
+
+    public int heuristic(){
+        return 0;
+    }
+
     public void setPlayer(int x, int y){
         if(cells[playerY][playerX].getState() == State.PLAYER_ON_TARGET) setCell(playerX, playerY, new Cell(State.TARGET));
         else setCell(playerX, playerY, new Cell(State.EMPTY));
@@ -139,4 +175,47 @@ public class Board {
     public int getHeight() {
         return height;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Board other = (Board) obj;
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (this.cells[y][x].getState() != other.cells[y][x].getState()) {
+                    return false;
+                }
+            }
+        }
+
+        return playerX == other.playerX && playerY == other.playerY;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                result = 31 * result + cells[y][x].getState().hashCode();
+            }
+        }
+        result = 31 * result + playerX;
+        result = 31 * result + playerY;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                sb.append(cells[y][x].getState().getSymbol());
+            }
+            sb.append('\n');
+        }
+        return sb.toString();
+    }
+
 }
