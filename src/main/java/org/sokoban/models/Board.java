@@ -36,9 +36,9 @@ public class Board {
     };
 
     public Board() {
-        executePreAnalysis();
         this.playerX = 4;
         this.playerY = 4;
+        executePreAnalysis();
     }
 
     public Board(int width, int height, Cell[][] level, int playerX, int playerY) {
@@ -54,7 +54,7 @@ public class Board {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 Cell cell = getCell(j, i);
-                if (cell.getState() == State.BOX) {
+                if (cell.getState() == State.WALL) {
                     preAnalysis[0][j]++;
                     preAnalysis[1][i]++;
                 }
