@@ -15,20 +15,10 @@ public class Main {
         //crear Fr set
 
         Node<Board> root = new Node<>(new Board(), null, null );
-        Set<Node<Board>> frontier = new TreeSet<>(new BFS<>());
+        Set<Node<Board>> frontier = new TreeSet<>();
 
 
 
     }
-}
 
-//algoritmos
-class BFS<T> implements Comparator<T> {
-    @Override
-    public int compare(T o1, T o2) {
-        // Implement the comparison logic for A* algorithm
-        // This could be based on the cost of reaching the node, heuristic, etc.
-        // For now, we will return 0 to avoid compilation error
-        return 0;
-    }
 }

@@ -139,4 +139,9 @@ public class Board {
     public int getHeight() {
         return height;
     }
+
+    public boolean isGoal(){
+        return cells[1][1].getState() == State.BOX_ON_TARGET &&
+                cells[1][2].getState() == State.BOX_ON_TARGET;
+    }
 }
