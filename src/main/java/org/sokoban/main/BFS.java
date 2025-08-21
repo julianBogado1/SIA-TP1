@@ -26,7 +26,7 @@ public class BFS {
             for (Board b : answer) {
                 writer.println(b.toString());
             }
-            System.out.println("Solution written to solution.txt");
+            System.out.println("Solution written to BFS_solution.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
