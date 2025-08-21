@@ -2,6 +2,7 @@ package org.sokoban.algorithms;
 
 import org.sokoban.models.Board;
 import java.util.*;
+import java.io.FileWriter;
 
 public class DFS {
     // Métricas opcionales
@@ -16,8 +17,20 @@ public class DFS {
         boolean ok = dfs(start, visited, path, 0);
 
         long ms = System.currentTimeMillis() - t0;
+        
         System.out.printf("DFS %s. Nodos expandidos=%d, ProfMax=%d, Tiempo=%d ms%n",
                 ok ? "encontró solución" : "no encontró solución", expanded, maxDepth, ms);
+
+        try{
+
+            FileWriter writer = new FileWriter("dfs_metrics.txt", true);
+            writer.write(String.format("DFS %s. Nodos expandidos=%d, ProfMax=%d, Tiempo=%d ms%n",
+                    ok ? "encontró solución" : "no encontró solución", expanded, maxDepth, ms));
+            writer.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return ok ? path : Collections.emptyList();
     }

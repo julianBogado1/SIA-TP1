@@ -1,6 +1,8 @@
 package org.sokoban.main;
 
 import org.sokoban.models.Board;
+
+import java.io.FileWriter;
 import java.util.List;
 import org.sokoban.algorithms.DFS;
 
@@ -12,5 +14,15 @@ public class Main {
 
         System.out.println(solutionPath);
 
+        try{
+            FileWriter writer = new FileWriter("dfs_metrics.txt", true);
+            writer.write(String.format("DFS Solution Path: \n"));
+            for ( int i=0; i< solutionPath.size(); i++ ) {
+                writer.write(String.format("Step %d: \n%s", i, solutionPath.get(i)));
+            }
+            writer.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
