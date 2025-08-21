@@ -22,7 +22,7 @@ public class BFS {
             return;
         }
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter("src/main/java/org/sokoban/solution/solution.txt"))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("src/main/resources/BFS_solution.txt"))) {
             for (Board b : answer) {
                 writer.println(b.toString());
             }
