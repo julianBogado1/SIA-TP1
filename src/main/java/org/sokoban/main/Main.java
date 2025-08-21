@@ -1,24 +1,28 @@
 package org.sokoban.main;
 
-import org.sokoban.models.Board;
-import org.sokoban.models.Node;
-
 import java.util.Comparator;
-import java.util.Set;
-import java.util.TreeSet;
+
+import org.sokoban.algorithms.GreedySearch;
+import org.sokoban.algorithms.SearchAlgorithm;
+import org.sokoban.models.Board;
 
 public class Main {
     public static void main(String[] args) {
-        // Create a new PuzzleState instance
+        Board root = new Board();
+        
+        SearchAlgorithm<Board> algorithm = new GreedySearch(root);
 
-        //inicializar arbol
-        //crear Fr set
+        while (algorithm.hasNext()) {
+            Board current = algorithm.next();
 
-        Node<Board> root = new Node<>(new Board(), null, null );
-        Set<Node<Board>> frontier = new TreeSet<>(new BFS<>());
+            if (current.isSolution()) {
+                System.out.println("¡Solución encontrada!");
+                System.out.println(current);
+                return;
+            }
+        }
 
-
-
+        System.out.println("No se encontró solución.");
     }
 }
 
