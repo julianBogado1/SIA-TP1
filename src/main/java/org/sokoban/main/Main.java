@@ -15,17 +15,15 @@ public class Main {
         //crear Fr set
 
         Node<Board> root = new Node<>(new Board(), null, null );
-        Set<Node<Board>> frontier = new TreeSet<>(new AStar<>());
+        Set<Node<Board>> frontier = new TreeSet<>(new BFS<>());
 
-        //{ 1, 2, 3, 6 } -> 1 -> 2
-        //
 
 
     }
 }
 
 //algoritmos
-class AStar<T> implements Comparator<T> {
+class BFS<T> implements Comparator<T> {
     @Override
     public int compare(T o1, T o2) {
         // Implement the comparison logic for A* algorithm
