@@ -1,38 +1,28 @@
 package org.sokoban.main;
 
-import java.util.Comparator;
+import java.io.FileWriter;
+import java.util.List;
 
-import org.sokoban.algorithms.GreedySearch;
-import org.sokoban.algorithms.SearchAlgorithm;
+import org.sokoban.algorithms.DFS;
 import org.sokoban.models.Board;
 
 public class Main {
     public static void main(String[] args) {
-        Board root = new Board();
-        
-        SearchAlgorithm<Board> algorithm = new GreedySearch(root);
 
-        while (algorithm.hasNext()) {
-            Board current = algorithm.next();
+        Board initialBoard = new Board();
+        List<Board> solutionPath = new DFS().search(initialBoard);
 
-            if (current.isSolution()) {
-                System.out.println("¡Solución encontrada!");
-                System.out.println(current);
-                return;
+        System.out.println(solutionPath);
+
+        try{
+            FileWriter writer = new FileWriter("dfs_metrics.txt", true);
+            writer.write(String.format("DFS Solution Path: \n"));
+            for ( int i=0; i< solutionPath.size(); i++ ) {
+                writer.write(String.format("Step %d: \n%s", i, solutionPath.get(i)));
             }
+            writer.close();
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
-        System.out.println("No se encontró solución.");
-    }
-}
-
-//algoritmos
-class BFS<T> implements Comparator<T> {
-    @Override
-    public int compare(T o1, T o2) {
-        // Implement the comparison logic for A* algorithm
-        // This could be based on the cost of reaching the node, heuristic, etc.
-        // For now, we will return 0 to avoid compilation error
-        return 0;
     }
 }

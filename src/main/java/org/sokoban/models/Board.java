@@ -2,6 +2,8 @@ package org.sokoban.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Board {
     private int width = -1;
@@ -19,8 +21,8 @@ public class Board {
     // Leyenda: # = WALL, T = TARGET, B = BOX, P = PLAYER, ' ' = EMPTY
     /*
      * # # # # # # #
-     * # T #   B T #
-     * #   #       #
+     * # T # T B   #
+     * #   #   #   #
      * # B #   #   #
      * #       P   #
      * # # # # # # #
@@ -29,8 +31,8 @@ public class Board {
     // default map
     private Cell[][] cells = {
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.TARGET), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
@@ -64,25 +66,25 @@ public class Board {
             }
         }
     }
+    private Board(Board other) {
+        this.width   = other.width;
+        this.height  = other.height;
+        this.playerX = other.playerX;
+        this.playerY = other.playerY;
 
-    private static Board fromBoard(Board old){
-        Board board = new Board();
-        board.width = old.width;
-        board.height = old.height;
-        board.playerX = old.playerX;
-        board.playerY = old.playerY;
-
-        board.cells = new Cell[board.height][board.width];
-
-        for(int y = 0; y < board.height; y++) {
-            for(int x = 0; x < board.width; x++) {
-                State state = old.getCell(x, y).getState();
-                board.setCell(x, y, new Cell(state));
+        this.cells = new Cell[height][width];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                this.cells[y][x] = new Cell(other.cells[y][x].getState());
             }
         }
-
-        return board;
+        this.preAnalysis = other.preAnalysis;
     }
+
+    private static Board fromBoard(Board old){
+        return new Board(old);
+    }
+
 
     public Board move(Direction direction){
         Board nextBoard = fromBoard(this);
@@ -118,6 +120,34 @@ public class Board {
                 return false;
             }
         }
+    }
+
+    public boolean isSolution() {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                State s = cell.getState();
+                if (s == State.TARGET || s == State.PLAYER_ON_TARGET) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    public List<Board> getPossibleBoards(){
+        List<Board> possibleBoards = new ArrayList<>();
+        for (Direction dir : Direction.values()) {
+            Board nextBoard = move(dir);
+            if (!this.equals(nextBoard)) {
+                possibleBoards.add(nextBoard);
+            }
+        }
+        return possibleBoards;
+    }
+
+    public int heuristic(){
+        return 0;
     }
 
     public void setPlayer(int x, int y){
