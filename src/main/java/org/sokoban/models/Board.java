@@ -1,10 +1,11 @@
 package org.sokoban.models;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Board {
-    private int width = 7;
-    private int height = 6;
+    private int width = -1;
+    private int height = -1;
 
     private int[][] preAnalysis; // number of blocked rows in[1] and number of blocked columns in[0]
 
@@ -12,14 +13,14 @@ public class Board {
 //    boxes
 //    boxesOnTargets == targets
 
-    private int playerX;
-    private int playerY;
+    private int playerX = -1;
+    private int playerY = -1;
 
     // Leyenda: # = WALL, T = TARGET, B = BOX, P = PLAYER, ' ' = EMPTY
     /*
      * # # # # # # #
-     * # T #   B T #
-     * #   #       #
+     * # T # T B   #
+     * #   #   #   #
      * # B #   #   #
      * #       P   #
      * # # # # # # #
@@ -28,14 +29,16 @@ public class Board {
     // default map
     private Cell[][] cells = {
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.TARGET), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
     };
 
     public Board() {
+        this.width = 7;
+        this.height = 6;
         this.playerX = 4;
         this.playerY = 4;
         executePreAnalysis();
@@ -61,19 +64,25 @@ public class Board {
             }
         }
     }
+    private Board(Board other) {
+        this.width   = other.width;
+        this.height  = other.height;
+        this.playerX = other.playerX;
+        this.playerY = other.playerY;
 
-    private static Board fromBoard(Board old){
-        Board board = new Board();
-        Cell[][] cells = Arrays.copyOf(old.cells, board.width*board.height);
-
-        //Copy cells
-        for(int i=0; i<board.width; i++){
-            for(int j=0; j<board.height; j++){
-                board.setCell(i, j, cells[i][j]);
+        this.cells = new Cell[height][width];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                this.cells[y][x] = new Cell(other.cells[y][x].getState());
             }
         }
-        return board;
+        this.preAnalysis = other.preAnalysis;
     }
+
+    private static Board fromBoard(Board old){
+        return new Board(old);
+    }
+
 
     public Board move(Direction direction){
         Board nextBoard = fromBoard(this);
@@ -112,13 +121,82 @@ public class Board {
     }
 
     public void setPlayer(int x, int y){
-        if(cells[playerY][playerX].getState() == State.PLAYER_ON_TARGET) setCell(playerX, playerY, new Cell(State.TARGET));
-        else setCell(playerX, playerY, new Cell(State.EMPTY));
+        if(playerY!=-1 && playerX!=-1){
+            if(cells[playerY][playerX].getState() == State.PLAYER_ON_TARGET) setCell(playerX, playerY, new Cell(State.TARGET));
+            else setCell(playerX, playerY, new Cell(State.EMPTY));
+        }
         playerX = x;
         playerY = y;
         if(cells[playerY][playerX].getState() == State.TARGET || cells[playerY][playerX].getState() == State.BOX_ON_TARGET) setCell(playerX, playerY, new Cell(State.PLAYER_ON_TARGET));
         else setCell(playerX, playerY, new Cell(State.PLAYER));
     }
+
+    public boolean isSolution() {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                State s = cell.getState();
+                if (s == State.TARGET || s == State.PLAYER_ON_TARGET) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public List<Board> getPossibleBoards(){
+        List<Board> possibleBoards = new ArrayList<>();
+        for (Direction dir : Direction.values()) {
+            Board nextBoard = move(dir);
+            if (!this.equals(nextBoard)) {
+                possibleBoards.add(nextBoard);
+            }
+        }
+        return possibleBoards;
+    }
+
+    public int heuristic() {
+        List<int[]> boxes = new ArrayList<>();
+        List<int[]> targets = new ArrayList<>();
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                State state = cells[y][x].getState();
+                if (state == State.BOX || state == State.BOX_ON_TARGET) {
+                    boxes.add(new int[]{x, y});
+                } else if (state == State.TARGET || state == State.PLAYER_ON_TARGET) {
+                    targets.add(new int[]{x, y});
+                }
+            }
+        }
+
+        int totalDistance = 0;
+        boolean[] usedTargets = new boolean[targets.size()];
+
+        for (int[] box : boxes) {
+            int minDistance = Integer.MAX_VALUE;
+            int closestTargetIndex = -1;
+
+            for (int i = 0; i < targets.size(); i++) {
+                if (usedTargets[i]) continue;
+
+                int[] target = targets.get(i);
+                int distance = Math.abs(box[0] - target[0]) + Math.abs(box[1] - target[1]);
+
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestTargetIndex = i;
+                }
+            }
+
+            if (closestTargetIndex != -1) {
+                usedTargets[closestTargetIndex] = true;
+                totalDistance += minDistance;
+            }
+        }
+
+        return totalDistance;
+    }
+
 
     public void initializeCells(Cell[][] level) {
         cells = level;
@@ -140,8 +218,46 @@ public class Board {
         return height;
     }
 
-    public boolean isGoal(){
-        return cells[1][1].getState() == State.BOX_ON_TARGET &&
-                cells[1][2].getState() == State.BOX_ON_TARGET;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Board other = (Board) obj;
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (this.cells[y][x].getState() != other.cells[y][x].getState()) {
+                    return false;
+                }
+            }
+        }
+
+        return playerX == other.playerX && playerY == other.playerY;
     }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                result = 31 * result + cells[y][x].getState().hashCode();
+            }
+        }
+        result = 31 * result + playerX;
+        result = 31 * result + playerY;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                sb.append(cells[y][x].getState().getSymbol());
+            }
+            sb.append('\n');
+        }
+        return sb.toString();
+    }
+
 }
