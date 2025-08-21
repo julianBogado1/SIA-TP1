@@ -2,8 +2,6 @@ package org.sokoban.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Board {
     private int width = -1;
@@ -120,34 +118,6 @@ public class Board {
                 return false;
             }
         }
-    }
-
-    public boolean isSolution() {
-        for (Cell[] row : cells) {
-            for (Cell cell : row) {
-                State s = cell.getState();
-                if (s == State.TARGET || s == State.PLAYER_ON_TARGET) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-
-    public List<Board> getPossibleBoards(){
-        List<Board> possibleBoards = new ArrayList<>();
-        for (Direction dir : Direction.values()) {
-            Board nextBoard = move(dir);
-            if (!this.equals(nextBoard)) {
-                possibleBoards.add(nextBoard);
-            }
-        }
-        return possibleBoards;
-    }
-
-    public int heuristic(){
-        return 0;
     }
 
     public void setPlayer(int x, int y){
