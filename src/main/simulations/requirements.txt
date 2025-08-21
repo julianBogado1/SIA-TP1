@@ -1,2 +1,5 @@
 matplotlib==3.10.5
 numpy==2.3.2
+pygame==2.2.0
+imageio==2.31.4
+moviepy==1.0.3
