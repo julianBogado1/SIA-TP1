@@ -1,62 +1,77 @@
 package org.sokoban.main;
+
 import org.sokoban.models.Board;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class BFS {
     Queue<Board> frontier = new LinkedList<>();
-    List<Board> solution = new ArrayList<>();
+    Queue<Board> solution = new LinkedList<>();
+    Set<Board> visited = new HashSet<>();
+    Map<Board, Board> parent = new HashMap<>();
 
     public static void main(String[] args) {
         BFS solver = new BFS();
-        List<Board> answer = solver.bfs();
+        Queue<Board> answer = solver.bfs();
 
-        if(answer==null){
+        if (answer == null) {
             System.out.println("No solution found");
             return;
         }
 
-        int step=0;
-        for(Board b : answer){
-            System.out.println("paso" + (step++));
-            System.out.println(b);
+        try (PrintWriter writer = new PrintWriter(new FileWriter("src/main/java/org/sokoban/solution/solution.txt"))) {
+            for (Board b : answer) {
+                writer.println(b.toString());
+            }
+            System.out.println("Solution written to solution.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-
     }
 
-    private boolean nextStep(Board current, Board parent, List<Board> solutionPath) {
-        solution.add(current);
-
-        if(current.isSolution()){
-            solution = new ArrayList<>(solutionPath);
+    private boolean nextStep(Board current) {
+        if (current.isSolution()) {
+            buildSolution(current);
+            return true;
         }
 
-        //miro frontera y se a donde moverme
         for (Board move : current.getPossibleBoards()) {
-            if(!move.equals(parent)) {
+            if (!visited.contains(move)) {
+                visited.add(move);
+                parent.put(move, current);
                 frontier.add(move);
             }
         }
 
-        Board next = frontier.poll();
-        if(next == null){
-            return false;
-        }
-
-        List<Board> newPath = new ArrayList<>(solutionPath);
-
-        return nextStep(next, current, newPath);
+        return false;
     }
 
-    private List<Board> bfs(){
+    private Queue<Board> bfs() {
         Board root = new Board();
         frontier.add(root);
+        visited.add(root);
+        parent.put(root, null);
 
-        if(nextStep(root, null, new ArrayList<>())){
-            return solution;
+        while (!frontier.isEmpty()) {
+            Board current = frontier.poll();
+
+            if (nextStep(current)) {
+                return solution;
+            }
         }
         return null;
     }
+
+    private void buildSolution(Board goal) {
+        Deque<Board> path = new ArrayDeque<>();
+        for (Board at = goal; at != null; at = parent.get(at)) {
+            path.push(at);
+        }
+        solution.addAll(path);
+    }
 }
+
 
