@@ -30,7 +30,7 @@ public class AStar {
             return;
         }
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter("src/main/resources/solution.txt"))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("src/main/resources/AStarSolution.txt"))) {
             for (Board b : solution) {
                 writer.println(b);
             }
@@ -41,13 +41,15 @@ public class AStar {
     }
 
     public List<Board> solve() {
-        Board start = new Board();
+        Board start = new Board(11, 11, 5);
+        System.out.println("Initial Board:\n" + start);
         BoardNode startNode = new BoardNode(start, 0);
         frontier.add(startNode);
         gScore.put(start, 0);
         parent.put(start, null);
 
-        while (!frontier.isEmpty()) {
+        int iterations = 0;
+        while (!frontier.isEmpty() && iterations++ < 10000000) {
             BoardNode currentNode = frontier.poll();
             Board current = currentNode.board;
 

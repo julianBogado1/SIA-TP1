@@ -15,7 +15,7 @@ COLORS = {
 }
 
 CELL_SIZE = 80
-ROWS, COLS = 6, 7
+ROWS, COLS = int(sys.argv[2]), int(sys.argv[3])  # Get rows and cols from command line arguments
 
 def load_frames(filename):
     """Load frames from a txt file. Each frame is separated by a blank line."""
@@ -38,7 +38,7 @@ def draw_frame(screen, frame):
             pygame.draw.rect(screen, color, rect)
             pygame.draw.rect(screen, (200, 200, 200), rect, 2)  # grid lines
 
-def main(filename, output_file="output.mp4"):
+def main(filename, output_file="output2.mp4"):
     frames = load_frames(filename)
     pygame.init()
     screen = pygame.display.set_mode((COLS * CELL_SIZE, ROWS * CELL_SIZE))
@@ -71,7 +71,7 @@ def main(filename, output_file="output.mp4"):
 
     # Save video using imageio
     clip = ImageSequenceClip(video_frames, fps=1)
-    clip.write_videofile("output.mp4", codec="libx264")
+    clip.write_videofile("Astar5.mp4", codec="libx264")
     print(f"Saved animation to {output_file}")
 
 if __name__ == "__main__":

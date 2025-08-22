@@ -51,11 +51,13 @@ public class BFS {
 
     private Queue<Board> bfs() {
         Board root = new Board();
+        System.out.println("Initial Board:\n" + root);
         frontier.add(root);
         visited.add(root);
         parent.put(root, null);
+        int iterations = 0;
 
-        while (!frontier.isEmpty()) {
+        while (!frontier.isEmpty() && iterations++ < 10000000) {
             Board current = frontier.poll();
 
             if (nextStep(current)) {

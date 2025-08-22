@@ -52,6 +52,15 @@ public class Board {
         executePreAnalysis();
     }
 
+    // Constructor for generating a random board
+    public Board(int width, int height, int targets) {
+        this.width = width;
+        this.height = height;
+        Cell[][] randomBoard = generateBoard(width, height, targets);
+        initializeCells(randomBoard);
+        executePreAnalysis();
+    }
+
     public void executePreAnalysis(){
         preAnalysis = new int[2][Math.max(width, height)];
         for (int i = 0; i < height; i++) {
@@ -197,6 +206,163 @@ public class Board {
         return totalDistance;
     }
 
+
+    private Cell[][] generateBoard(int width, int height, int targets) {
+        Cell[][] board = new Cell[height][width];
+
+        // Initialize all cells as empty first
+        for(int i = 0; i < height; i++) {
+            for(int j = 0; j < width; j++) {
+                board[i][j] = new Cell(State.EMPTY);
+            }
+        }
+
+        // Create border walls
+        for(int i = 0; i < height; i++) {
+            for(int j = 0; j < width; j++) {
+                if (i == 0 || i == height - 1 || j == 0 || j == width - 1) {
+                    board[i][j] = new Cell(State.WALL);
+                }
+            }
+        }
+
+        // Generate solvable configuration by starting from solved state
+        java.util.List<int[]> validPositions = new java.util.ArrayList<>();
+        // Use inner area (at least 2 cells away from walls) to prevent boxes near walls
+        for(int i = 3; i < height - 3; i++) {
+            for(int j = 3; j < width - 3; j++) {
+                validPositions.add(new int[]{i, j});
+            }
+        }
+
+//        if(validPositions.size() < targets + 1) {
+//            // Fallback for small boards
+//            return generateSimpleBoard(width, height, targets);
+//        }
+
+        java.util.Collections.shuffle(validPositions);
+
+        // Start by placing targets first
+        for(int t = 0; t < targets && t < validPositions.size(); t++) {
+            int[] pos = validPositions.get(t);
+            board[pos[0]][pos[1]] = new Cell(State.TARGET);
+        }
+
+        // Place player away from the targets
+        int playerIndex = targets;
+        if(playerIndex < validPositions.size()) {
+            int[] playerPos = validPositions.get(playerIndex);
+            board[playerPos[0]][playerPos[1]] = new Cell(State.PLAYER);
+            this.playerX = playerPos[1];
+            this.playerY = playerPos[0];
+        }
+
+        // Now place boxes in different positions from targets
+        java.util.Random random = new java.util.Random();
+        int boxesPlaced = 0;
+        int attempts = 0;
+        int maxAttempts = validPositions.size() * 2;
+
+        while(boxesPlaced < targets && attempts < maxAttempts) {
+            attempts++;
+            int randomIndex = random.nextInt(validPositions.size());
+            int[] pos = validPositions.get(randomIndex);
+
+            // Only place box if position is empty and valid for boxes
+            if(board[pos[0]][pos[1]].getState() == State.EMPTY &&
+               isValidBoxPosition(board, pos[0], pos[1], height, width)) {
+                board[pos[0]][pos[1]] = new Cell(State.BOX);
+                boxesPlaced++;
+            }
+        }
+
+        // Add minimal interior walls to increase difficulty, but ensure they don't block boxes
+        int wallsToAdd = Math.min(1, validPositions.size() / 15); // Even fewer walls
+        for(int w = 0; w < wallsToAdd; w++) {
+            int wallIndex = targets + 1 + w;
+            if(wallIndex < validPositions.size()) {
+                int[] wallPos = validPositions.get(wallIndex);
+                if(board[wallPos[0]][wallPos[1]].getState() == State.EMPTY &&
+                   !wouldBlockBoxes(board, wallPos[0], wallPos[1], height, width)) {
+                    board[wallPos[0]][wallPos[1]] = new Cell(State.WALL);
+                }
+            }
+        }
+
+        return board;
+    }
+
+    // Helper method to check if a position is valid for a box (not adjacent to walls)
+    private boolean isValidBoxPosition(Cell[][] board, int row, int col, int height, int width) {
+        // Check bounds
+        if(row <= 1 || row >= height-2 || col <= 1 || col >= width-2) {
+            return false;
+        }
+
+        // Check if position is empty
+        if(board[row][col].getState() != State.EMPTY) {
+            return false;
+        }
+
+        // Check that none of the adjacent cells are walls (except border)
+        int[] dr = {-1, -1, -1, 0, 0, 1, 1, 1};
+        int[] dc = {-1, 0, 1, -1, 1, -1, 0, 1};
+
+        for(int i = 0; i < 8; i++) {
+            int adjRow = row + dr[i];
+            int adjCol = col + dc[i];
+
+            if(adjRow >= 0 && adjRow < height && adjCol >= 0 && adjCol < width) {
+                // Don't allow boxes next to interior walls
+                if(board[adjRow][adjCol].getState() == State.WALL &&
+                   !(adjRow == 0 || adjRow == height-1 || adjCol == 0 || adjCol == width-1)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    // Helper method to check if placing a wall would block existing boxes
+    private boolean wouldBlockBoxes(Cell[][] board, int row, int col, int height, int width) {
+        // Check if placing a wall here would make any adjacent box unmovable
+        int[] dr = {-1, 0, 1, 0};
+        int[] dc = {0, 1, 0, -1};
+
+        for(int i = 0; i < 4; i++) {
+            int adjRow = row + dr[i];
+            int adjCol = col + dc[i];
+
+            if(adjRow >= 0 && adjRow < height && adjCol >= 0 && adjCol < width) {
+                State adjState = board[adjRow][adjCol].getState();
+                if(adjState == State.BOX || adjState == State.BOX_ON_TARGET) {
+                    // Check if this box would become unmovable
+                    int movableDirections = 0;
+                    for(int j = 0; j < 4; j++) {
+                        int boxMoveRow = adjRow + dr[j];
+                        int boxMoveCol = adjCol + dc[j];
+
+                        if(boxMoveRow >= 0 && boxMoveRow < height && boxMoveCol >= 0 && boxMoveCol < width) {
+                            State moveState = board[boxMoveRow][boxMoveCol].getState();
+                            // Simulate placing the wall
+                            if(boxMoveRow == row && boxMoveCol == col) {
+                                continue; // This would be a wall
+                            }
+                            if(moveState == State.EMPTY || moveState == State.TARGET) {
+                                movableDirections++;
+                            }
+                        }
+                    }
+                    if(movableDirections == 0) {
+                        return true; // Would block this box
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 
     public void initializeCells(Cell[][] level) {
         cells = level;
