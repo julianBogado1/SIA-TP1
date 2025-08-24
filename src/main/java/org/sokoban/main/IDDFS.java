@@ -33,7 +33,8 @@ public class IDDFS {
     }
 
     public List<Board> solve() {
-        Board start = new Board();
+        Board start = new Board(12, 12, 4);
+        System.out.println("Initial Board:\n" + start);
         int depth = 0;
 
         while (depth<=MAX_DEPTH) {

@@ -164,3 +164,15 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
+*.mp4
+*.mkv
+*.flv
+*.avi
+*.mov
+*.wmv
+*.webm
+*.mp3
+*.wav
+*.flac
+*.aac
+*.mp3

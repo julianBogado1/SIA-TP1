@@ -71,7 +71,7 @@ def main(filename, output_file="output2.mp4"):
 
     # Save video using imageio
     clip = ImageSequenceClip(video_frames, fps=1)
-    clip.write_videofile("Astar5.mp4", codec="libx264")
+    clip.write_videofile("IDDFS2.mp4", codec="libx264")
     print(f"Saved animation to {output_file}")
 
 if __name__ == "__main__":
