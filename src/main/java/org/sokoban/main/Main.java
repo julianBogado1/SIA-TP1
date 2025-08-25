@@ -13,7 +13,7 @@ public class Main {
         //String algorithm =  "DFS";
         String algorithm =  "Greedy";
 
-        Board initialBoard = new Board();
+        Board initialBoard = new Board(15, 15, 5);
         //List<Board> solutionPath = new DFS().search(initialBoard);
         List<Board> solutionPath = new Greedy(initialBoard).search();
 
