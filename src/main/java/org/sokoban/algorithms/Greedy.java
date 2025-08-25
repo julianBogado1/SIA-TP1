@@ -16,7 +16,6 @@ public class Greedy{
     private String filename = "greedy_metrics.txt";
     //Metricas
     private long expanded = 0;
-    private int maxDepth = 0;
 
     public Greedy(Board board){
         this.greedySearch = new GreedySearch(board);
@@ -34,12 +33,12 @@ public class Greedy{
                 path = greedySearch.reconstructPath(current);
 
                 long ms = System.currentTimeMillis() - t0;
-                System.out.printf("Greedy encontró solución. Nodos expandidos=%d, ProfMax=%d, Tiempo=%d ms%n", expanded, maxDepth, ms);
+                System.out.printf("Greedy encontró solución. Nodos expandidos=%d, Tiempo=%d ms%n", expanded, ms);
 
                 try {
                     FileWriter writer = new FileWriter(filename, true);
-                    writer.write(String.format("Greedy encontró solución. Nodos expandidos=%d, ProfMax=%d, Tiempo=%d ms%n",
-                            expanded, maxDepth, ms));
+                    writer.write(String.format("Greedy encontró solución. Nodos expandidos=%d, Tiempo=%d ms%n",
+                            expanded, ms));
                     writer.close();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -49,12 +48,12 @@ public class Greedy{
             }
         }//not found
         long ms = System.currentTimeMillis() - t0;
-        System.out.printf("Greedy no encontró solución. Nodos expandidos=%d, ProfMax=%d, Tiempo=%d ms%n", expanded, maxDepth, ms);
+        System.out.printf("Greedy no encontró solución. Nodos expandidos=%d, Tiempo=%d ms%n", expanded, ms);
         
         try {
             FileWriter writer = new FileWriter(filename, true);
-            writer.write(String.format("Greedy no encontró solución. Nodos expandidos=%d, ProfMax=%d, Tiempo=%d ms%n",
-                    expanded, maxDepth, ms));
+            writer.write(String.format("Greedy no encontró solución. Nodos expandidos=%d, Tiempo=%d ms%n",
+                    expanded, ms));
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();

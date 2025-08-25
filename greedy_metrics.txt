@@ -1,0 +1,24 @@
+Greedy no encontró solución. Nodos expandidos=3, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=3, Tiempo=1 ms
+Greedy no encontró solución. Nodos expandidos=3, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=3, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=1, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=3, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=1, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=3, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=1, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=3, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=1, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=3, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=1, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=3, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=1, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=3, Tiempo=1 ms
+Greedy encontró solución. Nodos expandidos=2, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=3, Tiempo=0 ms
+Greedy encontró solución. Nodos expandidos=2, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=3, Tiempo=0 ms
+Greedy encontró solución. Nodos expandidos=2, Tiempo=0 ms
+Greedy no encontró solución. Nodos expandidos=3, Tiempo=0 ms
+Greedy encontró solución. Nodos expandidos=2, Tiempo=0 ms
+Greedy encontró solución. Nodos expandidos=5463, Tiempo=244 ms

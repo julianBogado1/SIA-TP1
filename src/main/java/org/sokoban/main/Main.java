@@ -3,7 +3,6 @@ package org.sokoban.main;
 import java.io.FileWriter;
 import java.util.List;
 
-import org.sokoban.algorithms.Greedy;
 import org.sokoban.algorithms.DFS;
 import org.sokoban.models.Board;
 

@@ -1,0 +1,14 @@
+DFS no encontró solución. Nodos expandidos=1, ProfMax=0, Tiempo=1 ms
+DFS no encontró solución. Nodos expandidos=1, ProfMax=0, Tiempo=0 ms
+DFS no encontró solución. Nodos expandidos=1, ProfMax=0, Tiempo=0 ms
+DFS no encontró solución. Nodos expandidos=1, ProfMax=0, Tiempo=0 ms
+DFS no encontró solución. Nodos expandidos=1, ProfMax=0, Tiempo=0 ms
+DFS encontró solución. Nodos expandidos=2, ProfMax=1, Tiempo=0 ms
+DFS encontró solución. Nodos expandidos=2, ProfMax=1, Tiempo=0 ms
+DFS encontró solución. Nodos expandidos=2, ProfMax=1, Tiempo=0 ms
+DFS encontró solución. Nodos expandidos=2, ProfMax=1, Tiempo=0 ms
+DFS encontró solución. Nodos expandidos=2, ProfMax=1, Tiempo=0 ms
+DFS no encontró solución. Nodos expandidos=3, ProfMax=2, Tiempo=0 ms
+DFS encontró solución. Nodos expandidos=2, ProfMax=1, Tiempo=0 ms
+DFS no encontró solución. Nodos expandidos=3, ProfMax=2, Tiempo=0 ms
+DFS encontró solución. Nodos expandidos=2, ProfMax=1, Tiempo=0 ms

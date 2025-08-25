@@ -118,11 +118,15 @@ public class Board {
         return new Board(old);
     }
 
+    private boolean isInsideBoard(int x, int y) {
+        return x >= 0 && x < width && y >= 0 && y < height;
+    }
 
     public Board move(Direction direction){
         Board nextBoard = fromBoard(this);
         int newX = playerX + direction.dx();
         int newY = playerY + direction.dy();
+        if (!isInsideBoard(newX, newY)) return nextBoard;
         if(cells[newY][newX].getState() != State.WALL){
             if(cells[newY][newX].getState() == State.BOX || cells[newY][newX].getState() == State.BOX_ON_TARGET){
                 if (!nextBoard.moveBox(direction, newX, newY)) return nextBoard;
@@ -138,6 +142,7 @@ public class Board {
         else previous = State.TARGET;
         int newX = x + direction.dx();
         int newY = y + direction.dy();
+        if (!isInsideBoard(newX, newY)) return false;
         switch (cells[newY][newX].getState()) {
             case EMPTY -> {
                 setCell(newX, newY, new Cell(State.BOX));
