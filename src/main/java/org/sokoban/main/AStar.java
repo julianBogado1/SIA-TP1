@@ -41,6 +41,7 @@ public class AStar {
         try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
             writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
             writer.printf("Nodos expandidos: %d. ", solver.expanded);
+            writer.printf("Frontier: %d. ", solver.frontier.size());
             writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
             writer.println();
 
@@ -57,7 +58,7 @@ public class AStar {
     }
 
     public List<Board> solve() {
-        Board start = new Board(11, 11, 5);
+        Board start = new Board();
         System.out.println("Initial Board:\n" + start);
         BoardNode startNode = new BoardNode(start, 0);
         frontier.add(startNode);
