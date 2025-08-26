@@ -1,4 +1,4 @@
-Sí se encontró solución. Nodos expandidos: 4012. Tiempo de ejecución: 43 ms. 
+Sí se encontró solución. Nodos expandidos: 4012. Frontier: 413. Tiempo de ejecución: 173 ms. 
 === SOLUCIÓN ===
 #########
 #T#TB   #
