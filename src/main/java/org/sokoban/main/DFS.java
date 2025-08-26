@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.List;
 
 import org.sokoban.models.Board;
 
@@ -18,9 +19,10 @@ public class DFS {
     private final Set<Board> visited = new HashSet<>();
     private final Map<Board, Board> parent = new HashMap<>();
     private final Queue<Board> solution = new LinkedList<>();
-    private final String outputFile = "src/main/resources/DFS_solution.txt";
+    private final String outputFile = "SIA-TP1/src/main/resources/DFS_solution.txt";
     private long expanded = 0;
     private int maxDepth = 0;
+    private static int frontier = 1;
 
     public static void main(String[] args) {
         DFS solver = new DFS();
@@ -33,7 +35,7 @@ public class DFS {
         try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
             writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
             writer.printf("Nodos expandidos: %d. ", expanded);
-            writer.printf("Profundidad máxima: %d. ", maxDepth);
+            writer.printf("Nodos Fronteras: %d. ", frontier);
             writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
             writer.println();
 
@@ -70,9 +72,13 @@ public class DFS {
             return current;
         }
 
-        for (Board neighbor : current.getPossibleBoards()) {
+        List<Board> list = current.getPossibleBoards();
+        frontier +=list.size();
+
+        for (Board neighbor : list) {
             if (!visited.contains(neighbor)) {
                 parent.put(neighbor, current);
+                frontier--;
                 Board result = recursiveDFS(neighbor, depth + 1);
                 if (result != null) {
                     return result;
