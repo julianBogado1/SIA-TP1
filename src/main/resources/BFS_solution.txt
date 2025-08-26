@@ -1,4 +1,5 @@
-Sí se encontró solución. Nodos expandidos: 4012. Tiempo de ejecución: 48 ms. 
+Sí se encontró solución. Nodos expandidos: 4012. Tiempo de ejecución: 43 ms. 
+=== SOLUCIÓN ===
 #########
 #T#TB   #
 # # # # #

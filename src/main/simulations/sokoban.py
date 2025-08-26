@@ -74,11 +74,11 @@ def main(filename, output_file="output2.mp4"):
 
     # Save video using imageio
     clip = ImageSequenceClip(video_frames, fps=1)
-    clip.write_videofile("IDDFS2.mp4", codec="libx264")
-    print(f"Saved animation to {output_file}")
+    clip.write_gif(sys.argv[4])
+    print(f"Saved animation to {sys.argv[4]}")
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python sokoban.py <file.txt>")
+    if len(sys.argv) < 5:
+        print("Usage: python sokoban.py <file.txt> <rows> <cols> <output.mp4>")
     else:
         main(sys.argv[1])
