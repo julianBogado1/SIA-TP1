@@ -1,18 +1,28 @@
 package org.sokoban.main;
 
-import org.sokoban.models.Board;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
+
+import org.sokoban.models.Board;
 
 public class AStar {
-
     private final PriorityQueue<BoardNode> frontier;
     private final Set<Board> visited;
     private final Map<Board, Board> parent;
     private final Map<Board, Integer> gScore;
+    private final String outputFile = "src/main/resources/AStar_solution.txt";
+    private long expanded = 0;
+    private int maxDepth = 0;
 
     public AStar() {
         frontier = new PriorityQueue<>(new Heuristic());
@@ -23,18 +33,24 @@ public class AStar {
 
     public static void main(String[] args) {
         AStar solver = new AStar();
+        long t0 = System.currentTimeMillis();
         List<Board> solution = solver.solve();
+        long elapsed = System.currentTimeMillis() - t0;
+        boolean found = solution != null;
 
-        if (solution == null) {
-            System.out.println("No solution found");
-            return;
-        }
+        try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
+            writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
+            writer.printf("Nodos expandidos: %d. ", solver.expanded);
+            writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
+            writer.println();
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter("src/main/resources/AStarSolution.txt"))) {
-            for (Board b : solution) {
-                writer.println(b);
+            if(found){
+                writer.println("=== SOLUCIÓN ===");
+                for (Board b : solution) {
+                    writer.println(b);
+                }
             }
-            System.out.println("Solution written to AStar_solution.txt");
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,6 +75,7 @@ public class AStar {
 
             if (visited.contains(current)) continue;
             visited.add(current);
+            expanded++;
 
             for (Board neighbor : current.getPossibleBoards()) {
                 int possibleG = gScore.get(current) + 1;

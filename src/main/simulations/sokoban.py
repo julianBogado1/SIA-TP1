@@ -21,7 +21,10 @@ def load_frames(filename):
     """Load frames from a txt file. Each frame is separated by a blank line."""
     with open(filename, "r") as f:
         content = f.read().strip()
-    raw_frames = content.split("\n\n")
+    
+    parts = content.split("=== SOLUCIÓN ===")
+    metadata = parts[0].strip() if len(parts) > 1 else ""
+    raw_frames = parts[1].strip().split("\n\n") if len(parts) > 1 else []
 
     frames = []
     for raw in raw_frames:

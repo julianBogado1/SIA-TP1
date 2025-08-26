@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayDeque;
+import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,32 +12,32 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.sokoban.models.Board;
 
-public class BFS {
-    Queue<Board> frontier = new LinkedList<>();
-    Queue<Board> solution = new LinkedList<>();
-    Set<Board> visited = new HashSet<>();
-    Map<Board, Board> parent = new HashMap<>();
-    private final String outputFile = "src/main/resources/BFS_solution.txt";
-    private long expanded = 0;
-    private int maxDepth = 0;
+public class Greedy {
+    private final TreeSet<Board> frontier = new TreeSet<>(new GreedyComparator());
+    private final Set<Board> visited = new HashSet<>();
+    private final Map<Board, Board> parent = new HashMap<>();
+    private final Queue<Board> solution = new LinkedList<>();
+    private final String outputFile = "src/main/resources/Greedy_solution.txt";
 
     public static void main(String[] args) {
-        BFS solver = new BFS();
+        Greedy solver = new Greedy();
         long t0 = System.currentTimeMillis();
-        Queue<Board> answer = solver.bfs();
+        Queue<Board> answer = solver.search();
         long elapsed = System.currentTimeMillis() - t0;
         boolean found = answer != null;
+        long expanded = solver.visited.size();
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
             writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
-            writer.printf("Nodos expandidos: %d. ", solver.expanded);
+            writer.printf("Nodos expandidos: %d. ", expanded);
             writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
             writer.println();
-            
-            if(found){
+
+            if (found) {
                 writer.println("=== SOLUCIÓN ===");
                 for (Board b : answer) {
                     writer.println(b.toString());
@@ -48,14 +49,13 @@ public class BFS {
     }
 
     private boolean nextStep(Board current) {
-        expanded++;
         if (current.isSolution()) {
             buildSolution(current);
             return true;
         }
 
         for (Board move : current.getPossibleBoards()) {
-            if (!visited.contains(move)) {
+            if (!visited.contains(move) && !frontier.contains(move)) {
                 visited.add(move);
                 parent.put(move, current);
                 frontier.add(move);
@@ -65,34 +65,46 @@ public class BFS {
         return false;
     }
 
-    private Queue<Board> bfs() {
+    private Queue<Board> search() {
         Board root = new Board();
         System.out.println("Initial Board:\n" + root);
         frontier.add(root);
         visited.add(root);
         parent.put(root, null);
-        int iterations = 0;
+        long iterations = 0;
+        long t0 = System.currentTimeMillis();
 
-        while (!frontier.isEmpty() && iterations++ < 10000000) {
-            Board current = frontier.poll();
+        while (!frontier.isEmpty() && iterations++<10000000) {
+            Board current = frontier.pollFirst();
 
             if (nextStep(current)) {
+                long ms = System.currentTimeMillis() - t0;
+                System.out.printf("Greedy encontró solución. Nodos expandidos=%d, Tiempo=%d ms%n", iterations, ms);
                 return solution;
             }
         }
+
+        long ms = System.currentTimeMillis() - t0;
+        System.out.printf("Greedy no encontró solución. Nodos expandidos=%d, Tiempo=%d ms%n", iterations, ms);
         return null;
     }
 
     private void buildSolution(Board goal) {
         Deque<Board> path = new ArrayDeque<>();
-        int depth = 0;
         for (Board at = goal; at != null; at = parent.get(at)) {
             path.push(at);
-            depth++;
         }
-        maxDepth = depth - 1;
         solution.addAll(path);
     }
 }
 
+class GreedyComparator implements Comparator<Board> {
+    @Override
+    public int compare(Board b1, Board b2) {
+        int h1 = b1.heuristic();
+        int h2 = b2.heuristic();
 
+        if (h1 == h2) return System.identityHashCode(b1) - System.identityHashCode(b2);
+        return Integer.compare(h1, h2);
+    }
+}

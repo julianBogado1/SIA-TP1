@@ -3,38 +3,32 @@ package org.sokoban.main;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 import org.sokoban.models.Board;
 
-public class IDDFS {
-
-    private static final int MAX_DEPTH=1000;
-
+public class DFS {
+    private final Set<Board> visited = new HashSet<>();
     private final Map<Board, Board> parent = new HashMap<>();
-    private final String outputFile = "src/main/resources/IDDFS_solution.txt";
+    private final Queue<Board> solution = new LinkedList<>();
+    private final String outputFile = "src/main/resources/DFS_solution.txt";
     private long expanded = 0;
     private int maxDepth = 0;
 
     public static void main(String[] args) {
-        IDDFS solver = new IDDFS();
+        DFS solver = new DFS();
         long t0 = System.currentTimeMillis();
-        List<Board> solution = solver.solve();
+        boolean found = solver.search();
         long elapsed = System.currentTimeMillis() - t0;
-        boolean found = solution!=null;
         long expanded = solver.expanded;
         int maxDepth = solver.maxDepth;
-
-        if (solution == null) {
-            System.out.println("No solution found");
-            return;
-        }
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
             writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
@@ -45,7 +39,7 @@ public class IDDFS {
 
             if (found) {
                 writer.println("=== SOLUCIÓN ===");
-                for (Board b : solution) {
+                for (Board b : solver.solution) {
                     writer.println(b.toString());
                 }
             }
@@ -54,44 +48,33 @@ public class IDDFS {
         }
     }
 
-    public List<Board> solve() {
-        Board start = new Board(12, 12, 4);
-        System.out.println("Initial Board:\n" + start);
-        int depth = 0;
+    public boolean search() {
+        Board root = new Board();
+        System.out.println("Initial Board:\n" + root);
+        parent.put(root, null);
 
-        while (depth<=MAX_DEPTH) {
-            Set<Board> visited = new HashSet<>();
-            parent.clear();
-            parent.put(start, null);
-
-            Board result = dls(start, depth, visited);
-            if (result != null) {
-                maxDepth = depth;
-                return buildSolution(result);
-            }
-            depth++;
+        Board goal = recursiveDFS(root, 0);
+        if (goal != null) {
+            buildSolution(goal);
+            return true;
         }
-        return null;
+        return false;
     }
 
-    private Board dls(Board current, int depthLimit, Set<Board> visited) {
+    private Board recursiveDFS(Board current, int depth) {
+        if (!visited.add(current)) return null;
         expanded++;
+        maxDepth = Math.max(maxDepth, depth);
 
-        if (current.isSolution()){
+        if (current.isSolution()) {
             return current;
         }
-
-        if (depthLimit <= 0){
-            return null;
-        }
-
-        visited.add(current);
 
         for (Board neighbor : current.getPossibleBoards()) {
             if (!visited.contains(neighbor)) {
                 parent.put(neighbor, current);
-                Board result = dls(neighbor, depthLimit - 1, visited);
-                if (result != null){
+                Board result = recursiveDFS(neighbor, depth + 1);
+                if (result != null) {
                     return result;
                 }
             }
@@ -100,13 +83,11 @@ public class IDDFS {
         return null;
     }
 
-    private List<Board> buildSolution(Board goal) {
-        List<Board> path = new ArrayList<>();
+    private void buildSolution(Board goal) {
+        Deque<Board> path = new ArrayDeque<>();
         for (Board at = goal; at != null; at = parent.get(at)) {
-            path.add(at);
+            path.push(at);
         }
-        Collections.reverse(path);
-        return path;
+        solution.addAll(path);
     }
 }
-
