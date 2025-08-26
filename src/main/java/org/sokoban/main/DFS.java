@@ -1,45 +1,54 @@
 package org.sokoban.main;
 
+import org.sokoban.models.Board;
+
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-import java.util.List;
-
-import org.sokoban.models.Board;
+import java.util.*;
 
 public class DFS {
+    // Estructuras de búsqueda
     private final Set<Board> visited = new HashSet<>();
     private final Map<Board, Board> parent = new HashMap<>();
     private final Queue<Board> solution = new LinkedList<>();
-    private final String outputFile = "SIA-TP1/src/main/resources/DFS_solution.txt";
+
+    // Métricas generales
     private long expanded = 0;
     private int maxDepth = 0;
-    private static int frontier = 1;
+    private Board lastBoard;
+
+    // Frontera en tiempo real y snapshots por nodo
+    private int frontierCurrent = 0;
+    private final Map<Board, Integer> frontierBefore = new HashMap<>();
+    private final Map<Board, Integer> frontierAfter  = new HashMap<>();
+
+    // Salida
+    private final String outputFile = "SIA-TP1/src/main/resources/DFS_solution.txt";
 
     public static void main(String[] args) {
         DFS solver = new DFS();
+
         long t0 = System.currentTimeMillis();
         boolean found = solver.search();
         long elapsed = System.currentTimeMillis() - t0;
-        long expanded = solver.expanded;
-        int maxDepth = solver.maxDepth;
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
+        // Preparar archivo y crear directorios si no existen
+        File out = new File(solver.outputFile);
+        File parentDir = out.getParentFile();
+        if (parentDir != null) parentDir.mkdirs();
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(out))) {
             writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
-            writer.printf("Nodos expandidos: %d. ", expanded);
-            writer.printf("Nodos Fronteras: %d. ", frontier);
-            writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
-            writer.println();
+            writer.printf("# Nodos solucion: %d. ", solver.solution.size());
+            writer.printf("# Nodos expandidos: %d. ", solver.expanded);
+            writer.printf("# Nodos frontera: %d. ", solver.frontierAfter.get(solver.lastBoard));
+            writer.printf("Profundidad máxima: %d. ", solver.maxDepth);
+            writer.printf("Tiempo de ejecución: %d ms.%n", elapsed);
 
             if (found) {
+
                 writer.println("=== SOLUCIÓN ===");
                 for (Board b : solver.solution) {
                     writer.println(b.toString());
@@ -50,10 +59,20 @@ public class DFS {
         }
     }
 
+    /** Ejecuta DFS recursivo desde un Board por defecto. */
     public boolean search() {
         Board root = new Board();
         System.out.println("Initial Board:\n" + root);
+
+        // Inicialización
         parent.put(root, null);
+        visited.clear();
+        solution.clear();
+        expanded = 0;
+        maxDepth = 0;
+
+        // La frontera arranca con la raíz sin expandir
+        frontierCurrent = 1;
 
         Board goal = recursiveDFS(root, 0);
         if (goal != null) {
@@ -64,31 +83,47 @@ public class DFS {
     }
 
     private Board recursiveDFS(Board current, int depth) {
+        frontierBefore.put(current, frontierCurrent);
+
+        frontierCurrent--;
+
         if (!visited.add(current)) return null;
         expanded++;
         maxDepth = Math.max(maxDepth, depth);
 
         if (current.isSolution()) {
+            frontierAfter.put(current, frontierCurrent);
+            lastBoard = current;
             return current;
         }
 
-        List<Board> list = current.getPossibleBoards();
-        frontier +=list.size();
-
-        for (Board neighbor : list) {
-            if (!visited.contains(neighbor)) {
-                parent.put(neighbor, current);
-                frontier--;
-                Board result = recursiveDFS(neighbor, depth + 1);
-                if (result != null) {
-                    return result;
-                }
+        // Generar hijos NO visitados
+        List<Board> children = current.getPossibleBoards();
+        List<Board> nexts = new ArrayList<>(children.size());
+        for (Board nb : children) {
+            if (!visited.contains(nb)) {
+                parent.put(nb, current);
+                nexts.add(nb);
             }
         }
 
+        // Los hijos pasan a formar parte de la frontera
+        frontierCurrent += nexts.size();
+
+        // Snapshot de frontera DESPUÉS de generar los hijos de 'current'
+        frontierAfter.put(current, frontierCurrent);
+
+        // DFS: profundizar hijo por hijo
+        for (Board child : nexts) {
+            Board result = recursiveDFS(child, depth + 1);
+            if (result != null) {
+                return result;
+            }
+        }
         return null;
     }
 
+    /** Reconstruye el camino solución usando el mapa de padres. */
     private void buildSolution(Board goal) {
         Deque<Board> path = new ArrayDeque<>();
         for (Board at = goal; at != null; at = parent.get(at)) {
