@@ -1,41 +1,45 @@
 package org.sokoban.main;
 
+import org.sokoban.models.Board;
+
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayDeque;
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-import java.util.TreeSet;
-
-import org.sokoban.models.Board;
+import java.util.*;
 
 public class Greedy {
+
     private final TreeSet<Board> frontier = new TreeSet<>(new GreedyComparator());
     private final Set<Board> visited = new HashSet<>();
     private final Map<Board, Board> parent = new HashMap<>();
     private final Queue<Board> solution = new LinkedList<>();
-    private final String outputFile = "src/main/resources/Greedy_solution.txt";
+
+    private long expanded = 0;
+
+    private final Map<Board, Integer> frontierBefore = new HashMap<>();
+    private final Map<Board, Integer> frontierAfter  = new HashMap<>();
+
+    private final String outputFile = "SIA-TP1/src/main/resources/Greedy_solution.txt";
 
     public static void main(String[] args) {
         Greedy solver = new Greedy();
+
         long t0 = System.currentTimeMillis();
         Queue<Board> answer = solver.search();
         long elapsed = System.currentTimeMillis() - t0;
-        boolean found = answer != null;
-        long expanded = solver.visited.size();
+        boolean found = (answer != null);
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
+        File out = new File(solver.outputFile);
+        File parentDir = out.getParentFile();
+        if (parentDir != null) parentDir.mkdirs();
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(out))) {
             writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
-            writer.printf("Nodos expandidos: %d. ", expanded);
-            writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
-            writer.println();
+            writer.printf("Nodos Expandidos: %d. ", solver.expanded);
+            writer.printf("Nodos Solucion: %d. ", solver.solution.size());
+            writer.printf("Nodos Frontera (final): %d. ", solver.frontier.size());
+            writer.printf("Tiempo de ejecución: %d ms.%n", elapsed);
 
             if (found) {
                 writer.println("=== SOLUCIÓN ===");
@@ -48,44 +52,52 @@ public class Greedy {
         }
     }
 
-    private boolean nextStep(Board current) {
-        if (current.isSolution()) {
-            buildSolution(current);
-            return true;
-        }
-
-        for (Board move : current.getPossibleBoards()) {
-            if (!visited.contains(move) && !frontier.contains(move)) {
-                visited.add(move);
-                parent.put(move, current);
-                frontier.add(move);
-            }
-        }
-
-        return false;
-    }
-
     private Queue<Board> search() {
         Board root = new Board();
         System.out.println("Initial Board:\n" + root);
+
+        frontier.clear();
+        visited.clear();
+        parent.clear();
+        solution.clear();
+        frontierBefore.clear();
+        frontierAfter.clear();
+        expanded = 0;
+
         frontier.add(root);
         visited.add(root);
         parent.put(root, null);
+
         long iterations = 0;
-        long t0 = System.currentTimeMillis();
+        long maxIters = 10_000_000L;
 
-        while (!frontier.isEmpty() && iterations++<10000000) {
+        while (!frontier.isEmpty() && iterations++ < maxIters) {
+            int before = frontier.size();
             Board current = frontier.pollFirst();
+            expanded++;
 
-            if (nextStep(current)) {
-                long ms = System.currentTimeMillis() - t0;
-                System.out.printf("Greedy encontró solución. Nodos expandidos=%d, Tiempo=%d ms%n", iterations, ms);
+            frontierBefore.put(current, before);
+
+            if (current.isSolution()) {
+                frontierAfter.put(current, frontier.size());
+                buildSolution(current);
+                System.out.printf("Greedy encontró solución. Nodos expandidos=%d, Tiempo acumulado (aprox.)=%d ms%n",
+                        iterations, (System.currentTimeMillis()));
                 return solution;
             }
+
+            for (Board move : current.getPossibleBoards()) {
+                if (!visited.contains(move) && !frontier.contains(move)) {
+                    visited.add(move);
+                    parent.put(move, current);
+                    frontier.add(move);
+                }
+            }
+
+            frontierAfter.put(current, frontier.size());
         }
 
-        long ms = System.currentTimeMillis() - t0;
-        System.out.printf("Greedy no encontró solución. Nodos expandidos=%d, Tiempo=%d ms%n", iterations, ms);
+        System.out.printf("Greedy no encontró solución. Nodos expandidos=%d%n", iterations);
         return null;
     }
 
@@ -104,7 +116,12 @@ class GreedyComparator implements Comparator<Board> {
         int h1 = b1.heuristic();
         int h2 = b2.heuristic();
 
-        if (h1 == h2) return System.identityHashCode(b1) - System.identityHashCode(b2);
-        return Integer.compare(h1, h2);
+        int cmp = Integer.compare(h1, h2);
+        if (cmp != 0) return cmp;
+
+        cmp = Integer.compare(b1.hashCode(), b2.hashCode());
+        if (cmp != 0) return cmp;
+
+        return Integer.compare(System.identityHashCode(b1), System.identityHashCode(b2));
     }
 }
