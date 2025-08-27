@@ -10,7 +10,9 @@ import java.util.*;
 
 public class Greedy {
 
-    private final TreeSet<Board> frontier = new TreeSet<>(new GreedyComparator());
+    private final TreeSet<Board> frontier = new TreeSet<>(new AdmisibleHeuristic());
+    //private final TreeSet<Board> frontier = new TreeSet<>(new GreedyComparator());
+
     private final Set<Board> visited = new HashSet<>();
     private final Map<Board, Board> parent = new HashMap<>();
     private final Queue<Board> solution = new LinkedList<>();
@@ -123,5 +125,12 @@ class GreedyComparator implements Comparator<Board> {
         if (cmp != 0) return cmp;
 
         return Integer.compare(System.identityHashCode(b1), System.identityHashCode(b2));
+    }
+}
+
+class AdmisibleHeuristic implements Comparator<Board> {
+    @Override
+    public int compare(Board b1, Board b2) {
+        return Integer.compare(b1.admisibleHeuristic(), b2.admisibleHeuristic());
     }
 }
