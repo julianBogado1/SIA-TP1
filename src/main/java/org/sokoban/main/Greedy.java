@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Greedy {
 
-    private final TreeSet<Board> frontier = new TreeSet<>(new AdmisibleHeuristic());
+    private final PriorityQueue<Board> frontier = new PriorityQueue<>(new AdmisibleHeuristic());
     //private final TreeSet<Board> frontier = new TreeSet<>(new GreedyComparator());
 
     private final Set<Board> visited = new HashSet<>();
@@ -75,7 +75,7 @@ public class Greedy {
 
         while (!frontier.isEmpty() && iterations++ < maxIters) {
             int before = frontier.size();
-            Board current = frontier.pollFirst();
+            Board current = frontier.poll();
             expanded++;
 
             frontierBefore.put(current, before);
