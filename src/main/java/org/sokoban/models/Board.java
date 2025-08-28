@@ -242,7 +242,7 @@ public class Board {
         int resp = 0;
         for(int i = 0; i< cells.length; i++) {
             for(int j = 0; j< cells[i].length; j++) {
-                if(cells[i][j].getState() == State.BOX_ON_TARGET){
+                if(cells[i][j].getState() == State.TARGET || cells[i][j].getState() == State.PLAYER_ON_TARGET) {
                     resp++;
                 }
             }

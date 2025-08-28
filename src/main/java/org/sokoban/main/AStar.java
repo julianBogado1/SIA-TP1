@@ -20,7 +20,7 @@ public class AStar {
     private final Set<Board> visited;
     private final Map<Board, Board> parent;
     private final Map<Board, Integer> gScore;
-    private final String outputFile = "src/main/resources/AStar_solution.txt";
+    private final String outputFile = "src/main/resources/AStarH2_solution.txt";
     private long expanded = 0;
     private int maxDepth = 0;
 
@@ -38,7 +38,7 @@ public class AStar {
     }
 
     public static void main(String[] args) {
-        AStar solver = new AStar(args[0]);
+        AStar solver = new AStar("h2");
         long t0 = System.currentTimeMillis();
         List<Board> solution = solver.solve();
         long elapsed = System.currentTimeMillis() - t0;
