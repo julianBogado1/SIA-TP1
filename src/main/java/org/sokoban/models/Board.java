@@ -237,18 +237,18 @@ public class Board {
         return totalDistance;
     }
 
+
     public int admisibleHeuristic(){
         int resp = 0;
         for(int i = 0; i< cells.length; i++) {
-            for(int j = 0; j < cells[i].length; j++) {
-                if(cells[i][j].getState() == State.TARGET || cells[i][j].getState() == State.PLAYER_ON_TARGET){
+            for(int j = 0; j< cells[i].length; j++) {
+                if(cells[i][j].getState() == State.BOX_ON_TARGET){
                     resp++;
                 }
             }
         }
         return resp;
     }
-
 
     private Cell[][] generateBoard(int width, int height, int targets) {
         Cell[][] board = new Cell[height][width];

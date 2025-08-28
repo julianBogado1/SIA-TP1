@@ -67,7 +67,7 @@ public class AStar {
         parent.put(start, null);
 
         int iterations = 0;
-        while (!frontier.isEmpty() && iterations++ < 10000000) {
+        while (!frontier.isEmpty() /*&& iterations++ < 10000000*/) {
             BoardNode currentNode = frontier.poll();
             Board current = currentNode.board;
 
