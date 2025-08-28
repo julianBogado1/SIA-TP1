@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-No se encontró solución. Nodos expandidos: 265. Frontier: 265. Tiempo de ejecución: 19 ms. 
-=======
-Sí se encontró solución. Nodos Expandidos: 155. Nodos Solucion: 38. Nodos Frontera (final): 27. Tiempo de ejecución: 71 ms.
+Sí se encontró solución. Nodos Expandidos: 572. Nodos Solucion: 40. Nodos Frontera (final): 31. Tiempo de ejecución: 553 ms.
 === SOLUCIÓN ===
 #########
 #T#TB   #
@@ -289,8 +286,8 @@ Sí se encontró solución. Nodos Expandidos: 155. Nodos Solucion: 38. Nodos Fro
 #B# # # #
 #       #
 #X## ####
-# P    B#
-#     # #
+#      B#
+#P    # #
 #########
 
 #########
@@ -299,8 +296,28 @@ Sí se encontró solución. Nodos Expandidos: 155. Nodos Solucion: 38. Nodos Fro
 #B# # # #
 #       #
 #X## ####
-#  P   B#
-#     # #
+#      B#
+# P   # #
+#########
+
+#########
+#T#X    #
+# # # # #
+#B# # # #
+#       #
+#X## ####
+#      B#
+#  P  # #
+#########
+
+#########
+#T#X    #
+# # # # #
+#B# # # #
+#       #
+#X## ####
+#      B#
+#   P # #
 #########
 
 #########
@@ -383,4 +400,3 @@ Sí se encontró solución. Nodos Expandidos: 155. Nodos Solucion: 38. Nodos Fro
 #     # #
 #########
 
->>>>>>> 931e7ad7774cab930ec2619345c0bdd64f6d494c

@@ -20,7 +20,7 @@ public class AStar {
     private final Set<Board> visited;
     private final Map<Board, Board> parent;
     private final Map<Board, Integer> gScore;
-    private final String outputFile = "./SIA-TP1/src/main/resources/AStar_solution.txt";
+    private final String outputFile = "./SIA-TP1/src/main/resources/AStarAdmi_solution.txt";
     private long expanded = 0;
     private int maxDepth = 0;
 
@@ -42,6 +42,7 @@ public class AStar {
         try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
             writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
             writer.printf("Nodos expandidos: %d. ", solver.expanded);
+            writer.printf("# Nodos solucion: %d. ", solution.size());
             writer.printf("Frontier: %d. ", solver.frontier.size());
             writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
             writer.println();

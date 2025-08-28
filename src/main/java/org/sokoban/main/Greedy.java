@@ -10,8 +10,8 @@ import java.util.*;
 
 public class Greedy {
 
-    private final PriorityQueue<Board> frontier = new PriorityQueue<>(new AdmisibleHeuristic());
-    //private final TreeSet<Board> frontier = new TreeSet<>(new GreedyComparator());
+    //private final PriorityQueue<Board> frontier = new PriorityQueue<>(new AdmisibleHeuristic());
+    private final PriorityQueue<Board> frontier = new PriorityQueue<>(new GreedyComparator());
 
     private final Set<Board> visited = new HashSet<>();
     private final Map<Board, Board> parent = new HashMap<>();
@@ -22,7 +22,7 @@ public class Greedy {
     private final Map<Board, Integer> frontierBefore = new HashMap<>();
     private final Map<Board, Integer> frontierAfter  = new HashMap<>();
 
-    private final String outputFile = "SIA-TP1/src/main/resources/Greedy_solution.txt";
+    private final String outputFile = "SIA-TP1/src/main/resources/GreedyComp_solution.txt";
 
     public static void main(String[] args) {
         Greedy solver = new Greedy();
@@ -77,6 +77,7 @@ public class Greedy {
             int before = frontier.size();
             Board current = frontier.poll();
             expanded++;
+
 
             frontierBefore.put(current, before);
 
