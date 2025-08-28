@@ -1,4 +1,4 @@
-Sí se encontró solución. Nodos Expandidos: 9254. Nodos Solucion: 76. Nodos Frontera (final): 2. Tiempo de ejecución: 1082 ms.
+Sí se encontró solución. Nodos Expandidos: 9254. Nodos Solucion: 76. Nodos Frontera (final): 2. Tiempo de ejecución: 405 ms.
 === SOLUCIÓN ===
 #########
 #T#TB   #

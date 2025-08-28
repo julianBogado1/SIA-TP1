@@ -110,7 +110,8 @@ public class AStar {
         BoardNode(Board board, int g) {
             this.board = board;
             this.g = g;
-            this.f = g + board.heuristic(); // f = g + h
+            //this.f = g + board.heuristic(); // f = g + h
+            this.f = g + board.admisibleHeuristic();
         }
 
         public int getF() {
@@ -128,7 +129,7 @@ public class AStar {
     private static class AdmisibleHeuristic implements Comparator<BoardNode> {
         @Override
         public int compare(BoardNode o1, BoardNode o2) {
-            return Integer.compare(o1.board.admisibleHeuristic(), o2.board.admisibleHeuristic());
+            return Integer.compare(o1.getF(), o2.getF());
         }
     }
 }
