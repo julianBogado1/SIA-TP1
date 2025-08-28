@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Sí se encontró solución. Nodos expandidos: 4012. Nodos frontera: 413. Tiempo de ejecución: 41 ms. 
+=======
+Sí se encontró solución. Nodos expandidos: 4012. Frontier: 413. Tiempo de ejecución: 173 ms. 
+>>>>>>> 931e7ad7774cab930ec2619345c0bdd64f6d494c
 === SOLUCIÓN ===
 #########
 #T#TB   #

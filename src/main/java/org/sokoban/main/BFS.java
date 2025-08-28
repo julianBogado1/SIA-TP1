@@ -33,7 +33,11 @@ public class BFS {
         try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
             writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
             writer.printf("Nodos expandidos: %d. ", solver.expanded);
+<<<<<<< HEAD
             writer.printf("Nodos frontera: %d. ", solver.frontier.size());
+=======
+            writer.printf("Frontier: %d. ", solver.frontier.size());
+>>>>>>> 931e7ad7774cab930ec2619345c0bdd64f6d494c
             writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
             writer.println();
             

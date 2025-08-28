@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
+import java.util.LinkedList;
 import java.util.Set;
 
 import org.sokoban.models.Board;
@@ -18,6 +20,7 @@ public class IDDFS {
     private static final int MAX_DEPTH=1000;
 
     private final Map<Board, Board> parent = new HashMap<>();
+    private final Queue<Board> frontier = new LinkedList<>();
     private final String outputFile = "src/main/resources/IDDFS_solution.txt";
     private long expanded = 0;
     private int maxDepth = 0;
@@ -40,6 +43,7 @@ public class IDDFS {
             writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
             writer.printf("Nodos expandidos: %d. ", expanded);
             writer.printf("Profundidad máxima: %d. ", maxDepth);
+            writer.printf("Frontier: %d. ", solver.frontier.size());
             writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
             writer.println();
 
@@ -55,13 +59,14 @@ public class IDDFS {
     }
 
     public List<Board> solve() {
-        Board start = new Board(12, 12, 4);
+        Board start = new Board();
         System.out.println("Initial Board:\n" + start);
         int depth = 0;
 
         while (depth<=MAX_DEPTH) {
             Set<Board> visited = new HashSet<>();
             parent.clear();
+            frontier.clear();
             parent.put(start, null);
 
             Board result = dls(start, depth, visited);
@@ -82,6 +87,7 @@ public class IDDFS {
         }
 
         if (depthLimit <= 0){
+            frontier.add(current);
             return null;
         }
 
