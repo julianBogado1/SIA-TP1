@@ -10,8 +10,7 @@ import java.util.*;
 
 public class Greedy {
 
-    private final PriorityQueue<Board> frontier = new PriorityQueue<>(new AdmisibleHeuristic());
-    // private final PriorityQueue<Board> frontier = new PriorityQueue<>(new GreedyComparator());
+    private static PriorityQueue<Board> frontier; 
 
     private final Set<Board> visited = new HashSet<>();
     private final Map<Board, Board> parent = new HashMap<>();
@@ -25,6 +24,10 @@ public class Greedy {
     private final String outputFile = "src/main/resources/Greedy_second_solution.txt";
 
     public static void main(String[] args) {
+        if(args[0].equals("h1"))
+            frontier = new PriorityQueue<>(new GreedyComparator());
+        else
+            frontier = new PriorityQueue<>(new AdmisibleHeuristic());
         Greedy solver = new Greedy();
 
         long t0 = System.currentTimeMillis();

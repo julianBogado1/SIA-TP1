@@ -24,16 +24,21 @@ public class AStar {
     private long expanded = 0;
     private int maxDepth = 0;
 
-    public AStar() {
-        //frontier = new PriorityQueue<>(new Heuristic());
-        frontier = new PriorityQueue<>(new AdmisibleHeuristic());
+    public AStar(String heuristicType) {
+        if (heuristicType.equals("h1")) {
+            frontier = new PriorityQueue<>(new Heuristic());
+            System.out.println("h1");
+        } else {
+            System.out.println("h2");
+            frontier = new PriorityQueue<>(new AdmisibleHeuristic());
+        }
         visited = new HashSet<>();
         parent = new HashMap<>();
         gScore = new HashMap<>();
     }
 
     public static void main(String[] args) {
-        AStar solver = new AStar();
+        AStar solver = new AStar(args[0]);
         long t0 = System.currentTimeMillis();
         List<Board> solution = solver.solve();
         long elapsed = System.currentTimeMillis() - t0;

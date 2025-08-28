@@ -1,4 +1,4 @@
-Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Frontier: 2. Tiempo de ejecución: 89 ms. 
+Sí se encontró solución. Nodos expandidos: 1679. # Nodos solucion: 28. Frontier: 267. Tiempo de ejecución: 21 ms. 
 === SOLUCIÓN ===
 #########
 #T#TB   #
@@ -14,89 +14,9 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #T#TB   #
 # # # # #
 #B# # # #
-#       #
-#T##P####
-# B    B#
-#     # #
-#########
-
-#########
-#T#TB   #
-# # # # #
-#B# # # #
-#       #
-#T## ####
-# B P  B#
-#     # #
-#########
-
-#########
-#T#TB   #
-# # # # #
-#B# # # #
-#       #
-#T## ####
-# BP   B#
-#     # #
-#########
-
-#########
-#T#TB   #
-# # # # #
-#B# # # #
-#       #
-#T## ####
-#BP    B#
-#     # #
-#########
-
-#########
-#T#TB   #
-# # # # #
-#B# # # #
-#       #
-#T## ####
-#B P   B#
-#     # #
-#########
-
-#########
-#T#TB   #
-# # # # #
-#B# # # #
-#       #
-#T## ####
-#B  P  B#
-#     # #
-#########
-
-#########
-#T#TB   #
-# # # # #
-#B# # # #
-#       #
-#T##P####
-#B     B#
-#     # #
-#########
-
-#########
-#T#TB   #
-# # # # #
-#B# # # #
-#   P   #
-#T## ####
-#B     B#
-#     # #
-#########
-
-#########
-#T#TB   #
-# # # # #
-#B# # # #
 #    P  #
 #T## ####
-#B     B#
+# B    B#
 #     # #
 #########
 
@@ -106,7 +26,7 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #B# #P# #
 #       #
 #T## ####
-#B     B#
+# B    B#
 #     # #
 #########
 
@@ -116,7 +36,7 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #B# # # #
 #       #
 #T## ####
-#B     B#
+# B    B#
 #     # #
 #########
 
@@ -126,7 +46,7 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #B# # # #
 #       #
 #T## ####
-#B     B#
+# B    B#
 #     # #
 #########
 
@@ -136,7 +56,7 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #B# # # #
 #       #
 #T## ####
-#B     B#
+# B    B#
 #     # #
 #########
 
@@ -146,7 +66,7 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #B# # # #
 #       #
 #T## ####
-#B     B#
+# B    B#
 #     # #
 #########
 
@@ -156,7 +76,7 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #B# # # #
 #       #
 #T## ####
-#B     B#
+# B    B#
 #     # #
 #########
 
@@ -166,7 +86,7 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #B# #P# #
 #       #
 #T## ####
-#B     B#
+# B    B#
 #     # #
 #########
 
@@ -176,7 +96,7 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #B# # # #
 #    P  #
 #T## ####
-#B     B#
+# B    B#
 #     # #
 #########
 
@@ -186,7 +106,7 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #B# # # #
 #   P   #
 #T## ####
-#B     B#
+# B    B#
 #     # #
 #########
 
@@ -194,136 +114,36 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #T#X    #
 # # # # #
 #B# # # #
-#  P    #
-#T## ####
-#B     B#
-#     # #
-#########
-
-#########
-#T#X    #
-# # # # #
-#B# # # #
-# P     #
-#T## ####
-#B     B#
-#     # #
-#########
-
-#########
-#T#X    #
-# # # # #
-#B# # # #
-#P      #
-#T## ####
-#B     B#
-#     # #
-#########
-
-#########
-#T#X    #
-#B# # # #
-#P# # # #
-#       #
-#T## ####
-#B     B#
-#     # #
-#########
-
-#########
-#X#X    #
-#P# # # #
-# # # # #
-#       #
-#T## ####
-#B     B#
-#     # #
-#########
-
-#########
-#X#X    #
-# # # # #
-#P# # # #
-#       #
-#T## ####
-#B     B#
-#     # #
-#########
-
-#########
-#X#X    #
-# # # # #
-# # # # #
-#P      #
-#T## ####
-#B     B#
-#     # #
-#########
-
-#########
-#X#X    #
-# # # # #
-# # # # #
-# P     #
-#T## ####
-#B     B#
-#     # #
-#########
-
-#########
-#X#X    #
-# # # # #
-# # # # #
-#  P    #
-#T## ####
-#B     B#
-#     # #
-#########
-
-#########
-#X#X    #
-# # # # #
-# # # # #
-#   P   #
-#T## ####
-#B     B#
-#     # #
-#########
-
-#########
-#X#X    #
-# # # # #
-# # # # #
 #       #
 #T##P####
-#B     B#
+# B    B#
 #     # #
 #########
 
 #########
-#X#X    #
+#T#X    #
 # # # # #
-# # # # #
+#B# # # #
 #       #
 #T## ####
-#B  P  B#
+# B P  B#
 #     # #
 #########
 
 #########
-#X#X    #
+#T#X    #
 # # # # #
-# # # # #
+#B# # # #
 #       #
 #T## ####
-#B P   B#
+# BP   B#
 #     # #
 #########
 
 #########
-#X#X    #
+#T#X    #
 # # # # #
-# # # # #
+#B# # # #
 #       #
 #T## ####
 #BP    B#
@@ -331,9 +151,9 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #########
 
 #########
-#X#X    #
+#T#X    #
 # # # # #
-# # # # #
+#B# # # #
 #       #
 #T## ####
 #B     B#
@@ -341,9 +161,9 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #########
 
 #########
-#X#X    #
+#T#X    #
 # # # # #
-# # # # #
+#B# # # #
 #       #
 #T## ####
 #B     B#
@@ -351,12 +171,112 @@ Sí se encontró solución. Nodos expandidos: 9253. # Nodos solucion: 36. Fronti
 #########
 
 #########
-#X#X    #
+#T#X    #
 # # # # #
-# # # # #
+#B# # # #
 #       #
 #X## ####
 #P     B#
+#     # #
+#########
+
+#########
+#T#X    #
+# # # # #
+#B# # # #
+#       #
+#X## ####
+# P    B#
+#     # #
+#########
+
+#########
+#T#X    #
+# # # # #
+#B# # # #
+#       #
+#X## ####
+#  P   B#
+#     # #
+#########
+
+#########
+#T#X    #
+# # # # #
+#B# # # #
+#       #
+#X## ####
+#   P  B#
+#     # #
+#########
+
+#########
+#T#X    #
+# # # # #
+#B# # # #
+#       #
+#X##P####
+#      B#
+#     # #
+#########
+
+#########
+#T#X    #
+# # # # #
+#B# # # #
+#   P   #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#T#X    #
+# # # # #
+#B# # # #
+#  P    #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#T#X    #
+# # # # #
+#B# # # #
+# P     #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#T#X    #
+# # # # #
+#B# # # #
+#P      #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#T#X    #
+#B# # # #
+#P# # # #
+#       #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#X    #
+#P# # # #
+# # # # #
+#       #
+#X## ####
+#      B#
 #     # #
 #########
 
