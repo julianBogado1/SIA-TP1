@@ -17,7 +17,8 @@ import java.util.TreeSet;
 import org.sokoban.models.Board;
 
 public class Greedy {
-    private final TreeSet<Board> frontier = new TreeSet<>(new GreedyComparator());
+    // private final TreeSet<Board> frontier = new TreeSet<>(new GreedyComparator());
+    private final TreeSet<Board> frontier = new TreeSet<>(new AdmisibleHeuristic());
     private final Set<Board> visited = new HashSet<>();
     private final Map<Board, Board> parent = new HashMap<>();
     private final Queue<Board> solution = new LinkedList<>();
@@ -34,6 +35,7 @@ public class Greedy {
         try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
             writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
             writer.printf("Nodos expandidos: %d. ", expanded);
+            writer.printf("Frontier: %d. ", solver.visited.size());
             writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
             writer.println();
 
@@ -108,3 +110,9 @@ class GreedyComparator implements Comparator<Board> {
         return Integer.compare(h1, h2);
     }
 }
+class AdmisibleHeuristic implements Comparator<Board> {
+    @Override
+    public int compare(Board b1, Board b2) {
+        return Integer.compare(b1.admisibleHeuristic(), b2.admisibleHeuristic());
+    }
+} 

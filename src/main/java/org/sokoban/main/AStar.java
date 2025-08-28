@@ -25,7 +25,8 @@ public class AStar {
     private int maxDepth = 0;
 
     public AStar() {
-        frontier = new PriorityQueue<>(new Heuristic());
+        // frontier = new PriorityQueue<>(new Heuristic());
+        frontier = new PriorityQueue<>(new AdmisibleHeuristic());
         visited = new HashSet<>();
         parent = new HashMap<>();
         gScore = new HashMap<>();
@@ -57,7 +58,7 @@ public class AStar {
     }
 
     public List<Board> solve() {
-        Board start = new Board(11, 11, 5);
+        Board start = new Board();
         System.out.println("Initial Board:\n" + start);
         BoardNode startNode = new BoardNode(start, 0);
         frontier.add(startNode);
@@ -65,7 +66,7 @@ public class AStar {
         parent.put(start, null);
 
         int iterations = 0;
-        while (!frontier.isEmpty() && iterations++ < 10000000) {
+        while (!frontier.isEmpty() /*&& iterations++ < 10000000*/) {
             BoardNode currentNode = frontier.poll();
             Board current = currentNode.board;
 
@@ -119,6 +120,13 @@ public class AStar {
         @Override
         public int compare(BoardNode o1, BoardNode o2) {
             return Integer.compare(o1.getF(), o2.getF());
+        }
+    }
+
+    private static class AdmisibleHeuristic implements Comparator<BoardNode> {
+        @Override
+        public int compare(BoardNode o1, BoardNode o2) {
+            return Integer.compare(o1.board.admisibleHeuristic(), o2.board.admisibleHeuristic());
         }
     }
 }
