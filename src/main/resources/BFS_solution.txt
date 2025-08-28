@@ -1,4 +1,4 @@
-Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Frontera (final): 21. Tiempo de ejecución: 17 ms.
+Sí se encontró solución. Nodos expandidos: 4012. # Nodos solucion: 28. Frontier: 413. Tiempo de ejecución: 34 ms. 
 === SOLUCIÓN ===
 #########
 #T#TB   #
@@ -14,8 +14,8 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 #T#TB   #
 # # # # #
 #B# # # #
-#  P    #
-#T## ####
+#       #
+#T##P####
 # B    B#
 #     # #
 #########
@@ -24,96 +24,16 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 #T#TB   #
 # # # # #
 #B# # # #
-# P     #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#TB   #
-# # # # #
-#B# # # #
-#P      #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#TB   #
-#B# # # #
-#P# # # #
 #       #
 #T## ####
-# B    B#
+# B P  B#
 #     # #
 #########
 
 #########
 #T#TB   #
-#B# # # #
 # # # # #
-#P      #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#TB   #
 #B# # # #
-# # # # #
-#       #
-#Y## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#TB   #
-#B# # # #
-# # # # #
-#       #
-#T## ####
-#PB    B#
-#     # #
-#########
-
-#########
-#T#TB   #
-#B# # # #
-# # # # #
-#       #
-#T## ####
-# B    B#
-#P    # #
-#########
-
-#########
-#T#TB   #
-#B# # # #
-# # # # #
-#       #
-#T## ####
-# B    B#
-# P   # #
-#########
-
-#########
-#T#TB   #
-#B# # # #
-# # # # #
-#       #
-#T## ####
-# B    B#
-#  P  # #
-#########
-
-#########
-#T#TB   #
-#B# # # #
-# # # # #
 #       #
 #T## ####
 # BP   B#
@@ -122,8 +42,8 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 
 #########
 #T#TB   #
-#B# # # #
 # # # # #
+#B# # # #
 #       #
 #T## ####
 #BP    B#
@@ -132,8 +52,8 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 
 #########
 #T#TB   #
-#B# # # #
 # # # # #
+#B# # # #
 #       #
 #T## ####
 #B     B#
@@ -142,8 +62,8 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 
 #########
 #T#TB   #
-#B# # # #
 # # # # #
+#B# # # #
 #       #
 #T## ####
 #B     B#
@@ -152,8 +72,8 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 
 #########
 #T#TB   #
-#B# # # #
 # # # # #
+#B# # # #
 #       #
 #X## ####
 #P     B#
@@ -162,38 +82,18 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 
 #########
 #T#TB   #
-#B# # # #
 # # # # #
+#B# # # #
 #       #
 #X## ####
-#      B#
-#P    # #
+# P    B#
+#     # #
 #########
 
 #########
 #T#TB   #
-#B# # # #
 # # # # #
-#       #
-#X## ####
-#      B#
-# P   # #
-#########
-
-#########
-#T#TB   #
 #B# # # #
-# # # # #
-#       #
-#X## ####
-#      B#
-#  P  # #
-#########
-
-#########
-#T#TB   #
-#B# # # #
-# # # # #
 #       #
 #X## ####
 #  P   B#
@@ -202,8 +102,8 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 
 #########
 #T#TB   #
-#B# # # #
 # # # # #
+#B# # # #
 #       #
 #X## ####
 #   P  B#
@@ -212,8 +112,8 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 
 #########
 #T#TB   #
-#B# # # #
 # # # # #
+#B# # # #
 #       #
 #X##P####
 #      B#
@@ -222,8 +122,8 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 
 #########
 #T#TB   #
-#B# # # #
 # # # # #
+#B# # # #
 #   P   #
 #X## ####
 #      B#
@@ -232,108 +132,8 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 
 #########
 #T#TB   #
-#B# # # #
 # # # # #
-#    P  #
-#X## ####
-#      B#
-#     # #
-#########
-
-#########
-#T#TB   #
 #B# # # #
-# # #P# #
-#       #
-#X## ####
-#      B#
-#     # #
-#########
-
-#########
-#T#TB   #
-#B# #P# #
-# # # # #
-#       #
-#X## ####
-#      B#
-#     # #
-#########
-
-#########
-#T#TBP  #
-#B# # # #
-# # # # #
-#       #
-#X## ####
-#      B#
-#     # #
-#########
-
-#########
-#T#XP   #
-#B# # # #
-# # # # #
-#       #
-#X## ####
-#      B#
-#     # #
-#########
-
-#########
-#T#X P  #
-#B# # # #
-# # # # #
-#       #
-#X## ####
-#      B#
-#     # #
-#########
-
-#########
-#T#X    #
-#B# #P# #
-# # # # #
-#       #
-#X## ####
-#      B#
-#     # #
-#########
-
-#########
-#T#X    #
-#B# # # #
-# # #P# #
-#       #
-#X## ####
-#      B#
-#     # #
-#########
-
-#########
-#T#X    #
-#B# # # #
-# # # # #
-#    P  #
-#X## ####
-#      B#
-#     # #
-#########
-
-#########
-#T#X    #
-#B# # # #
-# # # # #
-#   P   #
-#X## ####
-#      B#
-#     # #
-#########
-
-#########
-#T#X    #
-#B# # # #
-# # # # #
 #  P    #
 #X## ####
 #      B#
@@ -341,9 +141,9 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 #########
 
 #########
-#T#X    #
-#B# # # #
+#T#TB   #
 # # # # #
+#B# # # #
 # P     #
 #X## ####
 #      B#
@@ -351,8 +151,48 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 #########
 
 #########
-#T#X    #
+#T#TB   #
+# # # # #
 #B# # # #
+#P      #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#T#TB   #
+#B# # # #
+#P# # # #
+#       #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#TB   #
+#P# # # #
+# # # # #
+#       #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # # # #
+#P# # # #
+#       #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # # # #
 # # # # #
 #P      #
 #X## ####
@@ -361,9 +201,49 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 #########
 
 #########
-#T#X    #
-#B# # # #
-#P# # # #
+#X#TB   #
+# # # # #
+# # # # #
+# P     #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # # # #
+# # # # #
+#  P    #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # # # #
+# # # # #
+#   P   #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # # # #
+# # # # #
+#    P  #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # # # #
+# # #P# #
 #       #
 #X## ####
 #      B#
@@ -371,8 +251,28 @@ Sí se encontró solución. Nodos Expandidos: 61. Nodos Solucion: 38. Nodos Fron
 #########
 
 #########
-#X#X    #
-#P# # # #
+#X#TB   #
+# # #P# #
+# # # # #
+#       #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#TBP  #
+# # # # #
+# # # # #
+#       #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#XP   #
+# # # # #
 # # # # #
 #       #
 #X## ####

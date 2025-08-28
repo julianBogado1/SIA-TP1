@@ -20,7 +20,7 @@ public class AStar {
     private final Set<Board> visited;
     private final Map<Board, Board> parent;
     private final Map<Board, Integer> gScore;
-    private final String outputFile = "./SIA-TP1/src/main/resources/AStarAdmi_solution.txt";
+    private final String outputFile = "src/main/resources/AStar_solution.txt";
     private long expanded = 0;
     private int maxDepth = 0;
 
