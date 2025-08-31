@@ -1,4 +1,4 @@
-Sí se encontró solución. # Nodos solucion: 112. # Nodos expandidos: 769. # Nodos frontera: 52. Profundidad máxima: 130. Tiempo de ejecución: 11 ms.
+Sí se encontró solución. # Nodos solucion: 112. # Nodos expandidos: 769. # Nodos frontera: 52. Profundidad máxima: 130. Tiempo de ejecución: 13 ms.
 === SOLUCIÓN ===
 #########
 #T#TB   #

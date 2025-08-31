@@ -1,4 +1,4 @@
-Sí se encontró solución. Nodos expandidos: 3066. # Nodos solucion: 28. Frontier: 435. Tiempo de ejecución: 31 ms. 
+Sí se encontró solución. Nodos expandidos: 22476. Profundidad máxima: 33. Frontier: 74. Tiempo de ejecución: 90 ms. 
 === SOLUCIÓN ===
 #########
 #T#TB   #
@@ -28,6 +28,26 @@ Sí se encontró solución. Nodos expandidos: 3066. # Nodos solucion: 28. Fronti
 #T## ####
 # B P  B#
 #     # #
+#########
+
+#########
+#T#TB   #
+# # # # #
+#B# # # #
+#       #
+#T## ####
+# B    B#
+#   P # #
+#########
+
+#########
+#T#TB   #
+# # # # #
+#B# # # #
+#       #
+#T## ####
+# B    B#
+#  P  # #
 #########
 
 #########
@@ -86,6 +106,26 @@ Sí se encontró solución. Nodos expandidos: 3066. # Nodos solucion: 28. Fronti
 #B# # # #
 #       #
 #X## ####
+#      B#
+#P    # #
+#########
+
+#########
+#T#TB   #
+# # # # #
+#B# # # #
+#       #
+#X## ####
+#      B#
+# P   # #
+#########
+
+#########
+#T#TB   #
+# # # # #
+#B# # # #
+#       #
+#X## ####
 # P    B#
 #     # #
 #########
@@ -98,6 +138,26 @@ Sí se encontró solución. Nodos expandidos: 3066. # Nodos solucion: 28. Fronti
 #X## ####
 #  P   B#
 #     # #
+#########
+
+#########
+#T#TB   #
+# # # # #
+#B# # # #
+#       #
+#X## ####
+#      B#
+#  P  # #
+#########
+
+#########
+#T#TB   #
+# # # # #
+#B# # # #
+#       #
+#X## ####
+#      B#
+#   P # #
 #########
 
 #########
