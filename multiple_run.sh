@@ -2,22 +2,18 @@
 
 mvn clean package
 
-mkdir outputs
+mkdir -p outputs
 
-# for((i=0; i<$1; i++))
-# do
-  mvn exec:java -Dexec.mainClass="org.sokoban.main.BFS" -Dexec.args="default" > outputs/BFS_output_default.txt
-  mvn exec:java -Dexec.mainClass="org.sokoban.main.BFS" -Dexec.args="small" > outputs/BFS_output_default.txt
-  mvn exec:java -Dexec.mainClass="org.sokoban.main.BFS" -Dexec.args="medium" > outputs/BFS_output_default.txt
-  mvn exec:java -Dexec.mainClass="org.sokoban.main.BFS" -Dexec.args="large" > outputs/BFS_output_default.txt
-  mvn exec:java -Dexec.mainClass="org.sokoban.main.BFS" -Dexec.args="medium" > outputs/BFS_output_default.txt
-  mvn exec:java -Dexec.mainClass="org.sokoban.main.BFS" -Dexec.args="default" > outputs/BFS_output_default.txt
+maps=("default" "small" "medium" "large" "medium3boxes" "mediumwalls" "mediumwithwalls" "mediumfiveboxes")
 
-  mvn exec:java -Dexec.mainClass="org.sokoban.main.DFS" -Dexec.args="small"> outputs/DFS_output"$i".txt
-  mvn exec:java -Dexec.mainClass="org.sokoban.main.IDDFS" -Dexec.args="h1"> outputs/IDDFS_output"$i".txt
 
-  mvn exec:java -Dexec.mainClass="org.sokoban.main.Greedy" -Dexec.args="h1" > outputs/Greedy_h1_output"$i".txt
-  mvn exec:java -Dexec.mainClass="org.sokoban.main.Greedy" -Dexec.args="h2" > outputs/Greedy_h2_output"$i".txt
-  mvn exec:java -Dexec.mainClass="org.sokoban.main.AStar" -Dexec.args="h1" > outputs/AStar_h1_output"$i".txt
-  mvn exec:java -Dexec.mainClass="org.sokoban.main.AStar" -Dexec.args="h2" > outputs/AStar_h2_output"$i".txt
-# done
+for ((i=0; i<${#maps[@]}; i++))
+do
+  mvn exec:java -Dexec.mainClass="org.sokoban.main.BFS"    -Dexec.args="${maps[i]}"       > outputs/BFS_output_${maps[i]}.txt
+  mvn exec:java -Dexec.mainClass="org.sokoban.main.DFS"    -Dexec.args="${maps[i]}"       > outputs/DFS_output_${maps[i]}.txt
+  mvn exec:java -Dexec.mainClass="org.sokoban.main.IDDFS"  -Dexec.args="${maps[i]}"       > outputs/IDDFS_output_${maps[i]}.txt
+  mvn exec:java -Dexec.mainClass="org.sokoban.main.Greedy" -Dexec.args="h1 ${maps[i]}"    > outputs/Greedy_h1_output_${maps[i]}.txt
+  mvn exec:java -Dexec.mainClass="org.sokoban.main.Greedy" -Dexec.args="h2 ${maps[i]}"    > outputs/Greedy_h2_output_${maps[i]}.txt
+  mvn exec:java -Dexec.mainClass="org.sokoban.main.AStar"  -Dexec.args="h1 ${maps[i]}"    > outputs/AStar_h1_output_${maps[i]}.txt
+  mvn exec:java -Dexec.mainClass="org.sokoban.main.AStar"  -Dexec.args="h2 ${maps[i]}"    > outputs/AStar_h2_output_${maps[i]}.txt
+done
