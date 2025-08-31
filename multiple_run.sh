@@ -2,6 +2,8 @@
 
 mvn clean package
 
+mkdir outputs
+
 for((i=0; i<$1; i++))
 do
   mvn exec:java -Dexec.mainClass="org.sokoban.main.BFS" > outputs/BFS_output"$i".txt
