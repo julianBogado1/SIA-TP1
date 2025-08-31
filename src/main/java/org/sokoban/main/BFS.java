@@ -26,7 +26,7 @@ public class BFS {
     public static void main(String[] args) {
         BFS solver = new BFS();
         long t0 = System.currentTimeMillis();
-        Queue<Board> answer = solver.bfs();
+        Queue<Board> answer = solver.bfs(new Board(args[0]));
         long elapsed = System.currentTimeMillis() - t0;
         boolean found = answer != null;
 
@@ -38,6 +38,12 @@ public class BFS {
             writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
             writer.println();
             
+            System.out.printf("%s se encontró solución. ", found ? "Sí" : "No");
+            System.out.printf("Nodos expandidos: %d. ", solver.expanded);
+            System.out.printf("# Nodos solucion: %d. ", solver.solution.size());
+            System.out.printf("Frontier: %d. ", solver.frontier.size());
+            System.out.printf("Tiempo de ejecución: %d ms. ", elapsed);
+
             if(found){
                 writer.println("=== SOLUCIÓN ===");
                 for (Board b : answer) {
@@ -67,8 +73,8 @@ public class BFS {
         return false;
     }
 
-    private Queue<Board> bfs() {
-        Board root = new Board();
+    private Queue<Board> bfs(Board board) {
+        Board root = board;
         System.out.println("Initial Board:\n" + root);
         frontier.add(root);
         visited.add(root);

@@ -38,9 +38,9 @@ public class AStar {
     }
 
     public static void main(String[] args) {
-        AStar solver = new AStar("h2");
+        AStar solver = new AStar(args[0]);
         long t0 = System.currentTimeMillis();
-        List<Board> solution = solver.solve();
+        List<Board> solution = solver.solve(new Board(args[1]));
         long elapsed = System.currentTimeMillis() - t0;
         boolean found = solution != null;
 
@@ -51,6 +51,12 @@ public class AStar {
             writer.printf("Frontier: %d. ", solver.frontier.size());
             writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
             writer.println();
+
+            System.out.printf("%s se encontró solución. ", found ? "Sí" : "No");
+            System.out.printf("Nodos expandidos: %d. ", solver.expanded);
+            System.out.printf("# Nodos solucion: %d. ", solution.size());
+            System.out.printf("Frontier: %d. ", solver.frontier.size());
+            System.out.printf("Tiempo de ejecución: %d ms. ", elapsed);
 
             if(found){
                 writer.println("=== SOLUCIÓN ===");
@@ -64,8 +70,8 @@ public class AStar {
         }
     }
 
-    public List<Board> solve() {
-        Board start = new Board();
+    public List<Board> solve(Board board) {
+        Board start = board;
         System.out.println("Initial Board:\n" + start);
         BoardNode startNode = new BoardNode(start, 0);
         frontier.add(startNode);
