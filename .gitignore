@@ -176,3 +176,6 @@ cython_debug/
 *.flac
 *.aac
 *.mp3
+
+outputs
+outputs/*

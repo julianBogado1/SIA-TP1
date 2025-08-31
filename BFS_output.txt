@@ -1,31 +1,0 @@
-[INFO] Scanning for projects...
-Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-metadata.xml
-Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/maven-metadata.xml
-Progress (1): 1.4/14 kBProgress (2): 1.4/14 kB | 1.4/21 kBProgress (2): 2.8/14 kB | 1.4/21 kBProgress (2): 2.8/14 kB | 2.8/21 kBProgress (2): 4.1/14 kB | 2.8/21 kBProgress (2): 4.1/14 kB | 4.1/21 kBProgress (2): 5.5/14 kB | 4.1/21 kBProgress (2): 5.5/14 kB | 5.5/21 kBProgress (2): 6.9/14 kB | 5.5/21 kBProgress (2): 8.3/14 kB | 5.5/21 kBProgress (2): 8.3/14 kB | 6.9/21 kBProgress (2): 9.7/14 kB | 6.9/21 kBProgress (2): 9.7/14 kB | 8.3/21 kBProgress (2): 11/14 kB | 8.3/21 kB Progress (2): 11/14 kB | 9.7/21 kBProgress (2): 12/14 kB | 9.7/21 kBProgress (2): 12/14 kB | 11/21 kB Progress (2): 14/14 kB | 11/21 kBProgress (2): 14/14 kB | 12/21 kBProgress (2): 14 kB | 12/21 kB   Progress (2): 14 kB | 14/21 kBProgress (2): 14 kB | 15/21 kBProgress (2): 14 kB | 17/21 kBProgress (2): 14 kB | 18/21 kBProgress (2): 14 kB | 19/21 kB                              Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-metadata.xml (14 kB at 78 kB/s)
-Progress (1): 21 kB                   Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/maven-metadata.xml (21 kB at 111 kB/s)
-Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/exec-maven-plugin/maven-metadata.xml
-Progress (1): 1.0 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/exec-maven-plugin/maven-metadata.xml (1.0 kB at 102 kB/s)
-[INFO] 
-[INFO] --------------------------< org.example:TP1 >---------------------------
-[INFO] Building TP1 1.0-SNAPSHOT
-[INFO]   from pom.xml
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- exec:3.5.1:java (default-cli) @ TP1 ---
-Initial Board:
-#########
-#T#TB   #
-# # # # #
-#B# # # #
-#   P   #
-#T## ####
-# B    B#
-#     # #
-#########
-
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  0.478 s
-[INFO] Finished at: 2025-08-31T13:18:27-03:00
-[INFO] ------------------------------------------------------------------------
