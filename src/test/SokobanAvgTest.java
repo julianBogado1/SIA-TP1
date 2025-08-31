@@ -83,48 +83,48 @@ public class SokobanAvgTest {
             private static Cell[][] mediumWithWalls3Cells = {
                 { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
                 { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell.EMPTY, new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell.BOX, new Cell(State.WALL), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell.EMPTY, new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.WALL), new Cell.EMPTY, new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell.PLAYER, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell.WALL, new Cell.WALL, new Cell(State.WALL) }
+                { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
             };
 
             // MEDIUM WITH WALLS4
             private static Cell[][] mediumWithWalls4Cells = {
                 { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
                 { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell.EMPTY, new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell.BOX, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.TARGET), new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell.EMPTY, new Cell.BOX, new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell.WALL, new Cell.PLAYER, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.WALL, new Cell.WALL, new Cell.WALL, new Cell.WALL, new Cell.WALL, new Cell.WALL, new Cell(State.WALL) }
+                { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
             };
 
             // MEDIUM WITH WALLS5
             private static Cell[][] mediumWithWalls5Cells = {
                 { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell.WALL, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.BOX, new Cell.WALL, new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.EMPTY, new Cell.WALL, new Cell.EMPTY, new Cell.WALL, new Cell.BOX, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.EMPTY, new Cell.EMPTY, new Cell.TARGET, new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.TARGET, new Cell.EMPTY, new Cell.BOX, new Cell.WALL, new Cell.WALL, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell.WALL, new Cell.PLAYER, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.WALL, new Cell.WALL, new Cell.WALL, new Cell.WALL, new Cell.WALL, new Cell.WALL, new Cell(State.WALL) }
+                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
             };
 
             // MEDIUM WITH WALLS6
             private static Cell[][] mediumWithWalls6Cells = {
                 { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell.EMPTY, new Cell.EMPTY, new Cell.BOX, new Cell.EMPTY, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.BOX, new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.EMPTY, new Cell.WALL, new Cell.WALL, new Cell.WALL, new Cell.BOX, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.EMPTY, new Cell.EMPTY, new Cell.TARGET, new Cell.WALL, new Cell.EMPTY, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.TARGET, new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.EMPTY, new Cell.EMPTY, new Cell.EMPTY, new Cell.WALL, new Cell.PLAYER, new Cell.EMPTY, new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell.WALL, new Cell.WALL, new Cell.WALL, new Cell.WALL, new Cell.WALL, new Cell.WALL, new Cell(State.WALL) }
+                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
+                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
             };
 
     private static Cell[][] cells = {
