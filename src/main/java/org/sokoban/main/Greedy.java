@@ -31,7 +31,7 @@ public class Greedy {
         Greedy solver = new Greedy();
 
         long t0 = System.currentTimeMillis();
-        Queue<Board> answer = solver.search();
+        Queue<Board> answer = solver.search(new Board(args[1]));
         long elapsed = System.currentTimeMillis() - t0;
         boolean found = (answer != null);
 
@@ -46,6 +46,12 @@ public class Greedy {
             writer.printf("Nodos Frontera (final): %d. ", solver.frontier.size());
             writer.printf("Tiempo de ejecución: %d ms.%n", elapsed);
 
+            System.out.printf("%s se encontró solución. ", found ? "Sí" : "No");
+            System.out.printf("Nodos Expandidos: %d. ", solver.expanded);
+            System.out.printf("Nodos Solucion: %d. ", solver.solution.size());
+            System.out.printf("Nodos Frontera (final): %d. ", solver.frontier.size());
+            System.out.printf("Tiempo de ejecución: %d ms.%n", elapsed);
+
             if (found) {
                 writer.println("=== SOLUCIÓN ===");
                 for (Board b : answer) {
@@ -57,8 +63,8 @@ public class Greedy {
         }
     }
 
-    private Queue<Board> search() {
-        Board root = new Board();
+    private Queue<Board> search(Board board) {
+        Board root = board;
         System.out.println("Initial Board:\n" + root);
 
         frontier.clear();

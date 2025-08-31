@@ -27,7 +27,9 @@ public class DFS {
         DFS solver = new DFS();
 
         long t0 = System.currentTimeMillis();
-        boolean found = solver.search();
+
+        //map passed in argv
+        boolean found = solver.search(new Board(args[0]));
         long elapsed = System.currentTimeMillis() - t0;
 
         File out = new File(solver.outputFile);
@@ -42,6 +44,12 @@ public class DFS {
             writer.printf("Profundidad máxima: %d. ", solver.maxDepth);
             writer.printf("Tiempo de ejecución: %d ms.%n", elapsed);
 
+            System.out.printf("%s se encontró solución. ", found ? "Sí" : "No");
+            System.out.printf("# Nodos solucion: %d. ", solver.solution.size());
+            System.out.printf("# Nodos expandidos: %d. ", solver.expanded);
+            System.out.printf("# Nodos frontera: %d. ", solver.frontierAfter.get(solver.lastBoard));
+            System.out.printf("Profundidad máxima: %d. ", solver.maxDepth);
+            System.out.printf("Tiempo de ejecución: %d ms.%n", elapsed);
             if (found) {
 
                 writer.println("=== SOLUCIÓN ===");
@@ -54,8 +62,8 @@ public class DFS {
         }
     }
 
-    public boolean search() {
-        Board root = new Board();
+    public boolean search(Board board) {
+        Board root = board;
         System.out.println("Initial Board:\n" + root);
 
         parent.put(root, null);

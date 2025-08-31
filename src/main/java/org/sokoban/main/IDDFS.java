@@ -28,7 +28,7 @@ public class IDDFS {
     public static void main(String[] args) {
         IDDFS solver = new IDDFS();
         long t0 = System.currentTimeMillis();
-        List<Board> solution = solver.solve();
+        List<Board> solution = solver.solve(new Board(args[0]));
         long elapsed = System.currentTimeMillis() - t0;
         boolean found = solution!=null;
         long expanded = solver.expanded;
@@ -47,6 +47,12 @@ public class IDDFS {
             writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
             writer.println();
 
+            System.out.writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
+            System.out.writer.printf("Nodos expandidos: %d. ", expanded);
+            System.out.writer.printf("Profundidad máxima: %d. ", maxDepth);
+            System.out.writer.printf("Frontier: %d. ", solver.frontier.size());
+            System.out.writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
+
             if (found) {
                 writer.println("=== SOLUCIÓN ===");
                 for (Board b : solution) {
@@ -58,8 +64,8 @@ public class IDDFS {
         }
     }
 
-    public List<Board> solve() {
-        Board start = new Board();
+    public List<Board> solve(Board board) {
+        Board start = board;
         System.out.println("Initial Board:\n" + start);
         int depth = 0;
 
