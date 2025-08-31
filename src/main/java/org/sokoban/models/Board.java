@@ -136,63 +136,7 @@ public class Board {
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
     };
 
-        /*
-        SMALL
-        # # # # # #
-        # T B     #
-        #         #
-        #     P   #
-        # # # # # #
 
-        MEDIUM
-        # # # # # # # #
-        # T B         #
-        #             #
-        #             #
-        #         P   #
-        # # # # # # # #            
-
-        LARGE
-        # # # # # # # #
-        # T B         #
-        #             #
-        #             #
-        #             #
-        #             # 
-        #         P   #
-        # # # # # # # #
-
-        MEDIUM - 3 boxes
-        # # # # # # # #
-        # T       B T #
-        # B           #
-        #         B   #
-        #     T       #
-        # T   B       # 
-        #         P   #
-        # # # # # # # #
-
-        MEDIUM WITH WALLS
-        # # # # # # # #
-        # T           #
-        # B           #
-        #   # # # B   #
-        #     T       #
-        # T   B # #   # 
-        #       # P   #
-        # # # # # # # #
-
-        MEDIUM - five boxes
-        # # # # # # # #
-        # T B T       #
-        #             #
-        # T           #
-        #         B   #
-        #     B   B T #
-        # T B     P   #
-        # # # # # # # #            
-
-    */
 
     private static final Map<String, Board> maps = createMaps();
 
