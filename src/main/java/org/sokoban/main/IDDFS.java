@@ -13,7 +13,7 @@ import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Set;
 
-import org.sokoban.models.Board;
+import org.sokoban.models.*;
 
 public class IDDFS {
 
@@ -62,6 +62,19 @@ public class IDDFS {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public ResultClass getResultClass(Board board) {
+
+        IDDFS solver = new IDDFS();
+        long t0 = System.currentTimeMillis();
+        List<Board> solution = solver.solve(board);
+        long elapsed = System.currentTimeMillis() - t0;
+        boolean found = solution!=null;
+        long expanded = solver.expanded;
+        int maxDepth = solver.maxDepth;
+
+        return new ResultClass(found,(int) expanded, solution.size(),solver.frontier.size(), maxDepth, elapsed);
     }
 
     public List<Board> solve(Board board) {

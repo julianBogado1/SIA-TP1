@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import org.sokoban.models.ResultClass;
 import java.util.*;
 
 public class Greedy {
@@ -61,6 +62,21 @@ public class Greedy {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public ResultClass getResultClass(Board board, String heuristic) {
+        if(heuristic.equals("h1"))
+            frontier = new PriorityQueue<>(new GreedyComparator());
+        else
+            frontier = new PriorityQueue<>(new AdmisibleHeuristic());
+
+        long t0 = System.currentTimeMillis();
+        Queue<Board> solution = search(board);
+        boolean found = (solution != null);
+        int solutionSize = found ? solution.size() : 0;
+
+        long elapsed = System.currentTimeMillis() - t0;
+        return new ResultClass(found, (int) expanded, solutionSize, frontier.size(), 0, elapsed);
     }
 
     private Queue<Board> search(Board board) {

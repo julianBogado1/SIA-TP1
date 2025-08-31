@@ -15,13 +15,13 @@ import java.util.Set;
 import org.sokoban.models.Board;
 
 public class BFS {
-    Queue<Board> frontier = new LinkedList<>();
-    Queue<Board> solution = new LinkedList<>();
-    Set<Board> visited = new HashSet<>();
-    Map<Board, Board> parent = new HashMap<>();
+    public Queue<Board> frontier = new LinkedList<>();
+    public Queue<Board> solution = new LinkedList<>();
+    public Set<Board> visited = new HashSet<>();
+    public Map<Board, Board> parent = new HashMap<>();
     private final String outputFile = "src/main/resources/BFS_solution.txt";
-    private long expanded = 0;
-    private int maxDepth = 0;
+    public long expanded = 0;
+    public int maxDepth = 0;
 
     public static void main(String[] args) {
         BFS solver = new BFS();
@@ -73,7 +73,7 @@ public class BFS {
         return false;
     }
 
-    private Queue<Board> bfs(Board board) {
+    public Queue<Board> bfs(Board board) {
         Board root = board;
         System.out.println("Initial Board:\n" + root);
         frontier.add(root);

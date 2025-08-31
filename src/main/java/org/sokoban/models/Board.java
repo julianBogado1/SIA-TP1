@@ -2,8 +2,6 @@ package org.sokoban.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 
 
 public class Board {
@@ -114,7 +112,7 @@ public class Board {
          * # # # # # # # # #   
          */
 
-        private static Cell[][] cells = {
+    private  Cell[][] cells = {
             { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
             { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
             { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
@@ -137,21 +135,6 @@ public class Board {
     };
 
 
-
-    private static final Map<String, Board> maps = createMaps();
-
-private static Map<String, Board> createMaps() {
-    Map<String, Board> map = new HashMap<>();
-    map.put("default", new Board(9, 9, cells, 4, 4));
-    map.put("small", new Board(6, 5, smallCells, 3, 3));
-    map.put("medium", new Board(8, 6, mediumCells, 5, 4));
-    map.put("large", new Board(8, 8, largeCells, 6, 4));
-    map.put("medium3boxes", new Board(8, 8, medium3BoxesCells, 6, 4));
-    map.put("mediumwithwalls", new Board(8, 8, mediumWithWallsCells, 6, 5));
-    map.put("mediumfiveboxes", new Board(8, 8, mediumFiveBoxesCells, 6, 5));
-    return map;
-}
-
     public Board() {
         this.width = 9;
         this.height = 9;
@@ -159,7 +142,7 @@ private static Map<String, Board> createMaps() {
         this.playerY = 4;
         executePreAnalysis();
     }
-
+/*
     public Board(String map){
         Board board = maps.get(map);
         this.width = board.getWidth();
@@ -173,7 +156,7 @@ private static Map<String, Board> createMaps() {
             }
         }
         executePreAnalysis();
-    }
+    }*/
 
     public Board(int width, int height, Cell[][] level, int playerX, int playerY) {
         this.width = width;

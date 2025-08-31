@@ -13,7 +13,8 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-import org.sokoban.models.Board;
+
+import org.sokoban.models.*;
 
 public class AStar {
     private final PriorityQueue<BoardNode> frontier;
@@ -68,6 +69,15 @@ public class AStar {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public ResultClass getResultClass(Board board) {
+        long t0 = System.currentTimeMillis();
+        List<Board> solution = solve(board);
+        long elapsed = System.currentTimeMillis() - t0;
+        boolean found = solution != null;
+        int solutionSize = found ? solution.size() : 0;
+        return new ResultClass(found, (int) expanded, solutionSize, frontier.size(), maxDepth, elapsed);
     }
 
     public List<Board> solve(Board board) {

@@ -1,6 +1,7 @@
 package org.sokoban.main;
 
 import org.sokoban.models.Board;
+import org.sokoban.models.ResultClass;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -60,6 +61,24 @@ public class DFS {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public ResultClass getResultClass(Board board){
+        DFS solver = new DFS();
+
+        long startTime = System.currentTimeMillis();
+
+        //map passed in argv
+        boolean found = solver.search(board);
+        long elapsed = System.currentTimeMillis() - startTime;
+        return new ResultClass(
+                found,
+                (int) solver.expanded,
+                solver.solution.size(),
+                solver.frontierAfter.get(solver.lastBoard) != null ? solver.frontierAfter.get(solver.lastBoard) : 0,
+                solver.maxDepth,
+                elapsed
+        );
     }
 
     public boolean search(Board board) {
@@ -126,4 +145,5 @@ public class DFS {
         }
         solution.addAll(path);
     }
+
 }
