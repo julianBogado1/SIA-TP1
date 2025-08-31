@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5819d62f-3412-4eb8-911f-24483d0b0db2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sokoban/models/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sokoban/models/Board.java" afterDir="false" />
     </list>
     <list id="3a187799-dbd6-4fdd-bd3c-52fcfcbd65da" name="Changes by Santi" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +48,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHELLCHECK.PATH": "/Users/julian/Library/Application Support/JetBrains/IntelliJIdea2025.2/plugins/Shell Script/shellcheck",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "heuristica-euclidea",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/julian/ITBA/sia/SIA-TP1",
     "node.js.detected.package.eslint": "true",

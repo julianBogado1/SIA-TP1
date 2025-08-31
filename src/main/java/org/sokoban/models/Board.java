@@ -339,11 +339,11 @@ public class Board {
         }
         return possibleBoards;
     }
+    //===============================================================
+    // ======================= HEURISTICAS ==========================
+    //===============================================================
 
-    public int heuristic() {
-        List<int[]> boxes = new ArrayList<>();
-        List<int[]> targets = new ArrayList<>();
-
+    private void getBoxesAndTargets(List<int[]> boxes, List<int[]> targets) {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 State state = cells[y][x].getState();
@@ -354,6 +354,12 @@ public class Board {
                 }
             }
         }
+    }
+
+    public int heuristic() {
+        List<int[]> boxes = new ArrayList<>();
+        List<int[]> targets = new ArrayList<>();
+        getBoxesAndTargets(boxes, targets);
 
         int totalDistance = 0;
         boolean[] usedTargets = new boolean[targets.size()];
@@ -395,6 +401,40 @@ public class Board {
         }
         return resp;
     }
+
+    public int distanciaEuclidea() {
+        List<int[]> boxes = new ArrayList<>();
+        List<int[]> targets = new ArrayList<>();
+        getBoxesAndTargets(boxes, targets);
+
+        int totalDistance = 0;
+        boolean[] usedTargets = new boolean[targets.size()];
+
+        for (int[] box : boxes) {
+            double minDistance = Double.MAX_VALUE;
+            int closestTargetIndex = -1;
+
+            for (int i = 0; i < targets.size(); i++) {
+                if (usedTargets[i]) continue;
+                int[] target = targets.get(i);
+                double distance = Math.hypot(box[0] - target[0], box[1] - target[1]);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestTargetIndex = i;
+                }
+            }
+
+            if (closestTargetIndex != -1) {
+                usedTargets[closestTargetIndex] = true;
+                totalDistance += (int) minDistance;
+            }
+        }
+        return totalDistance;
+    }
+
+//===============================================================
+// ======================= FIN HEURISTICAS ======================
+//===============================================================
 
     private Cell[][] generateBoard(int width, int height, int targets) {
         Cell[][] board = new Cell[height][width];
