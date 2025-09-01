@@ -47,11 +47,11 @@ public class IDDFS {
             writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
             writer.println();
 
-            System.out.writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
-            System.out.writer.printf("Nodos expandidos: %d. ", expanded);
-            System.out.writer.printf("Profundidad máxima: %d. ", maxDepth);
-            System.out.writer.printf("Frontier: %d. ", solver.frontier.size());
-            System.out.writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
+            System.out.printf("%s se encontró solución. ", found ? "Sí" : "No");
+            System.out.printf("Nodos expandidos: %d. ", expanded);
+            System.out.printf("Profundidad máxima: %d. ", maxDepth);
+            System.out.printf("Frontier: %d. ", solver.frontier.size());
+            System.out.printf("Tiempo de ejecución: %d ms. ", elapsed);
 
             if (found) {
                 writer.println("=== SOLUCIÓN ===");

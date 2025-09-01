@@ -1,6 +1,7 @@
 package org.sokoban.models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,13 +10,17 @@ public class Board {
     private int height = -1;
 
     private int[][] preAnalysis; // number of blocked rows in[1] and number of blocked columns in[0]
+    private int playerX = -1;
+    private int playerY = -1;
+
+    private Cell[][] cells;
+    private Map<String, PlayerAndMap> maps;
 
 //    targets
 //    boxes
 //    boxesOnTargets == targets
 
-    private int playerX = -1;
-    private int playerY = -1;
+
 
     // Leyenda: # = WALL, T = TARGET, B = BOX, P = PLAYER, ' ' = EMPTY
     /*
@@ -87,7 +92,7 @@ public class Board {
     */
 
     // SMALL
-    private Cell[][] smallCells = {
+    private static final Cell[][] smallCells = {
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
@@ -96,7 +101,7 @@ public class Board {
     };
 
     // MEDIUM
-    private Cell[][] mediumCells = {
+    private static final Cell[][] mediumCells = {
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
@@ -106,7 +111,7 @@ public class Board {
     };
 
     // LARGE
-    private Cell[][] largeCells = {
+    private static final Cell[][] largeCells = {
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
@@ -118,7 +123,7 @@ public class Board {
     };
 
     // MEDIUM - 3 boxes
-    private Cell[][] medium3BoxesCells = {
+    private static final Cell[][] medium3BoxesCells = {
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.TARGET), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
@@ -130,7 +135,7 @@ public class Board {
     };
 
     // MEDIUM WITH WALLS
-    private Cell[][] mediumWithWallsCells = {
+    private static final  Cell[][] mediumWithWallsCells = {
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
@@ -142,7 +147,7 @@ public class Board {
     };
 
     // MEDIUM - five boxes
-    private Cell[][] mediumFiveBoxesCells = {
+    private static final Cell[][] mediumFiveBoxesCells = {
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
@@ -168,7 +173,7 @@ public class Board {
          * # # # # # # # # #   
          */
 
-        private Cell[][] cells = {
+        private static final  Cell[][] defaultMap = {
             { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
             { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
             { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
@@ -181,7 +186,7 @@ public class Board {
         };
 
     // default map
-    private Cell[][] cells2 = {
+    private static final Cell[][] cells2 = {
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
@@ -189,30 +194,23 @@ public class Board {
         { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
         { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
     };
-    private Map<String, Board> maps = new HashMap<>()
-        .put("default", new Board(9, 9, cells, 4, 4))
-        .put("small", new Board(6, 5, smallCells, 3, 3))
-        .put("medium", new Board(8, 6, mediumCells, 4, 4))
-        .put("large", new Board(8, 8, largeCells, 6, 4))
-        .put("medium3boxes", new Board(8, 8, medium3BoxesCells, 6, 4))
-        .put("mediumwithwalls", new Board(8, 8, mediumWithWallsCells, 6, 5))
-        .put("mediumfiveboxes", new Board(8, 8, mediumFiveBoxesCells, 6, 4));
 
     public Board() {
-        this.width = 9;
-        this.height = 9;
+        this.width = defaultMap[0].length;
+        this.height = defaultMap.length;
         this.playerX = 4;
         this.playerY = 4;
+        this.cells = defaultMap;
         executePreAnalysis();
     }
 
     public Board(String map){
-        Board board = maps.get(map);
-        this.width = board.getWidth();
-        this.height = board.getHeight();
-        this.playerX = board.getPlayerX();
-        this.playerY = board.getPlayerY();
-        this.cells = board.getCells();
+        loadMaps();
+        this.cells = maps.get(map).map;
+        this.playerX = maps.get(map).playerX;
+        this.playerY = maps.get(map).playerY;
+        this.width = cells[0].length;
+        this.height = cells.length;
         executePreAnalysis();
     }
 
@@ -233,18 +231,6 @@ public class Board {
         executePreAnalysis();
     }
 
-    public void executePreAnalysis(){
-        preAnalysis = new int[2][Math.max(width, height)];
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                Cell cell = getCell(j, i);
-                if (cell.getState() == State.WALL) {
-                    preAnalysis[0][j]++;
-                    preAnalysis[1][i]++;
-                }
-            }
-        }
-    }
     private Board(Board other) {
         this.width   = other.width;
         this.height  = other.height;
@@ -263,7 +249,18 @@ public class Board {
     private static Board fromBoard(Board old){
         return new Board(old);
     }
-
+    public void executePreAnalysis(){
+        preAnalysis = new int[2][Math.max(width, height)];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                Cell cell = getCell(j, i);
+                if (cell.getState() == State.WALL) {
+                    preAnalysis[0][j]++;
+                    preAnalysis[1][i]++;
+                }
+            }
+        }
+    }
     private boolean isInsideBoard(int x, int y) {
         return x >= 0 && x < width && y >= 0 && y < height;
     }
@@ -593,6 +590,18 @@ public class Board {
         return false;
     }
 
+    private void loadMaps(){
+        maps = new HashMap<>();
+        maps.put("default", new PlayerAndMap(4,4,defaultMap));
+        maps.put("small", new PlayerAndMap(3,3, smallCells));
+        maps.put("medium", new PlayerAndMap(5, 4,mediumCells));
+        maps.put("large", new PlayerAndMap(6, 4, largeCells));
+        maps.put("medium3boxes", new PlayerAndMap(6, 4, medium3BoxesCells));
+        maps.put("mediumwithwalls", new PlayerAndMap(6, 5, mediumWithWallsCells));
+        maps.put("medium5boxes", new PlayerAndMap(6, 5, mediumFiveBoxesCells));
+    }
+
+
     public void initializeCells(Cell[][] level) {
         cells = level;
     }
@@ -613,6 +622,15 @@ public class Board {
         return height;
     }
 
+    public int getPlayerX() {
+        return playerX;
+    }
+    public int getPlayerY() {
+        return playerY;
+    }
+    public Cell[][] getCells() {
+        return cells;
+    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -653,6 +671,18 @@ public class Board {
             sb.append('\n');
         }
         return sb.toString();
+    }
+
+}
+
+class PlayerAndMap{
+    public int playerX;
+    public int playerY;
+    public Cell[][] map;
+    public PlayerAndMap(int playerX, int playerY, Cell[][] map) {
+        this.playerX = playerX;
+        this.playerY = playerY;
+        this.map = map;
     }
 
 }

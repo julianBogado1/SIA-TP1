@@ -24,6 +24,7 @@ public class BFS {
     private int maxDepth = 0;
 
     public static void main(String[] args) {
+        System.out.println("##############" + args[0] + "########");
         BFS solver = new BFS();
         long t0 = System.currentTimeMillis();
         Queue<Board> answer = solver.bfs(new Board(args[0]));

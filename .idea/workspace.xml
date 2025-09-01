@@ -6,7 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="5819d62f-3412-4eb8-911f-24483d0b0db2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SIA-TP1/src/main/resources/DFS_solution.txt" beforeDir="false" afterPath="$PROJECT_DIR$/SIA-TP1/src/main/resources/DFS_solution.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multiple_run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/multiple_run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sokoban/main/AStar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sokoban/main/AStar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sokoban/main/BFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sokoban/main/BFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sokoban/main/IDDFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sokoban/main/IDDFS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/sokoban/models/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sokoban/models/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AStarH2_solution.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AStarH2_solution.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/BFS_solution.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/BFS_solution.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Greedy_second_solution.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Greedy_second_solution.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IDDFS_solution.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IDDFS_solution.txt" afterDir="false" />
     </list>
     <list id="3a187799-dbd6-4fdd-bd3c-52fcfcbd65da" name="Changes by Santi" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +57,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHELLCHECK.PATH": "/Users/julian/Library/Application Support/JetBrains/IntelliJIdea2025.2/plugins/Shell Script/shellcheck",
-    "git-widget-placeholder": "heuristica-euclidea",
+    "git-widget-placeholder": "intentoDeMultiExec",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/julian/ITBA/sia/SIA-TP1",
     "node.js.detected.package.eslint": "true",
@@ -73,10 +82,10 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="IDDFS" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.sokoban.main.IDDFS" />
+    <configuration name="BFS" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.sokoban.main.BFS" />
       <module name="TP1" />
-      <option name="PROGRAM_PARAMETERS" value="-Xmx24g" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;small&quot;" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.sokoban.main.*" />
@@ -134,7 +143,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.IDDFS" />
+        <item itemvalue="Application.BFS" />
       </list>
     </recent_temporary>
   </component>
@@ -160,5 +169,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/sokoban/main/BFS.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
