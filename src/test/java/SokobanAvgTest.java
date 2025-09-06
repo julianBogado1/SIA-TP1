@@ -13,6 +13,8 @@ import org.sokoban.main.*;
 
 public class SokobanAvgTest {
 
+    private int totalMaps = maps.size();
+
     // MEDIUM WITH WALLS2
     /*
     ########
@@ -380,7 +382,7 @@ public class SokobanAvgTest {
         }
 
         System.out.printf("DFS - Time for DFS: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
-         (double) totalTime / 7, (double) expandedNodes / 7, (double) solutionNodes / 7, (double) frontierNodes / 7);
+         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
 
     }
 
@@ -407,7 +409,7 @@ public class SokobanAvgTest {
         }
 
         System.out.printf("A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
-         (double) totalTime / 7, (double) expandedNodes / 7, (double) solutionNodes / 7, (double) frontierNodes / 7);
+         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
 
     @Test
@@ -433,7 +435,7 @@ public class SokobanAvgTest {
         }
 
         System.out.printf("A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
-         (double) totalTime / 7, (double) expandedNodes / 7, (double) solutionNodes / 7, (double) frontierNodes / 7);
+         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
 
         @Test
@@ -459,7 +461,7 @@ public class SokobanAvgTest {
         }
 
         System.out.printf("Greedy H1 - Time for Greedy: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
-         (double) totalTime / 7, (double) expandedNodes / 7, (double) solutionNodes / 7, (double) frontierNodes / 7);
+         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
 
     @Test
@@ -485,7 +487,7 @@ public class SokobanAvgTest {
         }
 
         System.out.printf("Greedy H2 - Time for Greedy: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
-         (double) totalTime / 7, (double) expandedNodes / 7, (double) solutionNodes / 7, (double) frontierNodes / 7);
+         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
 
     @Test
@@ -511,7 +513,7 @@ public class SokobanAvgTest {
         }
 
         System.out.printf("IDDFS - Time for IDDFS: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
-         (double) totalTime / 7, (double) expandedNodes / 7, (double) solutionNodes / 7, (double) frontierNodes / 7);
+         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
 
 }
