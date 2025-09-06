@@ -21,17 +21,24 @@ public class AStar {
     private final Set<Board> visited;
     private final Map<Board, Board> parent;
     private final Map<Board, Integer> gScore;
-    private final String outputFile = "src/main/resources/AStarH2_solution.txt";
+    private String outputFile;
     private long expanded = 0;
     private int maxDepth = 0;
 
     public AStar(String heuristicType) {
-        if (heuristicType.equals("h1")) {
-            frontier = new PriorityQueue<>(new Heuristic());
-            System.out.println("h1");
-        } else {
-            System.out.println("h2");
+        if (heuristicType.equals("h2")) {
             frontier = new PriorityQueue<>(new AdmisibleHeuristic());
+            outputFile = "src/main/resources/AStarH2_solution.txt";
+            System.out.println("h2");
+        } else if(heuristicType.equals("h3")){
+            System.out.println("h3");
+            frontier = new PriorityQueue<>(new EuclideanHeuristic());
+            outputFile = "src/main/resources/AStarH3_solution.txt";
+        }
+        else{
+            System.out.println("h1");
+            frontier = new PriorityQueue<>(new Heuristic());
+            outputFile = "src/main/resources/AStarH1_solution.txt";
         }
         visited = new HashSet<>();
         parent = new HashMap<>();
@@ -41,7 +48,7 @@ public class AStar {
     public static void main(String[] args) {
         AStar solver = new AStar(args[0]);
         long t0 = System.currentTimeMillis();
-        List<Board> solution = solver.solve(new Board());
+        List<Board> solution = solver.solve(new Board(), args[0]); //receives heuristic type
         long elapsed = System.currentTimeMillis() - t0;
         boolean found = solution != null;
 
@@ -71,19 +78,19 @@ public class AStar {
         }
     }
 
-    public ResultClass getResultClass(Board board) {
+    public ResultClass getResultClass(Board board, String heuristicType) {
         long t0 = System.currentTimeMillis();
-        List<Board> solution = solve(board);
+        List<Board> solution = solve(board, heuristicType);
         long elapsed = System.currentTimeMillis() - t0;
         boolean found = solution != null;
         int solutionSize = found ? solution.size() : 0;
         return new ResultClass(found, (int) expanded, solutionSize, frontier.size(), maxDepth, elapsed);
     }
 
-    public List<Board> solve(Board board) {
+    public List<Board> solve(Board board, String heuristicType) {
         Board start = board;
         System.out.println("Initial Board:\n" + start);
-        BoardNode startNode = new BoardNode(start, 0);
+        BoardNode startNode = new BoardNode(start, 0, heuristicType);
         frontier.add(startNode);
         gScore.put(start, 0);
         parent.put(start, null);
@@ -107,7 +114,7 @@ public class AStar {
                 if (!gScore.containsKey(neighbor) || possibleG < gScore.get(neighbor)) {
                     gScore.put(neighbor, possibleG);
                     parent.put(neighbor, current);
-                    frontier.add(new BoardNode(neighbor, possibleG));
+                    frontier.add(new BoardNode(neighbor, possibleG, heuristicType));
                 }
             }
         }
@@ -128,11 +135,17 @@ public class AStar {
         int g;
         int f;
 
-        BoardNode(Board board, int g) {
+        BoardNode(Board board, int g, String heuristicType) {
             this.board = board;
             this.g = g;
-            //this.f = g + board.heuristic(); // f = g + h
-            this.f = g + board.admisibleHeuristic();
+            if(heuristicType.equals("h2")){
+                this.f = g + board.admisibleHeuristic(); // f = g + h
+            } else if(heuristicType.equals("h3")){
+                this.f = g + board.euclideanDistance();
+            }
+            else{
+                this.f = g + board.admisibleHeuristic();
+            }
         }
 
         public int getF() {
@@ -148,6 +161,12 @@ public class AStar {
     }
     
     private static class AdmisibleHeuristic implements Comparator<BoardNode> {
+        @Override
+        public int compare(BoardNode o1, BoardNode o2) {
+            return Integer.compare(o1.getF(), o2.getF());
+        }
+    }
+    private static class EuclideanHeuristic implements Comparator<BoardNode> {
         @Override
         public int compare(BoardNode o1, BoardNode o2) {
             return Integer.compare(o1.getF(), o2.getF());

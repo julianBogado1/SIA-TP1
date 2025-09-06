@@ -25,10 +25,14 @@ public class Greedy {
     private final String outputFile = "src/main/resources/Greedy_second_solution.txt";
 
     public static void main(String[] args) {
-        if(args[0].equals("h1"))
+        if(args[0].equals("h2"))
             frontier = new PriorityQueue<>(new GreedyComparator());
-        else
+        else if(args[0].equals("h3")) {
             frontier = new PriorityQueue<>(new AdmisibleHeuristic());
+        }
+        else{
+            frontier = new PriorityQueue<>(new EuclideanHeuristic());
+        }
         Greedy solver = new Greedy();
 
         long t0 = System.currentTimeMillis();
@@ -158,5 +162,12 @@ class AdmisibleHeuristic implements Comparator<Board> {
     @Override
     public int compare(Board b1, Board b2) {
         return Integer.compare(b1.admisibleHeuristic(), b2.admisibleHeuristic());
+    }
+}
+
+class EuclideanHeuristic implements Comparator<Board> {
+    @Override
+    public int compare(Board b1, Board b2) {
+        return Integer.compare(b1.euclideanDistance(), b2.euclideanDistance());
     }
 }

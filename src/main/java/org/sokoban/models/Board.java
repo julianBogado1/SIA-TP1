@@ -287,16 +287,7 @@ public class Board {
         List<int[]> boxes = new ArrayList<>();
         List<int[]> targets = new ArrayList<>();
 
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                State state = cells[y][x].getState();
-                if (state == State.BOX || state == State.BOX_ON_TARGET) {
-                    boxes.add(new int[]{x, y});
-                } else if (state == State.TARGET || state == State.PLAYER_ON_TARGET) {
-                    targets.add(new int[]{x, y});
-                }
-            }
-        }
+        getBoxesAndTargets(boxes, targets);
 
         int totalDistance = 0;
         boolean[] usedTargets = new boolean[targets.size()];
@@ -326,6 +317,48 @@ public class Board {
         return totalDistance;
     }
 
+    private void getBoxesAndTargets(List<int[]> boxes, List<int[]> targets) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                State state = cells[y][x].getState();
+                if (state == State.BOX || state == State.BOX_ON_TARGET) {
+                    boxes.add(new int[]{x, y});
+                } else if (state == State.TARGET || state == State.PLAYER_ON_TARGET) {
+                    targets.add(new int[]{x, y});
+                }
+            }
+        }
+    }
+
+    public int euclideanDistance() {
+        List<int[]> boxes = new ArrayList<>();
+        List<int[]> targets = new ArrayList<>();
+        getBoxesAndTargets(boxes, targets);
+
+        int totalDistance = 0;
+        boolean[] usedTargets = new boolean[targets.size()];
+
+        for (int[] box : boxes) {
+            double minDistance = Double.MAX_VALUE;
+            int closestTargetIndex = -1;
+
+            for (int i = 0; i < targets.size(); i++) {
+                if (usedTargets[i]) continue;
+                int[] target = targets.get(i);
+                double distance = Math.hypot(box[0] - target[0], box[1] - target[1]);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestTargetIndex = i;
+                }
+            }
+
+            if (closestTargetIndex != -1) {
+                usedTargets[closestTargetIndex] = true;
+                totalDistance += (int) minDistance;
+            }
+        }
+        return totalDistance;
+    }
 
     public int admisibleHeuristic(){
         int resp = 0;
