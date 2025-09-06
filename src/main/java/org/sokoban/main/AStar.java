@@ -24,8 +24,10 @@ public class AStar {
     private final String outputFile = "src/main/resources/AStarH2_solution.txt";
     private long expanded = 0;
     private int maxDepth = 0;
+    private final String heuristicType;
 
     public AStar(String heuristicType) {
+        this.heuristicType = heuristicType;
         if (heuristicType.equals("h1")) {
             frontier = new PriorityQueue<>(new Heuristic());
             System.out.println("h1");
@@ -83,7 +85,7 @@ public class AStar {
     public List<Board> solve(Board board) {
         Board start = board;
         System.out.println("Initial Board:\n" + start);
-        BoardNode startNode = new BoardNode(start, 0);
+        BoardNode startNode = new BoardNode(start, 0, heuristicType);
         frontier.add(startNode);
         gScore.put(start, 0);
         parent.put(start, null);
@@ -107,7 +109,7 @@ public class AStar {
                 if (!gScore.containsKey(neighbor) || possibleG < gScore.get(neighbor)) {
                     gScore.put(neighbor, possibleG);
                     parent.put(neighbor, current);
-                    frontier.add(new BoardNode(neighbor, possibleG));
+                    frontier.add(new BoardNode(neighbor, possibleG, heuristicType));
                 }
             }
         }
@@ -128,11 +130,14 @@ public class AStar {
         int g;
         int f;
 
-        BoardNode(Board board, int g) {
+        BoardNode(Board board, int g, String heuristicType) {
             this.board = board;
             this.g = g;
-            //this.f = g + board.heuristic(); // f = g + h
-            this.f = g + board.admisibleHeuristic();
+
+            if (heuristicType.equals("h1"))
+                this.f = g + board.heuristic(); // f = g + h
+            else
+                this.f = g + board.admisibleHeuristic();
         }
 
         public int getF() {
