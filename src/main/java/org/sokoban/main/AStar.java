@@ -144,7 +144,7 @@ public class AStar {
                 this.f = g + board.euclideanDistance();
             }
             else{
-                this.f = g + board.admisibleHeuristic();
+                this.f = g + board.heuristic();
             }
         }
 

@@ -405,6 +405,8 @@ public class SokobanAvgTest {
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
                 totalTime += result.getExecutionTime();
+                System.out.printf("%s : A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n", entry.getKey(),
+                        (double) result.getExecutionTime(), (double) result.getNodesExpanded(), (double) result.getSolutionSize(), (double) result.getFrontierSize());
             }
         }
 
@@ -431,6 +433,8 @@ public class SokobanAvgTest {
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
                 totalTime += result.getExecutionTime();
+                System.out.printf("%s : A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n", entry.getKey(),
+                        (double) result.getExecutionTime(), (double) result.getNodesExpanded(), (double) result.getSolutionSize(), (double) result.getFrontierSize());
             }
         }
 
@@ -456,6 +460,8 @@ public class SokobanAvgTest {
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
                 totalTime += result.getExecutionTime();
+                System.out.printf("%s : A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n", entry.getKey(),
+                        (double) result.getExecutionTime(), (double) result.getNodesExpanded(), (double) result.getSolutionSize(), (double) result.getFrontierSize());
             }
         }
 
@@ -512,6 +518,32 @@ public class SokobanAvgTest {
         }
 
         System.out.printf("Greedy H2 - Time for Greedy: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
+         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
+    }
+
+        @Test
+    public void testAverageGreedyH3() {
+
+        int expandedNodes = 0;
+        int solutionNodes = 0;
+        int frontierNodes = 0;
+        int totalTime = 0;
+
+        for (Map.Entry<String, Board> entry : maps.entrySet()) {
+            Board board = entry.getValue();
+
+            Greedy solver = new Greedy();
+            ResultClass result = solver.getResultClass(board, "h3");
+
+            if (result.isFound()) {
+                expandedNodes += result.getNodesExpanded();
+                solutionNodes += result.getSolutionSize();
+                frontierNodes += result.getFrontierSize();
+                totalTime += result.getExecutionTime();
+            }
+        }
+
+        System.out.printf("Greedy H3 - Time for Greedy: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
          (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
 
