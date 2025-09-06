@@ -1,6 +1,10 @@
 #!/bin/bash
 
+set -e  # Salir si hay un error
+
 mvn clean package
+
+javac -d class ./src/main/java/org/sokoban/*/*.java
 
 mkdir -p outputs  # -p avoids error if it already exists
 

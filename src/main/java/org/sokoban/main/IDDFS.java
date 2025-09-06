@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import java.util.LinkedList;
 import java.util.Set;
 
 import org.sokoban.models.Board;
@@ -42,6 +42,7 @@ public class IDDFS {
         try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
             writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
             writer.printf("Nodos expandidos: %d. ", expanded);
+            writer.printf("Nodos solution: %d. ", solution.size());
             writer.printf("Profundidad máxima: %d. ", maxDepth);
             writer.printf("Frontier: %d. ", solver.frontier.size());
             writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
@@ -49,6 +50,7 @@ public class IDDFS {
 
             System.out.printf("%s se encontró solución. ", found ? "Sí" : "No");
             System.out.printf("Nodos expandidos: %d. ", expanded);
+            System.out.printf("Nodos solution: %d. ", solution.size());
             System.out.printf("Profundidad máxima: %d. ", maxDepth);
             System.out.printf("Frontier: %d. ", solver.frontier.size());
             System.out.printf("Tiempo de ejecución: %d ms. ", elapsed);
@@ -74,6 +76,7 @@ public class IDDFS {
             parent.clear();
             frontier.clear();
             parent.put(start, null);
+            expanded = 0;
 
             Board result = dls(start, depth, visited);
             if (result != null) {
@@ -121,4 +124,3 @@ public class IDDFS {
         return path;
     }
 }
-
