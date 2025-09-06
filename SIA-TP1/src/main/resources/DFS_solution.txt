@@ -1,4 +1,4 @@
-Sí se encontró solución. # Nodos solucion: 1693. # Nodos expandidos: 244752. # Nodos frontera: 1922. Profundidad máxima: 8690. Tiempo de ejecución: 1000 ms.
+Sí se encontró solución. # Nodos solucion: 1693. # Nodos expandidos: 244752. # Nodos frontera: 1922. Profundidad máxima: 8690. Tiempo de ejecución: 995 ms.
 === SOLUCIÓN ===
 ########
 #TBT   #

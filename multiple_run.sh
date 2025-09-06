@@ -8,9 +8,9 @@ javac -d class ./src/main/java/org/sokoban/*/*.java
 
 mkdir -p outputs  # -p avoids error if it already exists
 
-maps=("default" "small" "medium" "large" "medium3boxes" "mediumwithwalls" "mediumwithwalls" "medium5boxes")
+maps=("default" "small" "medium" "large" "medium3boxes" "mediumwithwalls" "mediumwithwalls2" "mediumwithwalls3" "mediumwithwalls4" "mediumwithwalls5" "mediumwithwalls6" "medium5boxes")
 
-for ((i=0; i<8; i++))
+for ((i=0; i<12; i++))
 do
   mvn exec:java -Dexec.mainClass="org.sokoban.main.BFS" -Dexec.args="${maps[i]}" > "outputs/BFS_output_${maps[i]}.txt"
 

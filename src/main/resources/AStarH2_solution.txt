@@ -1,4 +1,4 @@
-Sí se encontró solución. Nodos expandidos: 364020. # Nodos solucion: 27. Frontier: 139012. Tiempo de ejecución: 2033 ms. 
+Sí se encontró solución. Nodos expandidos: 364020. # Nodos solucion: 27. Frontier: 139012. Tiempo de ejecución: 1801 ms. 
 === SOLUCIÓN ===
 ########
 #TBT   #

@@ -1,4 +1,4 @@
-Sí se encontró solución. Nodos expandidos: 960248. Profundidad máxima: 36. Frontier: 65898. Tiempo de ejecución: 1272 ms. 
+Sí se encontró solución. Nodos expandidos: 960248. Profundidad máxima: 36. Frontier: 65898. Tiempo de ejecución: 1282 ms. 
 === SOLUCIÓN ===
 ########
 #TBT   #
