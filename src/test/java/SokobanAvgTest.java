@@ -398,7 +398,7 @@ public class SokobanAvgTest {
             Board board = entry.getValue();
 
             AStar solver = new AStar("h1");
-            ResultClass result = solver.getResultClass(board);
+            ResultClass result = solver.getResultClass(board, "h1");
 
             if (result.isFound()) {
                 expandedNodes += result.getNodesExpanded();
@@ -424,7 +424,7 @@ public class SokobanAvgTest {
             Board board = entry.getValue();
 
             AStar solver = new AStar("h2");
-            ResultClass result = solver.getResultClass(board);
+            ResultClass result = solver.getResultClass(board, "h2");
 
             if (result.isFound()) {
                 expandedNodes += result.getNodesExpanded();
@@ -436,6 +436,31 @@ public class SokobanAvgTest {
 
         System.out.printf("A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
          (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
+    }
+    @Test
+    public void testAverageAStarH3() {
+
+        int expandedNodes = 0;
+        int solutionNodes = 0;
+        int frontierNodes = 0;
+        int totalTime = 0;
+
+        for (Map.Entry<String, Board> entry : maps.entrySet()) {
+            Board board = entry.getValue();
+
+            AStar solver = new AStar("h3");
+            ResultClass result = solver.getResultClass(board, "h3");
+
+            if (result.isFound()) {
+                expandedNodes += result.getNodesExpanded();
+                solutionNodes += result.getSolutionSize();
+                frontierNodes += result.getFrontierSize();
+                totalTime += result.getExecutionTime();
+            }
+        }
+
+        System.out.printf("A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
+                (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
 
         @Test
