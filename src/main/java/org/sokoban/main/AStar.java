@@ -41,7 +41,7 @@ public class AStar {
     public static void main(String[] args) {
         AStar solver = new AStar(args[0]);
         long t0 = System.currentTimeMillis();
-        List<Board> solution = solver.solve(new Board(args[1]));
+        List<Board> solution = solver.solve(new Board());
         long elapsed = System.currentTimeMillis() - t0;
         boolean found = solution != null;
 

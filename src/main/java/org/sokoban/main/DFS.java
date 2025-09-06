@@ -30,7 +30,7 @@ public class DFS {
         long t0 = System.currentTimeMillis();
 
         //map passed in argv
-        boolean found = solver.search(new Board(args[0]));
+        boolean found = solver.search(new Board());
         long elapsed = System.currentTimeMillis() - t0;
 
         File out = new File(solver.outputFile);

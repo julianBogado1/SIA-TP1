@@ -32,7 +32,7 @@ public class Greedy {
         Greedy solver = new Greedy();
 
         long t0 = System.currentTimeMillis();
-        Queue<Board> answer = solver.search(new Board(args[1]));
+        Queue<Board> answer = solver.search(new Board());
         long elapsed = System.currentTimeMillis() - t0;
         boolean found = (answer != null);
 

@@ -26,7 +26,7 @@ public class BFS {
     public static void main(String[] args) {
         BFS solver = new BFS();
         long t0 = System.currentTimeMillis();
-        Queue<Board> answer = solver.bfs(new Board(args[0]));
+        Queue<Board> answer = solver.bfs(new Board());
         long elapsed = System.currentTimeMillis() - t0;
         boolean found = answer != null;
 
