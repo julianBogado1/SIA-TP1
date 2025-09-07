@@ -1,124 +1,137 @@
 package org.sokoban.main;
 
+import org.sokoban.models.Board;
+import org.sokoban.models.ResultClass;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Set;
-
-
-import org.sokoban.models.*;
+import java.util.*;
 
 public class AStar {
     private final PriorityQueue<BoardNode> frontier;
-    private final Set<Board> visited;
     private final Map<Board, Board> parent;
     private final Map<Board, Integer> gScore;
+
     private String outputFile;
     private long expanded = 0;
     private int maxDepth = 0;
 
     public AStar(String heuristicType) {
-        if (heuristicType.equals("h2")) {
-            frontier = new PriorityQueue<>(new Heuristic());
+        // Un único comparator (f, luego g) — la heurística se aplica en BoardNode
+        this.frontier = new PriorityQueue<>(new ByFThenG());
+        this.parent = new HashMap<>();
+        this.gScore = new HashMap<>();
+
+        if ("h2".equals(heuristicType)) {
             outputFile = "src/main/resources/AStarH2_solution.txt";
             System.out.println("h2");
-        } else if(heuristicType.equals("h3")){
-            System.out.println("h3");
-            frontier = new PriorityQueue<>(new Heuristic());
+        } else if ("h3".equals(heuristicType)) {
             outputFile = "src/main/resources/AStarH3_solution.txt";
-        }
-        else{
-            System.out.println("h1");
-            frontier = new PriorityQueue<>(new Heuristic());
+            System.out.println("h3");
+        } else {
             outputFile = "src/main/resources/AStarH1_solution.txt";
+            System.out.println("h1");
         }
-        visited = new HashSet<>();
-        parent = new HashMap<>();
-        gScore = new HashMap<>();
     }
 
     public static void main(String[] args) {
-        AStar solver = new AStar(args[0]);
+        if (args.length == 0) {
+            System.err.println("Uso: java AStar <h1|h2|h3>");
+            return;
+        }
+        String heuristicType = args[0];
+
+        AStar solver = new AStar(heuristicType);
         long t0 = System.currentTimeMillis();
-        List<Board> solution = solver.solve(new Board(), args[0]); //receives heuristic type
+        List<Board> solution = solver.solve(new Board(), heuristicType); // pasa tu estado inicial real
         long elapsed = System.currentTimeMillis() - t0;
-        boolean found = solution != null;
+        boolean found = (solution != null);
+        int solSize = found ? solution.size() : 0;
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
             writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
             writer.printf("Nodos expandidos: %d. ", solver.expanded);
-            writer.printf("# Nodos solucion: %d. ", solution.size());
+            writer.printf("# Nodos solucion: %d. ", solSize);
             writer.printf("Frontier: %d. ", solver.frontier.size());
             writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
             writer.println();
 
             System.out.printf("%s se encontró solución. ", found ? "Sí" : "No");
             System.out.printf("Nodos expandidos: %d. ", solver.expanded);
-            System.out.printf("# Nodos solucion: %d. ", solution.size());
+            System.out.printf("# Nodos solucion: %d. ", solSize);
             System.out.printf("Frontier: %d. ", solver.frontier.size());
             System.out.printf("Tiempo de ejecución: %d ms. ", elapsed);
 
-            if(found){
+            if (found) {
+                writer.println();
                 writer.println("=== SOLUCIÓN ===");
                 for (Board b : solution) {
                     writer.println(b);
                 }
             }
-            
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /** Devuelve métricas en tu ResultClass (sin necesidad de imprimir el camino). */
     public ResultClass getResultClass(Board board, String heuristicType) {
         long t0 = System.currentTimeMillis();
         List<Board> solution = solve(board, heuristicType);
         long elapsed = System.currentTimeMillis() - t0;
-        boolean found = solution != null;
+        boolean found = (solution != null);
         int solutionSize = found ? solution.size() : 0;
         return new ResultClass(found, (int) expanded, solutionSize, frontier.size(), maxDepth, elapsed);
     }
 
-    public List<Board> solve(Board board, String heuristicType) {
-        Board start = board;
-        System.out.println("Initial Board:\n" + start);
-        BoardNode startNode = new BoardNode(start, 0, heuristicType);
-        frontier.add(startNode);
+    /** Devuelve el camino solución (o null si no hay). */
+    public List<Board> solve(Board start, String heuristicType) {
+        // Reset de estado para búsquedas independientes
+        frontier.clear();
+        parent.clear();
+        gScore.clear();
+        expanded = 0;
+        maxDepth = 0;
+
+        // Init
         gScore.put(start, 0);
         parent.put(start, null);
+        frontier.add(new BoardNode(start, 0, heuristicType));
 
-        int iterations = 0;
-        while (!frontier.isEmpty() /*&& iterations++ < 10000000*/) {
+        while (!frontier.isEmpty()) {
             BoardNode currentNode = frontier.poll();
             Board current = currentNode.board;
 
+            // Descarte perezoso: si no es el mejor g conocido, ignoro este nodo "viejo"
+            Integer bestG = gScore.get(current);
+            if (bestG == null || currentNode.g > bestG) {
+                continue;
+            }
+
+            // Profundidad máxima observada en expansión real
+            if (currentNode.g > maxDepth) maxDepth = currentNode.g;
+
+            // Objetivo
             if (current.isSolution()) {
                 return buildSolution(current);
             }
 
-            if (visited.contains(current)) continue;
-            visited.add(current);
+            // Expandimos
             expanded++;
 
+            // Sucesores
             for (Board neighbor : current.getPossibleBoards()) {
-                int possibleG = gScore.get(current) + 1;
-
-                if (!gScore.containsKey(neighbor) || possibleG < gScore.get(neighbor)) {
-                    gScore.put(neighbor, possibleG);
+                int tentativeG = bestG + 1; // costo uniforme
+                Integer known = gScore.get(neighbor);
+                if (known == null || tentativeG < known) {
+                    gScore.put(neighbor, tentativeG);
                     parent.put(neighbor, current);
-                    frontier.add(new BoardNode(neighbor, possibleG, heuristicType));
+                    frontier.add(new BoardNode(neighbor, tentativeG, heuristicType));
                 }
             }
         }
-        return null;
+        return null; // sin solución
     }
 
     private List<Board> buildSolution(Board goal) {
@@ -130,48 +143,58 @@ public class AStar {
         return path;
     }
 
-    private static class BoardNode {
-        Board board;
-        int g;
-        int f;
+    // ----------------- Auxiliares -----------------
+
+    private static final class BoardNode {
+        final Board board;
+        final int g;
+        final int f;
 
         BoardNode(Board board, int g, String heuristicType) {
             this.board = board;
             this.g = g;
-            if(heuristicType.equals("h2")){
-                this.f = g + board.admisibleHeuristic(); // f = g + h
-            } else if(heuristicType.equals("h3")){
-                this.f = g + board.euclideanDistance();
-            }
-            else{
-                this.f = g + board.heuristic();
-            }
-//            this.f = g;
-        }
 
-        public int getF() {
-            return f;
+            int h;
+            switch (heuristicType) {
+                case "h2":
+                    // Ej.: Manhattan / admisible
+                    h = board.admisibleHeuristic();
+                    break;
+                case "h3":
+                    // Si euclideanDistance() es double, evito truncar hacia abajo
+                    // para no introducir sesgos raros en la comparación:
+                    h = (int) Math.ceil(board.h2ManhattanHungarian());
+                    break;
+                case "h1":
+                default:
+                    // Ej.: celdas mal colocadas (admisible para 8-puzzle; para Sokoban dependerá de tu definición)
+                    h = board.h1PerBoxMinManhattan();
+                    break;
+            }
+            this.f = g + h;
         }
 
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
             if (!(o instanceof BoardNode)) return false;
-            BoardNode other = (BoardNode) o;
-            return board.equals(other.board);
+            BoardNode boardNode = (BoardNode) o;
+            return board.equals(boardNode.board);
         }
+
         @Override
         public int hashCode() {
             return board.hashCode();
         }
-
     }
 
-    private static class Heuristic implements Comparator<BoardNode> {
+    /** Ordena por f y desempata por g para mayor estabilidad. */
+    private static final class ByFThenG implements Comparator<BoardNode> {
         @Override
-        public int compare(BoardNode o1, BoardNode o2) {
-            return Integer.compare(o1.getF(), o2.getF());
+        public int compare(BoardNode a, BoardNode b) {
+            int cf = Integer.compare(a.f, b.f);
+            if (cf != 0) return cf;
+            return Integer.compare(a.g, b.g);
         }
     }
 }
-

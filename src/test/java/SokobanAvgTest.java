@@ -1,9 +1,6 @@
 
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Queue;
 import java.util.HashMap;
@@ -296,17 +293,17 @@ public class SokobanAvgTest {
     private static final Map<String, Board> maps = new HashMap<>();
     static {
         //  maps.put("default", new Board(9, 9, cells, 4, 4));
-        // maps.put("small", new Board(6, 5, smallCells, 3, 3));
+        maps.put("small", new Board(6, 5, smallCells, 3, 3));
         // maps.put("medium", new Board(8, 6, mediumCells, 5, 4));
         // maps.put("large", new Board(8, 8, largeCells, 6, 4));
-    //     // maps.put("mediumfiveboxes", new Board(8, 8, mediumFiveBoxesCells, 6, 5));
-        maps.put("medium3boxes", new Board(8, 8, medium3BoxesCells, 6, 4));
-        maps.put("mediumwithwalls", new Board(8, 8, mediumWithWallsCells, 6, 5));
-        maps.put("mediumwithwalls2", new Board(8, 8, mediumWithWalls2Cells, 6, 5));
-        maps.put("mediumwithwalls3", new Board(8, 8, mediumWithWalls3Cells, 6, 5));
-        maps.put("mediumwithwalls4", new Board(8, 8, mediumWithWalls4Cells, 6, 5));
-        maps.put("mediumwithwalls5", new Board(8, 8, mediumWithWalls5Cells, 6, 5));
-        maps.put("mediumwithwalls6", new Board(8, 8, mediumWithWalls6Cells, 6, 5));
+        // maps.put("mediumfiveboxes", new Board(8, 8, mediumFiveBoxesCells, 6, 5));
+        // maps.put("medium3boxes", new Board(8, 8, medium3BoxesCells, 6, 4));
+        // maps.put("mediumwithwalls", new Board(8, 8, mediumWithWallsCells, 6, 5));
+        // maps.put("mediumwithwalls2", new Board(8, 8, mediumWithWalls2Cells, 6, 5));
+        // maps.put("mediumwithwalls3", new Board(8, 8, mediumWithWalls3Cells, 6, 5));
+        // maps.put("mediumwithwalls4", new Board(8, 8, mediumWithWalls4Cells, 6, 5));
+        // maps.put("mediumwithwalls5", new Board(8, 8, mediumWithWalls5Cells, 6, 5));
+        // maps.put("mediumwithwalls6", new Board(8, 8, mediumWithWalls6Cells, 6, 5));
     }
     
     @Test
@@ -332,8 +329,7 @@ public class SokobanAvgTest {
                 frontierNodes += solver.frontier.size();
                 totalTime += elapsed;
                 System.out.println(entry.getKey());
-//                System.out.printf("expanded: %.2f; solution: %.2f; frontier: %.2f%n", (double) solver.expanded, (double) solver.solution.size(), (double) solver.frontier.size());
-                System.out.printf("expanded: %d; solution: %d; frontier: %d", solver.expanded, solver.solution.size(), solver.frontier.size());
+                System.out.printf("expanded: %d; solution: %d; frontier: %d\n", solver.expanded, solver.solution.size(), solver.frontier.size());
             }
             /*
             try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
@@ -355,8 +351,8 @@ public class SokobanAvgTest {
 
         }
 
-        System.out.printf("BFS - Time for BFS: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
-         (double) totalTime / 7, (double) expandedNodes / 7, (double) solutionNodes / 7, (double) frontierNodes / 7);
+        System.out.printf("BFS - Time for BFS: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f\n",
+         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
 
     }
 
@@ -382,7 +378,7 @@ public class SokobanAvgTest {
             }
         }
 
-        System.out.printf("DFS - Time for DFS: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
+        System.out.printf("DFS - Time for DFS: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f\n",
          (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
 
     }
@@ -411,7 +407,7 @@ public class SokobanAvgTest {
             }
         }
 
-        System.out.printf("A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
+        System.out.printf("A* - H1 - Time for A*: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f\n",
          (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
 
@@ -439,7 +435,7 @@ public class SokobanAvgTest {
             }
         }
 
-        System.out.printf("A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
+        System.out.printf("A* - H2 - Time for A*: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f\n",
          (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
     @Test
@@ -461,16 +457,14 @@ public class SokobanAvgTest {
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
                 totalTime += result.getExecutionTime();
-//                System.out.printf("%s : A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n", entry.getKey(),
-//                        (double) result.getExecutionTime(), (double) result.getNodesExpanded(), (double) result.getSolutionSize(), (double) result.getFrontierSize());
 
-                System.out.printf("%s : A* - Time for A*: %d ; expanded: %d; solution: %d; frontier: %d", entry.getKey(),
+                System.out.printf("%s : A* - Time for A*: %d ; expanded: %d; solution: %d; frontier: %d\n", entry.getKey(),
                         result.getExecutionTime(), result.getNodesExpanded(), result.getSolutionSize(), result.getFrontierSize());
             }
         }
 
-        System.out.printf("A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
-                (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
+        System.out.printf("A* - H3 - Time for A*: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f\n",
+         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
 
         @Test
@@ -495,7 +489,7 @@ public class SokobanAvgTest {
             }
         }
 
-        System.out.printf("Greedy H1 - Time for Greedy: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
+        System.out.printf("Greedy - H1 - Time for Greedy: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f\n",
          (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
 
@@ -521,7 +515,7 @@ public class SokobanAvgTest {
             }
         }
 
-        System.out.printf("Greedy H2 - Time for Greedy: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
+        System.out.printf("Greedy - H2 - Time for Greedy: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f\n",
          (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
 
@@ -547,7 +541,7 @@ public class SokobanAvgTest {
             }
         }
 
-        System.out.printf("Greedy H3 - Time for Greedy: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
+        System.out.printf("Greedy - H3 - Time for Greedy: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f\n",
          (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
 
@@ -573,7 +567,7 @@ public class SokobanAvgTest {
             }
         }
 
-        System.out.printf("IDDFS - Time for IDDFS: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
+        System.out.printf("IDDFS - Time for IDDFS: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f\n",
          (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
     }
 

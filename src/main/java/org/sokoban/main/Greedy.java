@@ -25,9 +25,9 @@ public class Greedy {
     private final String outputFile = "src/main/resources/Greedy_second_solution.txt";
 
     public static void main(String[] args) {
-        if(args[0].equals("h2"))
+        if(args[0].equals("h1"))
             frontier = new PriorityQueue<>(new GreedyComparator());
-        else if(args[0].equals("h3")) {
+        else if(args[0].equals("h2")) {
             frontier = new PriorityQueue<>(new AdmisibleHeuristic());
         }
         else{
@@ -71,8 +71,12 @@ public class Greedy {
     public ResultClass getResultClass(Board board, String heuristic) {
         if(heuristic.equals("h1"))
             frontier = new PriorityQueue<>(new GreedyComparator());
-        else
+        else if(heuristic.equals("h2")) {
             frontier = new PriorityQueue<>(new AdmisibleHeuristic());
+        }
+        else{
+            frontier = new PriorityQueue<>(new EuclideanHeuristic());
+        }
 
         long t0 = System.currentTimeMillis();
         Queue<Board> solution = search(board);
@@ -145,8 +149,8 @@ public class Greedy {
 class GreedyComparator implements Comparator<Board> {
     @Override
     public int compare(Board b1, Board b2) {
-        int h1 = b1.heuristic();
-        int h2 = b2.heuristic();
+        int h1 = b1.h1PerBoxMinManhattan();
+        int h2 = b2.h1PerBoxMinManhattan();
 
         int cmp = Integer.compare(h1, h2);
         if (cmp != 0) return cmp;
@@ -168,6 +172,6 @@ class AdmisibleHeuristic implements Comparator<Board> {
 class EuclideanHeuristic implements Comparator<Board> {
     @Override
     public int compare(Board b1, Board b2) {
-        return Integer.compare(b1.euclideanDistance(), b2.euclideanDistance());
+        return Integer.compare(b1.h2ManhattanHungarian(), b2.h2ManhattanHungarian());
     }
 }

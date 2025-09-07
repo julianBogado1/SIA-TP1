@@ -1,6 +1,7 @@
 package org.sokoban.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -283,51 +284,132 @@ public class Board {
         return possibleBoards;
     }
 
-    public int heuristic() {
-        List<int[]> boxes = new ArrayList<>();
-        List<int[]> targets = new ArrayList<>();
-        getBoxesAndTargets(boxes, targets);
-
-        int totalDistance = 0;
-        for (int[] box : boxes) {
-            int minDistance = Integer.MAX_VALUE;
-            for (int[] target : targets) {
-                int distance = Math.abs(box[0] - target[0]) + Math.abs(box[1] - target[1]);
-                minDistance = Math.min(minDistance, distance);
-            }
-            totalDistance += minDistance;
-        }
-        return totalDistance;
-    }
-
+        /** Corrige el recolector: incluye también BOX_ON_TARGET como objetivo.
+     *  Así, #boxes == #targets en tableros válidos y h(goal) = 0. */
     private void getBoxesAndTargets(List<int[]> boxes, List<int[]> targets) {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                State state = cells[y][x].getState();
-                if (state == State.BOX || state == State.BOX_ON_TARGET) {
+                State s = cells[y][x].getState();
+                // Todas las cajas (incluidas sobre objetivo)
+                if (s == State.BOX || s == State.BOX_ON_TARGET) {
                     boxes.add(new int[]{x, y});
-                } else if (state == State.TARGET || state == State.PLAYER_ON_TARGET) {
+                }
+                // TODOS los objetivos: vacíos, con jugador o con caja encima
+                if (s == State.TARGET || s == State.PLAYER_ON_TARGET || s == State.BOX_ON_TARGET) {
                     targets.add(new int[]{x, y});
                 }
             }
         }
     }
 
-    public int euclideanDistance() {
+    // h1: Suma por caja de la distancia Manhattan al objetivo más cercano (no exclusivo) — ADMISIBLE
+    public int h1PerBoxMinManhattan() {
         List<int[]> boxes = new ArrayList<>();
         List<int[]> targets = new ArrayList<>();
         getBoxesAndTargets(boxes, targets);
 
-        int totalDistance = 0;
+        int total = 0;
         for (int[] box : boxes) {
-            double minDistance = Double.MAX_VALUE;
-            for (int[] target : targets) {
-                double distance = Math.hypot(box[0] - target[0], box[1] - target[1]);
-                minDistance = Math.min(minDistance, distance);
+            int best = Integer.MAX_VALUE;
+            for (int[] t : targets) {
+                int d = Math.abs(box[0] - t[0]) + Math.abs(box[1] - t[1]);
+                if (d < best) best = d;
             }
-            totalDistance += minDistance;
+            total += (best == Integer.MAX_VALUE ? 0 : best);
         }
-        return totalDistance;
+        return total;
+    }
+
+    // ===== Helpers comunes =====
+    private static int manhattan(int x1, int y1, int x2, int y2) {
+        return Math.abs(x1 - x2) + Math.abs(y1 - y2);
+    }
+
+    /** Cota admisible "débil": por caja, Manhattan al objetivo más cercano (NO exclusivo). */
+    private int perBoxMinManhattan(List<int[]> boxes, List<int[]> targets) {
+        if (boxes.isEmpty() || targets.isEmpty()) return 0;
+        int sum = 0;
+        for (int[] b : boxes) {
+            int best = Integer.MAX_VALUE;
+            for (int[] t : targets) {
+                int d = manhattan(b[0], b[1], t[0], t[1]);
+                if (d < best) best = d;
+            }
+            sum += (best == Integer.MAX_VALUE ? 0 : best);
+        }
+        return sum;
+    }
+
+    // ===== h2: Hungarian con Manhattan (ADMISIBLE y más informativa) =====
+    public int h2ManhattanHungarian() {
+        List<int[]> boxes = new ArrayList<>();
+        List<int[]> targets = new ArrayList<>();
+        getBoxesAndTargets(boxes, targets);
+
+        // Caso trivial
+        if (boxes.isEmpty()) return 0;
+
+        // Robustez: si hay desbalance por cualquier razón, caemos a una cota admisible segura
+        if (boxes.size() != targets.size()) {
+            // Idealmente N cajas == N objetivos. Si no, devolvemos una cota admisible más débil.
+            return perBoxMinManhattan(boxes, targets);
+        }
+
+        final int n = boxes.size();
+        int[][] cost = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            int[] b = boxes.get(i);
+            for (int j = 0; j < n; j++) {
+                int[] t = targets.get(j);
+                cost[i][j] = manhattan(b[0], b[1], t[0], t[1]);
+            }
+        }
+        return hungarianMinCost(cost);
+    }
+
+    /** Hungarian clásico para matriz cuadrada de costos mínimos. Devuelve suma mínima. */
+    private int hungarianMinCost(int[][] a) {
+        int n = a.length;
+        int[] u = new int[n + 1];
+        int[] v = new int[n + 1];
+        int[] p = new int[n + 1];
+        int[] way = new int[n + 1];
+
+        for (int i = 1; i <= n; i++) {
+            p[0] = i;
+            int j0 = 0;
+            int[] minv = new int[n + 1];
+            boolean[] used = new boolean[n + 1];
+            Arrays.fill(minv, Integer.MAX_VALUE);
+
+            do {
+                used[j0] = true;
+                int i0 = p[j0], delta = Integer.MAX_VALUE, j1 = 0;
+                for (int j = 1; j <= n; j++) {
+                    if (used[j]) continue;
+                    int cur = a[i0 - 1][j - 1] - u[i0] - v[j];
+                    if (cur < minv[j]) { minv[j] = cur; way[j] = j0; }
+                    if (minv[j] < delta) { delta = minv[j]; j1 = j; }
+                }
+                for (int j = 0; j <= n; j++) {
+                    if (used[j]) { u[p[j]] += delta; v[j] -= delta; }
+                    else { minv[j] -= delta; }
+                }
+                j0 = j1;
+            } while (p[j0] != 0);
+
+            do {
+                int j1 = way[j0];
+                p[j0] = p[j1];
+                j0 = j1;
+            } while (j0 != 0);
+        }
+
+        int result = 0;
+        for (int j = 1; j <= n; j++) {
+            result += a[p[j] - 1][j - 1];
+        }
+        return result;
     }
 
     public int admisibleHeuristic(){

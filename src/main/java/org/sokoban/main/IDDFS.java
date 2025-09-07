@@ -3,13 +3,21 @@ package org.sokoban.main;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.Set;
 
 import org.sokoban.models.*;
 
 public class IDDFS {
 
-    private static final int MAX_DEPTH = 1000;
+    private static final int MAX_DEPTH=1000;
 
     private final Map<Board, Board> parent = new HashMap<>();
     private final Queue<Board> frontier = new LinkedList<>();
@@ -22,7 +30,7 @@ public class IDDFS {
         long t0 = System.currentTimeMillis();
         List<Board> solution = solver.solve(new Board());
         long elapsed = System.currentTimeMillis() - t0;
-        boolean found = solution != null;
+        boolean found = solution!=null;
         long expanded = solver.expanded;
         int maxDepth = solver.maxDepth;
 
@@ -57,22 +65,16 @@ public class IDDFS {
     }
 
     public ResultClass getResultClass(Board board) {
+
         IDDFS solver = new IDDFS();
         long t0 = System.currentTimeMillis();
         List<Board> solution = solver.solve(board);
         long elapsed = System.currentTimeMillis() - t0;
-        boolean found = solution != null;
+        boolean found = solution!=null;
         long expanded = solver.expanded;
         int maxDepth = solver.maxDepth;
 
-        return new ResultClass(
-                found,
-                (int) expanded,
-                solution != null ? solution.size() : 0,
-                solver.frontier.size(),
-                maxDepth,
-                elapsed
-        );
+        return new ResultClass(found,(int) expanded, solution.size(),solver.frontier.size(), maxDepth, elapsed);
     }
 
     public List<Board> solve(Board board) {
@@ -80,8 +82,8 @@ public class IDDFS {
         System.out.println("Initial Board:\n" + start);
         int depth = 0;
 
-        while (depth <= MAX_DEPTH) {
-            Map<Board, Integer> visited = new HashMap<>();
+        while (depth<=MAX_DEPTH) {
+            Set<Board> visited = new HashSet<>();
             parent.clear();
             frontier.clear();
             parent.put(start, null);
@@ -97,27 +99,25 @@ public class IDDFS {
         return null;
     }
 
-    private Board dls(Board current, int depthLimit, Map<Board, Integer> visited) {
+    private Board dls(Board current, int depthLimit, Set<Board> visited) {
         expanded++;
 
-        if (current.isSolution()) {
+        if (current.isSolution()){
             return current;
         }
 
-        if (depthLimit <= 0) {
+        if (depthLimit <= 0){
             frontier.add(current);
             return null;
         }
 
-        visited.put(current, depthLimit);
+        visited.add(current);
 
         for (Board neighbor : current.getPossibleBoards()) {
-            Integer prevDepth = visited.get(neighbor);
-
-            if (prevDepth == null || prevDepth < depthLimit - 1) {
+            if (!visited.contains(neighbor)) {
                 parent.put(neighbor, current);
                 Board result = dls(neighbor, depthLimit - 1, visited);
-                if (result != null) {
+                if (result != null){
                     return result;
                 }
             }
@@ -135,5 +135,3 @@ public class IDDFS {
         return path;
     }
 }
-
-
