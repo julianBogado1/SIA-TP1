@@ -286,34 +286,17 @@ public class Board {
     public int heuristic() {
         List<int[]> boxes = new ArrayList<>();
         List<int[]> targets = new ArrayList<>();
-
         getBoxesAndTargets(boxes, targets);
 
         int totalDistance = 0;
-        boolean[] usedTargets = new boolean[targets.size()];
-
         for (int[] box : boxes) {
             int minDistance = Integer.MAX_VALUE;
-            int closestTargetIndex = -1;
-
-            for (int i = 0; i < targets.size(); i++) {
-                if (usedTargets[i]) continue;
-
-                int[] target = targets.get(i);
+            for (int[] target : targets) {
                 int distance = Math.abs(box[0] - target[0]) + Math.abs(box[1] - target[1]);
-
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    closestTargetIndex = i;
-                }
+                minDistance = Math.min(minDistance, distance);
             }
-
-            if (closestTargetIndex != -1) {
-                usedTargets[closestTargetIndex] = true;
-                totalDistance += minDistance;
-            }
+            totalDistance += minDistance;
         }
-
         return totalDistance;
     }
 
@@ -336,26 +319,13 @@ public class Board {
         getBoxesAndTargets(boxes, targets);
 
         int totalDistance = 0;
-        boolean[] usedTargets = new boolean[targets.size()];
-
         for (int[] box : boxes) {
             double minDistance = Double.MAX_VALUE;
-            int closestTargetIndex = -1;
-
-            for (int i = 0; i < targets.size(); i++) {
-                if (usedTargets[i]) continue;
-                int[] target = targets.get(i);
+            for (int[] target : targets) {
                 double distance = Math.hypot(box[0] - target[0], box[1] - target[1]);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    closestTargetIndex = i;
-                }
+                minDistance = Math.min(minDistance, distance);
             }
-
-            if (closestTargetIndex != -1) {
-                usedTargets[closestTargetIndex] = true;
-                totalDistance += (int) minDistance;
-            }
+            totalDistance += minDistance;
         }
         return totalDistance;
     }
@@ -573,8 +543,7 @@ public class Board {
                 }
             }
         }
-
-        return playerX == other.playerX && playerY == other.playerY;
+        return true;
     }
 
     @Override
@@ -585,8 +554,7 @@ public class Board {
                 result = 31 * result + cells[y][x].getState().hashCode();
             }
         }
-        result = 31 * result + playerX;
-        result = 31 * result + playerY;
+
         return result;
     }
 

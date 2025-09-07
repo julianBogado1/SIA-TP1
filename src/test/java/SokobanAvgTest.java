@@ -331,8 +331,9 @@ public class SokobanAvgTest {
                 solutionNodes += solver.solution.size();
                 frontierNodes += solver.frontier.size();
                 totalTime += elapsed;
-
-                System.out.printf("expanded: %.2f; solution: %.2f; frontier: %.2f%n", (double) solver.expanded, (double) solver.solution.size(), (double) solver.frontier.size());
+                System.out.println(entry.getKey());
+//                System.out.printf("expanded: %.2f; solution: %.2f; frontier: %.2f%n", (double) solver.expanded, (double) solver.solution.size(), (double) solver.frontier.size());
+                System.out.printf("expanded: %d; solution: %d; frontier: %d", solver.expanded, solver.solution.size(), solver.frontier.size());
             }
             /*
             try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
@@ -460,8 +461,11 @@ public class SokobanAvgTest {
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
                 totalTime += result.getExecutionTime();
-                System.out.printf("%s : A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n", entry.getKey(),
-                        (double) result.getExecutionTime(), (double) result.getNodesExpanded(), (double) result.getSolutionSize(), (double) result.getFrontierSize());
+//                System.out.printf("%s : A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n", entry.getKey(),
+//                        (double) result.getExecutionTime(), (double) result.getNodesExpanded(), (double) result.getSolutionSize(), (double) result.getFrontierSize());
+
+                System.out.printf("%s : A* - Time for A*: %d ; expanded: %d; solution: %d; frontier: %d", entry.getKey(),
+                        result.getExecutionTime(), result.getNodesExpanded(), result.getSolutionSize(), result.getFrontierSize());
             }
         }
 

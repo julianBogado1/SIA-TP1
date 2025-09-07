@@ -27,12 +27,12 @@ public class AStar {
 
     public AStar(String heuristicType) {
         if (heuristicType.equals("h2")) {
-            frontier = new PriorityQueue<>(new AdmisibleHeuristic());
+            frontier = new PriorityQueue<>(new Heuristic());
             outputFile = "src/main/resources/AStarH2_solution.txt";
             System.out.println("h2");
         } else if(heuristicType.equals("h3")){
             System.out.println("h3");
-            frontier = new PriorityQueue<>(new EuclideanHeuristic());
+            frontier = new PriorityQueue<>(new Heuristic());
             outputFile = "src/main/resources/AStarH3_solution.txt";
         }
         else{
@@ -146,27 +146,28 @@ public class AStar {
             else{
                 this.f = g + board.heuristic();
             }
+//            this.f = g;
         }
 
         public int getF() {
             return f;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof BoardNode)) return false;
+            BoardNode other = (BoardNode) o;
+            return board.equals(other.board);
+        }
+        @Override
+        public int hashCode() {
+            return board.hashCode();
+        }
+
     }
 
     private static class Heuristic implements Comparator<BoardNode> {
-        @Override
-        public int compare(BoardNode o1, BoardNode o2) {
-            return Integer.compare(o1.getF(), o2.getF());
-        }
-    }
-    
-    private static class AdmisibleHeuristic implements Comparator<BoardNode> {
-        @Override
-        public int compare(BoardNode o1, BoardNode o2) {
-            return Integer.compare(o1.getF(), o2.getF());
-        }
-    }
-    private static class EuclideanHeuristic implements Comparator<BoardNode> {
         @Override
         public int compare(BoardNode o1, BoardNode o2) {
             return Integer.compare(o1.getF(), o2.getF());
