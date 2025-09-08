@@ -481,6 +481,14 @@ public class SokobanAvgTest {
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
                 totalTime += result.getExecutionTime();
+                min_expanded = Math.min(min_expanded, (int) result.getNodesExpanded());
+                max_expanded = Math.max(max_expanded, (int) result.getNodesExpanded());
+                min_solution = Math.min(min_solution, (int) result.getSolutionSize());
+                max_solution = Math.max(max_solution, (int) result.getSolutionSize());
+                min_frontier = Math.min(min_frontier, (int) result.getFrontierSize());
+                max_frontier = Math.max(max_frontier, (int) result.getFrontierSize());
+                min_time = Math.min(min_time, (int) result.getExecutionTime());
+                max_time = Math.max(max_time, (int) result.getExecutionTime());
                 System.out.printf("%s : A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n", entry.getKey(),
                         (double) result.getExecutionTime(), (double) result.getNodesExpanded(), (double) result.getSolutionSize(), (double) result.getFrontierSize());
             }
@@ -518,6 +526,15 @@ public class SokobanAvgTest {
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
                 totalTime += result.getExecutionTime();
+                min_expanded = Math.min(min_expanded, (int) result.getNodesExpanded());
+                max_expanded = Math.max(max_expanded, (int) result.getNodesExpanded());
+                min_solution = Math.min(min_solution, (int) result.getSolutionSize());
+                max_solution = Math.max(max_solution, (int) result.getSolutionSize());
+                min_frontier = Math.min(min_frontier, (int) result.getFrontierSize());
+                max_frontier = Math.max(max_frontier, (int) result.getFrontierSize());
+                min_time = Math.min(min_time, (int) result.getExecutionTime());
+                max_time = Math.max(max_time, (int) result.getExecutionTime());
+
                 System.out.printf("%s : A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n", entry.getKey(),
                         (double) result.getExecutionTime(), (double) result.getNodesExpanded(), (double) result.getSolutionSize(), (double) result.getFrontierSize());
             }
@@ -554,6 +571,15 @@ public class SokobanAvgTest {
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
                 totalTime += result.getExecutionTime();
+
+                min_expanded = Math.min(min_expanded, (int) result.getNodesExpanded());
+                max_expanded = Math.max(max_expanded, (int) result.getNodesExpanded());
+                min_solution = Math.min(min_solution, (int) result.getSolutionSize());
+                max_solution = Math.max(max_solution, (int) result.getSolutionSize());
+                min_frontier = Math.min(min_frontier, (int) result.getFrontierSize());
+                max_frontier = Math.max(max_frontier, (int) result.getFrontierSize());
+                min_time = Math.min(min_time, (int) result.getExecutionTime());
+                max_time = Math.max(max_time, (int) result.getExecutionTime());
 
                 System.out.printf("%s : A* - Time for A*: %d ; expanded: %d; solution: %d; frontier: %d\n", entry.getKey(),
                         result.getExecutionTime(), result.getNodesExpanded(), result.getSolutionSize(), result.getFrontierSize());
@@ -592,6 +618,14 @@ public class SokobanAvgTest {
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
                 totalTime += result.getExecutionTime();
+                min_expanded = Math.min(min_expanded, (int) result.getNodesExpanded());
+                max_expanded = Math.max(max_expanded, (int) result.getNodesExpanded());
+                min_solution = Math.min(min_solution, (int) result.getSolutionSize());
+                max_solution = Math.max(max_solution, (int) result.getSolutionSize());
+                min_frontier = Math.min(min_frontier, (int) result.getFrontierSize());
+                max_frontier = Math.max(max_frontier, (int) result.getFrontierSize());
+                min_time = Math.min(min_time, (int) result.getExecutionTime());
+                max_time = Math.max(max_time, (int) result.getExecutionTime());
             }
         }
 
@@ -627,6 +661,15 @@ public class SokobanAvgTest {
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
                 totalTime += result.getExecutionTime();
+
+                min_expanded = Math.min(min_expanded, (int) result.getNodesExpanded());
+                max_expanded = Math.max(max_expanded, (int) result.getNodesExpanded());
+                min_solution = Math.min(min_solution, (int) result.getSolutionSize());
+                max_solution = Math.max(max_solution, (int) result.getSolutionSize());
+                min_frontier = Math.min(min_frontier, (int) result.getFrontierSize());
+                max_frontier = Math.max(max_frontier, (int) result.getFrontierSize());
+                min_time = Math.min(min_time, (int) result.getExecutionTime());
+                max_time = Math.max(max_time, (int) result.getExecutionTime());
             }
         }
 
@@ -662,6 +705,15 @@ public class SokobanAvgTest {
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
                 totalTime += result.getExecutionTime();
+
+                min_expanded = Math.min(min_expanded, (int) result.getNodesExpanded());
+                max_expanded = Math.max(max_expanded, (int) result.getNodesExpanded());
+                min_solution = Math.min(min_solution, (int) result.getSolutionSize());
+                max_solution = Math.max(max_solution, (int) result.getSolutionSize());
+                min_frontier = Math.min(min_frontier, (int) result.getFrontierSize());
+                max_frontier = Math.max(max_frontier, (int) result.getFrontierSize());
+                min_time = Math.min(min_time, (int) result.getExecutionTime());
+                max_time = Math.max(max_time, (int) result.getExecutionTime());
             }
         }
 
@@ -689,6 +741,8 @@ public class SokobanAvgTest {
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
                 totalTime += result.getExecutionTime();
+
+                
             }
         }
 
