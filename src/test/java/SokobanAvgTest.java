@@ -1,5 +1,4 @@
 
-
 import org.junit.jupiter.api.Test;
 import java.util.Map;
 import java.util.Queue;
@@ -10,317 +9,437 @@ import org.sokoban.main.*;
 
 public class SokobanAvgTest {
 
-    private int totalMaps = maps.size();
-
     // MEDIUM WITH WALLS2
     /*
-    ########
-    #.     #
-    #$ #   #
-    # # #$ #
-    #  .   #
-    #. $## #
-    #    @ #
-    ########
-    */
+     * ########
+     * #. #
+     * #$ # #
+     * # # #$ #
+     * # . #
+     * #. $## #
+     * # @ #
+     * ########
+     */
 
     // MEDIUM WITH WALLS3
     /*
-    ########
-    #.     #
-    #$     #
-    # ###$ #
-    #  .   #
-    #. $#  #
-    #   #@ #
-    ########
-    */
+     * ########
+     * #. #
+     * #$ #
+     * # ###$ #
+     * # . #
+     * #. $# #
+     * # #@ #
+     * ########
+     */
 
     // MEDIUM WITH WALLS4
     /*
-    ########
-    #.     #
-    #$     #
-    # ###$ #
-    # #.   #
-    #. $   #
-    #   #@ #
-    ########
-    */
+     * ########
+     * #. #
+     * #$ #
+     * # ###$ #
+     * # #. #
+     * #. $ #
+     * # #@ #
+     * ########
+     */
 
     // MEDIUM WITH WALLS5
     /*
-    ########
-    #.   # #
-    #$#    #
-    # # #$ #
-    #  .   #
-    #. $## #
-    #   #@ #
-    ########
-    */
+     * ########
+     * #. # #
+     * #$# #
+     * # # #$ #
+     * # . #
+     * #. $## #
+     * # #@ #
+     * ########
+     */
 
     // MEDIUM WITH WALLS6
     /*
-    ########
-    #.  $  #
-    #$     #
-    # ###$ #
-    #  .#  #
-    #.     #
-    #   #@ #
-    ########
-    */
+     * ########
+     * #. $ #
+     * #$ #
+     * # ###$ #
+     * # .# #
+     * #. #
+     * # #@ #
+     * ########
+     */
 
     // DEFAULT
     /*
-    #########
-    #.#$   #
-    # # # # #
-    #$ # # #
-    #   @   #
-    #.### ###
-    # $    $#
-    #     # #
-    #########
-    */
+     * #########
+     * #.#$ #
+     * # # # # #
+     * #$ # # #
+     * # @ #
+     * #.### ###
+     * # $ $#
+     * # # #
+     * #########
+     */
 
     // SMALL
     /*
-    ######
-    #.$  #
-    #    #
-    #  @ #
-    ######
-    */
+     * ######
+     * #.$ #
+     * # #
+     * # @ #
+     * ######
+     */
 
     // MEDIUM
     /*
-    ########
-    #.$    #
-    #      #
-    #      #
-    #   @  #
-    ########
-    */
+     * ########
+     * #.$ #
+     * # #
+     * # #
+     * # @ #
+     * ########
+     */
 
     // LARGE
     /*
-    ########
-    #.$    #
-    #      #
-    #      #
-    #      #
-    #     ##
-    #   @  #
-    ########
-    */
+     * ########
+     * #.$ #
+     * # #
+     * # #
+     * # #
+     * # ##
+     * # @ #
+     * ########
+     */
 
     // MEDIUM - 3 boxes
     /*
-    ########
-    #.   $.#
-    #$     #
-    #   $  #
-    # .    #
-    #. $   #
-    #   @  #
-    ########
-    */
+     * ########
+     * #. $.#
+     * #$ #
+     * # $ #
+     * # . #
+     * #. $ #
+     * # @ #
+     * ########
+     */
 
     // MEDIUM WITH WALLS
     /*
-    ########
-    #.     #
-    #$     #
-    # ###$ #
-    #  .   #
-    #. $#  #
-    #   #@ #
-    ########
-    */
+     * ########
+     * #. #
+     * #$ #
+     * # ###$ #
+     * # . #
+     * #. $# #
+     * # #@ #
+     * ########
+     */
 
     // MEDIUM - five boxes
     /*
-    ########
-    #.$.   #
-    #      #
-    #.     #
-    #   $  #
-    # $ $. #
-    #.$ @  #
-    ########
-    */
-            // MEDIUM WITH WALLS2
-            private static Cell[][] mediumWithWalls2Cells = {
-                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
-            };
+     * ########
+     * #.$. #
+     * # #
+     * #. #
+     * # $ #
+     * # $ $. #
+     * #.$ @ #
+     * ########
+     */
+    // MEDIUM WITH WALLS2
+    private static Cell[][] mediumWithWalls2Cells = {
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+    };
 
-            // MEDIUM WITH WALLS3
-            private static Cell[][] mediumWithWalls3Cells = {
-                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
-            };
+    // MEDIUM WITH WALLS3
+    private static Cell[][] mediumWithWalls3Cells = {
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX),
+                    new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+    };
 
-            // MEDIUM WITH WALLS4
-            private static Cell[][] mediumWithWalls4Cells = {
-                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
-            };
+    // MEDIUM WITH WALLS4
+    private static Cell[][] mediumWithWalls4Cells = {
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.TARGET),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+    };
 
-            // MEDIUM WITH WALLS5
-            private static Cell[][] mediumWithWalls5Cells = {
-                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
-            };
+    // MEDIUM WITH WALLS5
+    private static Cell[][] mediumWithWalls5Cells = {
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY),
+                    new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+    };
 
-            // MEDIUM WITH WALLS6
-            private static Cell[][] mediumWithWalls6Cells = {
-                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
-                { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
-            };
+    // MEDIUM WITH WALLS6
+    private static Cell[][] mediumWithWalls6Cells = {
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET),
+                    new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+    };
 
     private static Cell[][] cells = {
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.TARGET),
+                    new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY),
+                    new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY),
+                    new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.EMPTY),
+                    new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY),
+                    new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.BOX),
+                    new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY),
+                    new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL) }
     };
 
-            // SMALL
+    // SMALL
     private static Cell[][] smallCells = {
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.BOX), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER),
+                    new Cell(State.TARGET), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL) }
     };
 
-            // SMALL2
+    // SMALL2
     private static Cell[][] smallCells2 = {
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY),
+                    new Cell(State.TARGET), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.BOX), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER),
+                    new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL) }
     };
 
     // MEDIUM
     private static Cell[][] mediumCells = {
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
     };
 
     // MEDIUM 2
     private static Cell[][] mediumCells2 = {
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY),
+                    new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.PLAYER), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
     };
 
     // LARGE
     private static Cell[][] largeCells = {
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
     };
 
-        // LARGE 2
+    // LARGE 2
     private static Cell[][] largeCells2 = {
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL),
+                    new Cell(State.PLAYER), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
     };
 
     // MEDIUM - 3 boxes
     private static Cell[][] medium3BoxesCells = {
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
     };
 
     // MEDIUM WITH WALLS
     private static Cell[][] mediumWithWallsCells = {
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.TARGET),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.BOX),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.WALL), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
     };
 
     // MEDIUM - five boxes
     private static Cell[][] mediumFiveBoxesCells = {
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
-        { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.TARGET),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.EMPTY),
+                    new Cell(State.BOX), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.EMPTY), new Cell(State.BOX), new Cell(State.EMPTY),
+                    new Cell(State.BOX), new Cell(State.TARGET), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.TARGET), new Cell(State.BOX), new Cell(State.EMPTY),
+                    new Cell(State.PLAYER), new Cell(State.EMPTY), new Cell(State.EMPTY), new Cell(State.WALL) },
+            { new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL),
+                    new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL), new Cell(State.WALL) }
     };
 
     private static final Map<String, Board> maps = new HashMap<>();
@@ -333,7 +452,7 @@ public class SokobanAvgTest {
         // maps.put("large", new Board(8, 9, largeCells, 6, 4));
         // maps.put("large2", new Board(8, 9, largeCells2, 6, 4));
         // maps.put("mediumfiveboxes", new Board(8, 8, mediumFiveBoxesCells, 6, 5));
-        // maps.put("medium3boxes", new Board(8, 8, medium3BoxesCells, 6, 4));
+        maps.put("medium3boxes", new Board(8, 8, medium3BoxesCells, 6, 4));
         maps.put("mediumwithwalls", new Board(8, 8, mediumWithWallsCells, 6, 5));
         maps.put("mediumwithwalls2", new Board(8, 8, mediumWithWalls2Cells, 6, 5));
         maps.put("mediumwithwalls3", new Board(8, 8, mediumWithWalls3Cells, 6, 5));
@@ -341,7 +460,9 @@ public class SokobanAvgTest {
         maps.put("mediumwithwalls5", new Board(8, 8, mediumWithWalls5Cells, 6, 5));
         maps.put("mediumwithwalls6", new Board(8, 8, mediumWithWalls6Cells, 6, 5));
     }
-    
+
+    private int totalMaps = maps.size();
+
     @Test
     public void testAverageBFS() {
 
@@ -359,6 +480,8 @@ public class SokobanAvgTest {
         int min_time = Integer.MAX_VALUE;
         int max_time = Integer.MIN_VALUE;
 
+        int solvedMaps = 0;
+
         for (Map.Entry<String, Board> entry : maps.entrySet()) {
             Board board = entry.getValue();
 
@@ -369,7 +492,9 @@ public class SokobanAvgTest {
             boolean found = answer != null;
 
             if (found) {
+                solvedMaps++;
                 expandedNodes += solver.expanded;
+                System.out.println("Map " + entry.getKey() + " solved.");
                 min_expanded = Math.min(min_expanded, (int) solver.expanded);
                 max_expanded = Math.max(max_expanded, (int) solver.expanded);
                 solutionNodes += solver.solution.size();
@@ -382,31 +507,40 @@ public class SokobanAvgTest {
                 min_time = Math.min(min_time, (int) elapsed);
                 max_time = Math.max(max_time, (int) elapsed);
                 System.out.println(entry.getKey());
-                System.out.printf("expanded: %d; solution: %d; frontier: %d\n", solver.expanded, solver.solution.size(), solver.frontier.size());
+                System.out.printf("expanded: %d; solution: %d; frontier: %d\n", solver.expanded, solver.solution.size(),
+                        solver.frontier.size());
             }
             /*
-            try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile))) {
-                writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
-                writer.printf("Nodos expandidos: %d. ", solver.expanded);
-                writer.printf("# Nodos solucion: %d. ", solver.solution.size());
-                writer.printf("Frontier: %d. ", solver.frontier.size());
-                writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
-                writer.println();
-                
-                System.out.printf("%s se encontró solución. ", found ? "Sí" : "No");
-                System.out.printf("Nodos expandidos: %d. ", solver.expanded);
-                System.out.printf("# Nodos solucion: %d. ", solver.solution.size());
-                System.out.printf("Frontier: %d. ", solver.frontier.size());
-                System.out.printf("Tiempo de ejecución: %d ms. ", elapsed);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
+             * try (PrintWriter writer = new PrintWriter(new FileWriter(solver.outputFile)))
+             * {
+             * writer.printf("%s se encontró solución. ", found ? "Sí" : "No");
+             * writer.printf("Nodos expandidos: %d. ", solver.expanded);
+             * writer.printf("# Nodos solucion: %d. ", solver.solution.size());
+             * writer.printf("Frontier: %d. ", solver.frontier.size());
+             * writer.printf("Tiempo de ejecución: %d ms. ", elapsed);
+             * writer.println();
+             * 
+             * System.out.printf("%s se encontró solución. ", found ? "Sí" : "No");
+             * System.out.printf("Nodos expandidos: %d. ", solver.expanded);
+             * System.out.printf("# Nodos solucion: %d. ", solver.solution.size());
+             * System.out.printf("Frontier: %d. ", solver.frontier.size());
+             * System.out.printf("Tiempo de ejecución: %d ms. ", elapsed);
+             * } catch (IOException e) {
+             * e.printStackTrace();
+             * }
+             */
 
         }
 
-        System.out.printf("BFS - Time for BFS: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, dif_time: %d, dif_expanded: %d, dif_solution: %d, dif_frontier: %d\n",
-         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps,
-         max_time - min_time, max_expanded - min_expanded, max_solution - min_solution, max_frontier - min_frontier);
+        if (solvedMaps == 0) {
+            System.out.println("No se encontró solución en ningún mapa.");
+        } else {
+            System.out.printf(
+                    "BFS - Time for BFS: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, MAX_time: %d, MIN_time: %d, MAX_expanded: %d, MIN_expanded: %d, MAX_solution: %d, MIN_solution: %d, MAX_frontier: %d, MIN_frontier: %d\n",
+                    (double) totalTime / solvedMaps, (double) expandedNodes / solvedMaps, (double) solutionNodes / solvedMaps,
+                    (double) frontierNodes / solvedMaps,
+                    max_time, min_time, max_expanded, min_expanded, max_solution, min_solution, max_frontier, min_frontier);
+        }
 
     }
 
@@ -425,6 +559,7 @@ public class SokobanAvgTest {
         int max_frontier = Integer.MIN_VALUE;
         int min_time = Integer.MAX_VALUE;
         int max_time = Integer.MIN_VALUE;
+        int solvedMaps = 0;
 
         for (Map.Entry<String, Board> entry : maps.entrySet()) {
             Board board = entry.getValue();
@@ -433,6 +568,7 @@ public class SokobanAvgTest {
             ResultClass result = solver.getResultClass(board);
 
             if (result.isFound()) {
+                solvedMaps++;
                 expandedNodes += result.getNodesExpanded();
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
@@ -448,9 +584,15 @@ public class SokobanAvgTest {
             }
         }
 
-        System.out.printf("DFS - Time for DFS: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, dif_time: %d, dif_expanded: %d, dif_solution: %d, dif_frontier: %d\n",
-         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps,
-         max_time - min_time, max_expanded - min_expanded, max_solution - min_solution, max_frontier - min_frontier);
+        if (solvedMaps == 0) {
+            System.out.println("No se encontró solución en ningún mapa.");
+        } else {
+            System.out.printf(
+                    "DFS - Time for DFS: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, MAX_time: %d, MIN_time: %d, MAX_expanded: %d, MIN_expanded: %d, MAX_solution: %d, MIN_solution: %d, MAX_frontier: %d, MIN_frontier: %d\n",
+                    (double) totalTime / solvedMaps, (double) expandedNodes / solvedMaps, (double) solutionNodes / solvedMaps,
+                    (double) frontierNodes / solvedMaps,
+                    max_time, min_time, max_expanded, min_expanded, max_solution, min_solution, max_frontier, min_frontier);
+        }
 
     }
 
@@ -469,6 +611,7 @@ public class SokobanAvgTest {
         int max_frontier = Integer.MIN_VALUE;
         int min_time = Integer.MAX_VALUE;
         int max_time = Integer.MIN_VALUE;
+        int solved = 0;
 
         for (Map.Entry<String, Board> entry : maps.entrySet()) {
             Board board = entry.getValue();
@@ -477,6 +620,7 @@ public class SokobanAvgTest {
             ResultClass result = solver.getResultClass(board, "h1");
 
             if (result.isFound()) {
+                solved++;
                 expandedNodes += result.getNodesExpanded();
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
@@ -489,14 +633,23 @@ public class SokobanAvgTest {
                 max_frontier = Math.max(max_frontier, (int) result.getFrontierSize());
                 min_time = Math.min(min_time, (int) result.getExecutionTime());
                 max_time = Math.max(max_time, (int) result.getExecutionTime());
-                System.out.printf("%s : A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n", entry.getKey(),
-                        (double) result.getExecutionTime(), (double) result.getNodesExpanded(), (double) result.getSolutionSize(), (double) result.getFrontierSize());
+                System.out.printf("%s : A* - Time for A*: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
+                        entry.getKey(),
+                        (double) result.getExecutionTime(), (double) result.getNodesExpanded(),
+                        (double) result.getSolutionSize(), (double) result.getFrontierSize());
             }
         }
 
-        System.out.printf("A* - H1 - Time for A*: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, dif_time: %d, dif_expanded: %d, dif_solution: %d, dif_frontier: %d\n",
-         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps,
-         max_time - min_time, max_expanded - min_expanded, max_solution - min_solution, max_frontier - min_frontier);
+        if (solved == 0) {
+            System.out.println("A* - H1 - No se encontró solución en ningún mapa.");
+            return;
+        }
+
+        System.out.printf(
+                "A* - H1 - Time for A*: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, MAX_time: %d, MIN_time: %d, MAX_expanded: %d, MIN_expanded: %d, MAX_solution: %d, MIN_solution: %d, MAX_frontier: %d, MIN_frontier: %d%n",
+                (double) totalTime / solved, (double) expandedNodes / solved, (double) solutionNodes / solved,
+                (double) frontierNodes / solved,
+                max_time, min_time, max_expanded, min_expanded, max_solution, min_solution, max_frontier, min_frontier);
     }
 
     @Test
@@ -514,6 +667,7 @@ public class SokobanAvgTest {
         int max_frontier = Integer.MIN_VALUE;
         int min_time = Integer.MAX_VALUE;
         int max_time = Integer.MIN_VALUE;
+        int solved = 0;
 
         for (Map.Entry<String, Board> entry : maps.entrySet()) {
             Board board = entry.getValue();
@@ -522,6 +676,7 @@ public class SokobanAvgTest {
             ResultClass result = solver.getResultClass(board, "h2");
 
             if (result.isFound()) {
+                solved++;
                 expandedNodes += result.getNodesExpanded();
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
@@ -535,15 +690,25 @@ public class SokobanAvgTest {
                 min_time = Math.min(min_time, (int) result.getExecutionTime());
                 max_time = Math.max(max_time, (int) result.getExecutionTime());
 
-                System.out.printf("%s : A* - Time for A*: %.2f ms%n; expanded: %.2f; solution: %.2f; frontier: %.2f%n", entry.getKey(),
-                        (double) result.getExecutionTime(), (double) result.getNodesExpanded(), (double) result.getSolutionSize(), (double) result.getFrontierSize());
+                System.out.printf("%s : A* - Time for A*: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f%n",
+                        entry.getKey(),
+                        (double) result.getExecutionTime(), (double) result.getNodesExpanded(),
+                        (double) result.getSolutionSize(), (double) result.getFrontierSize());
             }
         }
 
-        System.out.printf("A* - H2 - Time for A*: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, dif_time: %d, dif_expanded: %d, dif_solution: %d, dif_frontier: %d\n",
-         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps,
-         max_time - min_time, max_expanded - min_expanded, max_solution - min_solution, max_frontier - min_frontier);
+        if (solved == 0) {
+            System.out.println("A* - H2 - No se encontró solución en ningún mapa.");
+            return;
+        }
+
+        System.out.printf(
+                "A* - H2 - Time for A*: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, MAX_time: %d, MIN_time: %d, MAX_expanded: %d, MIN_expanded: %d, MAX_solution: %d, MIN_solution: %d, MAX_frontier: %d, MIN_frontier: %d%n",
+                (double) totalTime / solved, (double) expandedNodes / solved, (double) solutionNodes / solved,
+                (double) frontierNodes / solved,
+                max_time, min_time, max_expanded, min_expanded, max_solution, min_solution, max_frontier, min_frontier);
     }
+
     @Test
     public void testAverageAStarH3() {
 
@@ -559,6 +724,7 @@ public class SokobanAvgTest {
         int max_frontier = Integer.MIN_VALUE;
         int min_time = Integer.MAX_VALUE;
         int max_time = Integer.MIN_VALUE;
+        int solved = 0;
 
         for (Map.Entry<String, Board> entry : maps.entrySet()) {
             Board board = entry.getValue();
@@ -567,6 +733,7 @@ public class SokobanAvgTest {
             ResultClass result = solver.getResultClass(board, "h3");
 
             if (result.isFound()) {
+                solved++;
                 expandedNodes += result.getNodesExpanded();
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
@@ -581,17 +748,27 @@ public class SokobanAvgTest {
                 min_time = Math.min(min_time, (int) result.getExecutionTime());
                 max_time = Math.max(max_time, (int) result.getExecutionTime());
 
-                System.out.printf("%s : A* - Time for A*: %d ; expanded: %d; solution: %d; frontier: %d\n", entry.getKey(),
-                        result.getExecutionTime(), result.getNodesExpanded(), result.getSolutionSize(), result.getFrontierSize());
+                System.out.printf("%s : A* - Time for A*: %d ; expanded: %d; solution: %d; frontier: %d%n",
+                        entry.getKey(),
+                        result.getExecutionTime(), result.getNodesExpanded(), result.getSolutionSize(),
+                        result.getFrontierSize());
             }
         }
 
-        System.out.printf("A* - H3 - Time for A*: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, dif_time: %d, dif_expanded: %d, dif_solution: %d, dif_frontier: %d\n",
-         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps,
-         max_time - min_time, max_expanded - min_expanded, max_solution - min_solution, max_frontier - min_frontier);
+        if (solved == 0) {
+            System.out.println("A* - H3 - No se encontró solución en ningún mapa.");
+            return;
+        }
+
+        System.out.printf(
+                "A* - H3 - Time for A*: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, MAX_time: %d, MIN_time: %d, MAX_expanded: %d, MIN_expanded: %d, MAX_solution: %d, MIN_solution: %d, MAX_frontier: %d, MIN_frontier: %d%n",
+                (double) totalTime / solved, (double) expandedNodes / solved, (double) solutionNodes / solved,
+                (double) frontierNodes / solved,
+                max_time, min_time, max_expanded, min_expanded, max_solution, min_solution, max_frontier, min_frontier);
     }
 
-        @Test
+
+    @Test
     public void testAverageGreedyH1() {
 
         int expandedNodes = 0;
@@ -606,6 +783,7 @@ public class SokobanAvgTest {
         int max_frontier = Integer.MIN_VALUE;
         int min_time = Integer.MAX_VALUE;
         int max_time = Integer.MIN_VALUE;
+        int solved = 0;
 
         for (Map.Entry<String, Board> entry : maps.entrySet()) {
             Board board = entry.getValue();
@@ -614,6 +792,7 @@ public class SokobanAvgTest {
             ResultClass result = solver.getResultClass(board, "h1");
 
             if (result.isFound()) {
+                solved++;
                 expandedNodes += result.getNodesExpanded();
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
@@ -629,10 +808,18 @@ public class SokobanAvgTest {
             }
         }
 
-        System.out.printf("Greedy - H1 - Time for Greedy: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, dif_time: %d, dif_expanded: %d, dif_solution: %d, dif_frontier: %d\n",
-         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps,
-         max_time - min_time, max_expanded - min_expanded, max_solution - min_solution, max_frontier - min_frontier);
+        if (solved == 0) {
+            System.out.println("Greedy - H1 - No se encontró solución en ningún mapa.");
+            return;
+        }
+
+        System.out.printf(
+                "Greedy - H1 - Time for Greedy: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, MAX_time: %d, MIN_time: %d, MAX_expanded: %d, MIN_expanded: %d, MAX_solution: %d, MIN_solution: %d, MAX_frontier: %d, MIN_frontier: %d%n",
+                (double) totalTime / solved, (double) expandedNodes / solved, (double) solutionNodes / solved,
+                (double) frontierNodes / solved,
+                max_time, min_time, max_expanded, min_expanded, max_solution, min_solution, max_frontier, min_frontier);
     }
+
 
     @Test
     public void testAverageGreedyH2() {
@@ -649,6 +836,7 @@ public class SokobanAvgTest {
         int max_frontier = Integer.MIN_VALUE;
         int min_time = Integer.MAX_VALUE;
         int max_time = Integer.MIN_VALUE;
+        int solved = 0;
 
         for (Map.Entry<String, Board> entry : maps.entrySet()) {
             Board board = entry.getValue();
@@ -657,6 +845,7 @@ public class SokobanAvgTest {
             ResultClass result = solver.getResultClass(board, "h2");
 
             if (result.isFound()) {
+                solved++;
                 expandedNodes += result.getNodesExpanded();
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
@@ -673,12 +862,19 @@ public class SokobanAvgTest {
             }
         }
 
-        System.out.printf("Greedy - H2 - Time for Greedy: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, dif_time: %d, dif_expanded: %d, dif_solution: %d, dif_frontier: %d\n",
-         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps,
-         max_time - min_time, max_expanded - min_expanded, max_solution - min_solution, max_frontier - min_frontier);
+        if (solved == 0) {
+            System.out.println("Greedy - H2 - No se encontró solución en ningún mapa.");
+            return;
+        }
+
+        System.out.printf(
+                "Greedy - H2 - Time for Greedy: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, MAX_time: %d, MIN_time: %d, MAX_expanded: %d, MIN_expanded: %d, MAX_solution: %d, MIN_solution: %d, MAX_frontier: %d, MIN_frontier: %d%n",
+                (double) totalTime / solved, (double) expandedNodes / solved, (double) solutionNodes / solved,
+                (double) frontierNodes / solved,
+                max_time, min_time, max_expanded, min_expanded, max_solution, min_solution, max_frontier, min_frontier);
     }
 
-        @Test
+    @Test
     public void testAverageGreedyH3() {
 
         int expandedNodes = 0;
@@ -693,6 +889,7 @@ public class SokobanAvgTest {
         int max_frontier = Integer.MIN_VALUE;
         int min_time = Integer.MAX_VALUE;
         int max_time = Integer.MIN_VALUE;
+        int solved = 0;
 
         for (Map.Entry<String, Board> entry : maps.entrySet()) {
             Board board = entry.getValue();
@@ -701,6 +898,7 @@ public class SokobanAvgTest {
             ResultClass result = solver.getResultClass(board, "h3");
 
             if (result.isFound()) {
+                solved++;
                 expandedNodes += result.getNodesExpanded();
                 solutionNodes += result.getSolutionSize();
                 frontierNodes += result.getFrontierSize();
@@ -717,10 +915,19 @@ public class SokobanAvgTest {
             }
         }
 
-        System.out.printf("Greedy - H3 - Time for Greedy: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, dif_time: %d, dif_expanded: %d, dif_solution: %d, dif_frontier: %d\n",
-         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps,
-         max_time - min_time, max_expanded - min_expanded, max_solution - min_solution, max_frontier - min_frontier);
+        if (solved == 0) {
+            System.out.println("Greedy - H3 - No se encontró solución en ningún mapa.");
+            return;
+        }
+
+        System.out.printf(
+                "Greedy - H3 - Time for Greedy: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f, MAX_time: %d, MIN_time: %d, MAX_expanded: %d, MIN_expanded: %d, MAX_solution: %d, MIN_solution: %d, MAX_frontier: %d, MIN_frontier: %d%n",
+                (double) totalTime / solved, (double) expandedNodes / solved, (double) solutionNodes / solved,
+                (double) frontierNodes / solved,
+                max_time, min_time, max_expanded, min_expanded, max_solution, min_solution, max_frontier, min_frontier);
     }
+
+    
 
     @Test
     public void testAverageIDDFS() {
@@ -742,12 +949,12 @@ public class SokobanAvgTest {
                 frontierNodes += result.getFrontierSize();
                 totalTime += result.getExecutionTime();
 
-                
             }
         }
 
         System.out.printf("IDDFS - Time for IDDFS: %.2f ms; expanded: %.2f; solution: %.2f; frontier: %.2f\n",
-         (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps, (double) frontierNodes / totalMaps);
+                (double) totalTime / totalMaps, (double) expandedNodes / totalMaps, (double) solutionNodes / totalMaps,
+                (double) frontierNodes / totalMaps);
     }
 
 }
