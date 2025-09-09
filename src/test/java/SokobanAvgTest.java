@@ -293,8 +293,8 @@ public class SokobanAvgTest {
     private static final Map<String, Board> maps = new HashMap<>();
     static {
         //  maps.put("default", new Board(9, 9, cells, 4, 4));
-        maps.put("small", new Board(6, 5, smallCells, 3, 3));
-        // maps.put("medium", new Board(8, 6, mediumCells, 5, 4));
+//        maps.put("small", new Board(6, 5, smallCells, 3, 3));
+         maps.put("medium", new Board(8, 6, mediumCells, 5, 4));
         // maps.put("large", new Board(8, 8, largeCells, 6, 4));
         // maps.put("mediumfiveboxes", new Board(8, 8, mediumFiveBoxesCells, 6, 5));
         // maps.put("medium3boxes", new Board(8, 8, medium3BoxesCells, 6, 4));

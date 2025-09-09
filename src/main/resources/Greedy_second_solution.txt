@@ -1,4 +1,4 @@
-Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Frontera (final): 21. Tiempo de ejecución: 6 ms.
+Sí se encontró solución. Nodos Expandidos: 83. Nodos Solucion: 36. Nodos Frontera (final): 20. Tiempo de ejecución: 5 ms.
 === SOLUCIÓN ===
 #########
 #T#TB   #
@@ -14,146 +14,6 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #T#TB   #
 # # # # #
 #B# # # #
-#    P  #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#TB   #
-# # # # #
-#B# # # #
-#     P #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#TB   #
-# # # # #
-#B# # # #
-#      P#
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#TB   #
-# # # # #
-#B# # #P#
-#       #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#TB   #
-# # # #P#
-#B# # # #
-#       #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#TB  P#
-# # # # #
-#B# # # #
-#       #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#TB P #
-# # # # #
-#B# # # #
-#       #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#TBP  #
-# # # # #
-#B# # # #
-#       #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#XP   #
-# # # # #
-#B# # # #
-#       #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#X P  #
-# # # # #
-#B# # # #
-#       #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#X    #
-# # #P# #
-#B# # # #
-#       #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#X    #
-# # # # #
-#B# #P# #
-#       #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#X    #
-# # # # #
-#B# # # #
-#    P  #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#X    #
-# # # # #
-#B# # # #
-#   P   #
-#T## ####
-# B    B#
-#     # #
-#########
-
-#########
-#T#X    #
-# # # # #
-#B# # # #
 #       #
 #T##P####
 # B    B#
@@ -161,7 +21,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#T#X    #
+#T#TB   #
 # # # # #
 #B# # # #
 #       #
@@ -171,7 +31,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#T#X    #
+#T#TB   #
 # # # # #
 #B# # # #
 #       #
@@ -181,7 +41,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#T#X    #
+#T#TB   #
 # # # # #
 #B# # # #
 #       #
@@ -191,7 +51,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#T#X    #
+#T#TB   #
 # # # # #
 #B# # # #
 #       #
@@ -201,7 +61,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#T#X    #
+#T#TB   #
 # # # # #
 #B# # # #
 #       #
@@ -211,7 +71,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#T#X    #
+#T#TB   #
 # # # # #
 #B# # # #
 #       #
@@ -221,7 +81,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#T#X    #
+#T#TB   #
 # # # # #
 #B# # # #
 #   P   #
@@ -231,7 +91,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#T#X    #
+#T#TB   #
 # # # # #
 #B# # # #
 #  P    #
@@ -241,7 +101,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#T#X    #
+#T#TB   #
 # # # # #
 #B# # # #
 # P     #
@@ -251,7 +111,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#T#X    #
+#T#TB   #
 # # # # #
 #B# # # #
 #P      #
@@ -261,7 +121,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#T#X    #
+#T#TB   #
 #B# # # #
 #P# # # #
 #       #
@@ -271,7 +131,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#X#X    #
+#X#TB   #
 #P# # # #
 # # # # #
 #       #
@@ -281,7 +141,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#X#X    #
+#X#TB   #
 # # # # #
 #P# # # #
 #       #
@@ -291,7 +151,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#X#X    #
+#X#TB   #
 # # # # #
 # # # # #
 #P      #
@@ -301,7 +161,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#X#X    #
+#X#TB   #
 # # # # #
 # # # # #
 # P     #
@@ -311,7 +171,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#X#X    #
+#X#TB   #
 # # # # #
 # # # # #
 #  P    #
@@ -321,7 +181,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#X#X    #
+#X#TB   #
 # # # # #
 # # # # #
 #   P   #
@@ -331,7 +191,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#X#X    #
+#X#TB   #
 # # # # #
 # # # # #
 #       #
@@ -341,7 +201,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#X#X    #
+#X#TB   #
 # # # # #
 # # # # #
 #       #
@@ -351,27 +211,27 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#X#X    #
+#X#TB   #
 # # # # #
 # # # # #
 #       #
 #T## ####
-#B     B#
-#   P # #
+#B P   B#
+#     # #
 #########
 
 #########
-#X#X    #
+#X#TB   #
 # # # # #
 # # # # #
 #       #
 #T## ####
-#B     B#
-#  P  # #
+#BP    B#
+#     # #
 #########
 
 #########
-#X#X    #
+#X#TB   #
 # # # # #
 # # # # #
 #       #
@@ -381,7 +241,7 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#X#X    #
+#X#TB   #
 # # # # #
 # # # # #
 #       #
@@ -391,12 +251,112 @@ Sí se encontró solución. Nodos Expandidos: 122. Nodos Solucion: 40. Nodos Fro
 #########
 
 #########
-#X#X    #
+#X#TB   #
 # # # # #
 # # # # #
 #       #
 #X## ####
 #P     B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # # # #
+# # # # #
+#       #
+#X## ####
+# P    B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # # # #
+# # # # #
+#       #
+#X## ####
+#  P   B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # # # #
+# # # # #
+#       #
+#X## ####
+#   P  B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # # # #
+# # # # #
+#       #
+#X##P####
+#      B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # # # #
+# # # # #
+#   P   #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # # # #
+# # # # #
+#    P  #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # # # #
+# # #P# #
+#       #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#TB   #
+# # #P# #
+# # # # #
+#       #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#TBP  #
+# # # # #
+# # # # #
+#       #
+#X## ####
+#      B#
+#     # #
+#########
+
+#########
+#X#XP   #
+# # # # #
+# # # # #
+#       #
+#X## ####
+#      B#
 #     # #
 #########
 
